@@ -1,0 +1,78 @@
+<div class="bg-white rounded-lg shadow-lg">
+  <!-- Modal Header -->
+  <div class="flex items-center justify-between p-5 border-b border-gray-200">
+    <!-- Modal Title -->
+    <h2 class="text-lg font-bold text-gray-800">Add properties : {{ attribute.name}}</h2>
+    <!-- Close Button -->
+
+  </div>
+  <!-- Modal Body -->
+  <div class="p-5 space-y-5 overflow-y-auto">
+    <!-- Form -->
+    <form id="kt_modal_add_user_form" class="space-y-5">
+      <!-- Input Group -->
+      <div class="space-y-2">
+        <label class="block text-sm font-medium text-gray-700 required">Nombre de la propiedad</label>
+        <input
+          type="text"
+          name="name"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Atributo..."
+          [(ngModel)]="name"
+        />
+      </div>
+      <!-- Select Group -->
+      <div class="space-y-2">
+        <label class="block text-sm font-medium text-gray-700 required">Selec. un tipo</label>
+        <select
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          name="XXXXX"
+          [(ngModel)]="type_action">
+          <option value="1">Normal</option>
+          <option value="2">Color</option>
+
+        </select>
+      </div>
+
+      <div class="space-y-2" *ngIf="type_action == 2">
+        <label for="etiqueta_especial" class="mb-0">Color: </label>
+        <input type="color" id="color" name="color"  [(ngModel)]="color" />
+      </div>
+
+      <div class="space-y-2">
+        <div class="overflow-x-auto">
+          <table class="table-auto w-full text-left text-sm">
+            <thead class="bg-gray-100 text-gray-600 uppercase text-xs font-semibold">
+              <tr>
+                <th class="py-2 px-4">Nombre</th>
+                <th class="py-2 px-4">Color</th>
+              </tr>
+            </thead>
+            <tbody class="text-gray-700">
+              <ng-container *ngFor="let propertie of properties">
+                <tr class="border-b hover:bg-gray-50">
+                  <td class="py-2 px-4">{{ propertie.name }}</td>
+                  <td class="py-2 px-4" *ngIf="propertie.code">{{ propertie.code }}</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex justify-center space-x-3 pt-5">
+
+        <button
+          type="button"
+          (click)="store()"
+          class="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none">
+          <span class="indicator-label">Registrar</span>
+          <span
+            class="ml-2 spinner-border spinner-border-sm"
+            *ngIf="isLoading$ | async"></span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

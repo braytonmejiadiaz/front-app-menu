@@ -1,0 +1,52 @@
+<div class="bg-white rounded-lg shadow-lg">
+  <!-- Modal Header -->
+  <div class="flex items-center justify-between p-5 border-b border-gray-200">
+    <!-- Modal Title -->
+    <h2 class="text-lg font-bold text-gray-800">Add attribute</h2>
+    <!-- Close Button -->
+
+  </div>
+  <!-- Modal Body -->
+  <div class="p-5 space-y-5 overflow-y-auto">
+    <!-- Form -->
+    <form id="kt_modal_add_user_form" class="space-y-5">
+      <!-- Input Group -->
+      <div class="space-y-2">
+        <label class="block text-sm font-medium text-gray-700 required">Nombre del atributo</label>
+        <input
+          type="text"
+          name="name"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Atributo..."
+          [(ngModel)]="name"
+        />
+      </div>
+      <!-- Select Group -->
+      <div class="space-y-2">
+        <label class="block text-sm font-medium text-gray-700 required">Selec. un tipo</label>
+        <select
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          name="XXXXX"
+          [(ngModel)]="type_attribute">
+          <option value="1">Texto</option>
+          <option value="2">Numero</option>
+          <option value="3">Seleccionable</option>
+          <option value="4">Multiple seleccion</option>
+        </select>
+      </div>
+      <!-- Actions -->
+      <div class="flex justify-center space-x-3 pt-5">
+
+        <button
+          type="button"
+          (click)="store()"
+          class="px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none">
+          <span class="indicator-label">Registrar</span>
+          <span
+            class="ml-2 spinner-border spinner-border-sm"
+            *ngIf="isLoading$ | async"></span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

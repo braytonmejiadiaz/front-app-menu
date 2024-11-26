@@ -1,0 +1,92 @@
+<div class="bg-white shadow rounded-lg p-6 m-9">
+  <!-- Spinner de carga -->
+  <span class="spinner-border spinner-border-sm align-middle ms-2" *ngIf="isLoading$ | async"></span>
+
+  <!-- Encabezado -->
+  <div class="flex flex-wrap justify-between items-center border-b pb-4 mb-4">
+    <div class="flex items-center relative">
+      <svg class="absolute left-3 w-5 h-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16l4-4m0 0l4-4m-4 4v12"></path>
+      </svg>
+      <input
+        type="text"
+        (keyup.enter)="searchTo()"
+        placeholder="Buscar Atributos"
+        class="pl-10 py-2 border rounded-md w-64 text-sm focus:ring focus:ring-blue-300"
+      />
+    </div>
+
+    <button
+      (click)="openModalCreateAttribute()"
+      class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition"
+    >
+      <i class="mr-2 fas fa-plus"></i> Agregar Atributo
+    </button>
+  </div>
+
+  <!-- Cuerpo de la tarjeta -->
+  <div class="overflow-x-auto">
+    <table class="table-auto w-full text-left text-sm">
+      <thead class="bg-gray-100 text-gray-600 uppercase text-xs font-semibold">
+        <tr>
+          <th class="py-2 px-4">Nombre</th>
+          <th class="py-2 px-4">Tipo de Atributo</th>
+          <th class="py-2 px-4">Estado</th>
+          <th class="py-2 px-4">N° de Propiedades</th>
+          <th class="py-2 px-4">Fecha de Creación</th>
+          <th class="py-2 px-4 text-right">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-700">
+        <ng-container *ngFor="let attribute of attributes">
+          <tr class="border-b hover:bg-gray-50">
+            <td class="py-2 px-4">{{ attribute.name }}</td>
+            <td class="py-2 px-4">{{ getNameAttribute(attribute.type_attribute) }}</td>
+            <td class="py-2 px-4">
+              <span *ngIf="attribute.state == 1" class="bg-green-100 text-green-600 px-2 py-1 rounded-full text-xs">Activo</span>
+              <span *ngIf="attribute.state == 2" class="bg-red-100 text-red-600 px-2 py-1 rounded-full text-xs">Inactivo</span>
+            </td>
+            <td class="py-2 px-4">{{ attribute.properties.length }}</td>
+            <td class="py-2 px-4">{{ attribute.created_at }}</td>
+            <td class="py-2 px-4 text-right">
+              <button
+                *ngIf="attribute.type_attribute == 3 || attribute.type_attribute == 4"
+                (click)="openModalRegisterProperties(attribute)"
+                class="text-blue-500 hover:text-blue-700 mr-2"
+              >
+                <i class="fas fa-cogs"></i>
+              </button>
+              <button
+                (click)="openModalEditAttribute(attribute)"
+                class="text-green-500 hover:text-green-700 mr-2"
+              >
+                <i class="fas fa-edit"></i>
+              </button>
+              <button
+                (click)="deleteAttribute(attribute)"
+                class="text-red-500 hover:text-red-700"
+              >
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal con Tailwind -->
+  <div class="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50" *ngIf="showModal">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+      <h2 class="text-xl font-bold mb-4" *ngIf="modalType === 'create'">Crear Atributo</h2>
+      <h2 class="text-xl font-bold mb-4" *ngIf="modalType === 'edit'">Editar Atributo</h2>
+      <h2 class="text-xl font-bold mb-4" *ngIf="modalType === 'delete'">Eliminar Atributo</h2>
+      <app-create-attribute *ngIf="modalType === 'create'" (create)="handleCreate($event)"></app-create-attribute>
+      <app-edit-attribute *ngIf="modalType === 'edit'" (edit)="handleEdit($event)"></app-edit-attribute>
+      <app-sub-attribute-create *ngIf="modalType === 'properties'" ></app-sub-attribute-create>
+      <div class="mt-4 text-right">
+        <button (click)="closeModal()" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

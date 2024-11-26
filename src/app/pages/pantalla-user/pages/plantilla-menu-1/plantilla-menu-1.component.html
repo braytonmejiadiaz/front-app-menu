@@ -1,0 +1,84 @@
+    <!-- Encabezado del menú -->
+  <div class=" bg-[#F5F5F4] flex items-center justify-between p-5 ">
+    <div>
+      <p>Usar esta plantilla</p>
+    </div>
+    <div class="space-x-5 flex items-center">
+        <i class="fa-solid fa-mobile-screen text-3xl " (click)="toggleMode()"></i>
+        <i class="fa-solid fa-desktop text-3xl" (click)="togleDesktop()"></i>
+    </div>
+    <div>
+      <button class="bg-[#FC4D25] text-white p-2 rounded hover:bg-[#ed401a]" (click)="navigateBack()">Ir atras</button>
+    </div>
+
+  </div>
+
+  <div [ngClass]="isMobileMode ? 'max-w-md mx-auto p-4' : 'max-w-full mx-auto'">
+    <header class="bg-red-600 text-white text-center py-8">
+      <h1 class="text-4xl font-bold">Menú del Restaurante</h1>
+      <p class="mt-2 text-lg">Descubre nuestros deliciosos platillos</p>
+  </header>
+
+  <!-- Contenido del menú -->
+  <main class="container mx-auto p-6">
+
+      <!-- Sección de Entradas -->
+      <section class="mb-8">
+          <h2 class="text-3xl font-semibold border-b-2 border-red-600 inline-block mb-4">Entradas</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Item de entrada -->
+              <div class="bg-white p-4 shadow rounded-lg">
+                  <h3 class="text-xl font-bold">Ensalada César</h3>
+                  <p class="text-gray-600">Lechuga fresca con aderezo césar, crutones y parmesano.</p>
+                  <span class="text-red-600 font-semibold text-lg">$12.000</span>
+              </div>
+              <div class="bg-white p-4 shadow rounded-lg">
+                  <h3 class="text-xl font-bold">Bruschetta</h3>
+                  <p class="text-gray-600">Pan tostado con tomate, albahaca y aceite de oliva.</p>
+                  <span class="text-red-600 font-semibold text-lg">$10.000</span>
+              </div>
+          </div>
+      </section>
+
+      <!-- Sección de Platos Principales -->
+      <section class="mb-8">
+          <h2 class="text-3xl font-semibold border-b-2 border-red-600 inline-block mb-4">Platos Principales</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Item de plato principal -->
+              <div class="bg-white p-4 shadow rounded-lg">
+                  <h3 class="text-xl font-bold">Pasta Alfredo</h3>
+                  <p class="text-gray-600">Pasta con salsa cremosa de queso y pollo a la parrilla.</p>
+                  <span class="text-red-600 font-semibold text-lg">$25.000</span>
+              </div>
+              <div class="bg-white p-4 shadow rounded-lg">
+                  <h3 class="text-xl font-bold">Filete Mignon</h3>
+                  <p class="text-gray-600">Carne tierna con salsa de vino tinto y puré de papas.</p>
+                  <span class="text-red-600 font-semibold text-lg">$40.000</span>
+              </div>
+          </div>
+      </section>
+
+      <!-- Sección de Postres -->
+      <section class="mb-8">
+          <h2 class="text-3xl font-semibold border-b-2 border-red-600 inline-block mb-4">Postres</h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Item de postre -->
+              <div class="bg-white p-4 shadow rounded-lg">
+                  <h3 class="text-xl font-bold">Tiramisu</h3>
+                  <p class="text-gray-600">Postre italiano con capas de mascarpone y café.</p>
+                  <span class="text-red-600 font-semibold text-lg">$15.000</span>
+              </div>
+              <div class="bg-white p-4 shadow rounded-lg">
+                  <h3 class="text-xl font-bold">Helado Artesanal</h3>
+                  <p class="text-gray-600">Helado de sabores variados, preparado artesanalmente.</p>
+                  <span class="text-red-600 font-semibold text-lg">$10.000</span>
+              </div>
+          </div>
+      </section>
+  </main>
+
+  <!-- Pie de página -->
+  <footer class="bg-gray-800 text-white text-center py-4">
+      <p>&copy; 2024 Restaurante Gourmet. Todos los derechos reservados.</p>
+  </footer>
+</div>
