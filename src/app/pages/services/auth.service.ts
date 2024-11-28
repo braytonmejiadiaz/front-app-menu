@@ -23,9 +23,17 @@ export class AuthService {
 
 
   initAuth(){
-    if(localStorage.getItem("token")){
-      this.user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user") ?? '') : null;
-      this.token = localStorage.getItem("token") + "";
+    const token = localStorage.getItem("token");
+    const userData = localStorage.getItem("user");
+
+    if (token) {
+      this.token = token;
+      try {
+        this.user = userData ? JSON.parse(userData) : null;
+      } catch (error) {
+        console.error("Error al analizar JSON del usuario:", error);
+        this.user = null;
+      }
     }
   }
 
