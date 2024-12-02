@@ -1,11 +1,7 @@
 import { Routes } from '@angular/router';
-import PagesLoginComponent from './pages/pages-login/pages-login.component';
 import { InicioComponent } from './pages/pantalla-user/pages/inicio/inicio.component';
-import { CrearProductoComponent } from './pages/pantalla-user/pages/crear-producto/crear-producto.component';
 import { PlantillaMenu1Component } from './pages/pantalla-user/pages/plantilla-menu-1/plantilla-menu-1.component';
 import { ListaDePlantillasMenuComponent } from './pages/pantalla-user/pages/lista-de-plantillas-menu/lista-de-plantillas-menu.component';
-import { ListaProductosComponent } from './pages/pantalla-user/pages/lista-productos/lista-productos.component';
-import { RegisterComponent } from './pages/register/register.component';
 import { CreateCategorieComponent } from './pages/pantalla-user/pages/categories/create-categorie/create-categorie.component';
 import { AttributesComponent } from './modules/attributes/attributes.component';
 import { ListAttributeComponent } from './modules/attributes/list-attribute/list-attribute.component';
@@ -14,7 +10,7 @@ import { ListAttributeComponent } from './modules/attributes/list-attribute/list
 export const routes: Routes = [
   {
     path:'register',
-    component:PagesLoginComponent,
+    loadComponent: () => import('./pages/pages-login/pages-login.component').then((m) => m.PagesLoginComponent)
   },
   {
     path:'',
@@ -23,21 +19,13 @@ export const routes: Routes = [
   },
   {
     path:'login',
-    component:RegisterComponent,
+    loadComponent: () => import('./pages/register/register.component').then((m) => m.RegisterComponent)
   },
   {
     path:'usuario',
     component:InicioComponent,
     title:'usuario',
     children:[
-      {
-        path:'crear-producto',
-        component:CrearProductoComponent,
-      },
-      {
-        path:'lista-productos',
-        component:ListaProductosComponent,
-      },
       {
         path:'crear-categorias',
         component:CreateCategorieComponent,
@@ -63,7 +51,18 @@ export const routes: Routes = [
           }
         ]
       },
-
+      {
+        path:'crear-producto',
+        loadComponent: () => import('./modules/products/create-product/create-product.component').then((m) => m.CreateProductComponent)
+      },
+      {
+        path:'lista-producto',
+        loadComponent: () => import('./modules/products/list-product/list-product.component').then((m) => m.ListProductComponent)
+      },
+      {
+        path:'list/edit/:id',
+        loadComponent: () => import('./modules/products/edit-product/edit-product.component').then((m) => m.EditProductComponent)
+      },
 
     ]
   }

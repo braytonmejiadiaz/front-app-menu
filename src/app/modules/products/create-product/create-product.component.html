@@ -1,0 +1,166 @@
+<div class="card border border-gray-300 rounded-lg shadow-lg">
+  <!-- Card body -->
+  <span class="spinner-border spinner-border-sm align-middle ms-2" *ngIf="isLoading$ | async"></span>
+  <div class="card-body border-t p-9">
+    <!-- Título y SKU -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+      <div>
+        <label class="font-semibold text-lg py-2 block">Título: (*)</label>
+        <input
+          type="text"
+          name="title"
+          [(ngModel)]="title"
+          class="form-input w-full px-4 py-2 text-lg border border-gray-300 rounded-md"
+          placeholder="Por ejemplo: The best notebook collection 2023"
+        />
+      </div>
+      <div>
+        <label class="font-semibold text-lg py-2 block">SKU: (*)</label>
+        <input
+          type="text"
+          name="sku"
+          [(ngModel)]="sku"
+          class="form-input w-full px-4 py-2 text-lg border border-gray-300 rounded-md"
+          placeholder="Por ejemplo: ZDR456"
+        />
+      </div>
+    </div>
+    <!-- Precios -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+      <div>
+        <label class="font-semibold text-lg py-2 block">Precio PESOS: (*)</label>
+        <input
+          type="number"
+          name="price_pen"
+          [(ngModel)]="price_pes"
+          class="form-input w-full px-4 py-2 text-lg border border-gray-300 rounded-md"
+          placeholder="Por ejemplo: 20 PEN"
+        />
+      </div>
+      <div>
+        <label class="font-semibold text-lg py-2 block">Precio USD: (*)</label>
+        <input
+          type="number"
+          name="price_usd"
+          [(ngModel)]="price_usd"
+          class="form-input w-full px-4 py-2 text-lg border border-gray-300 rounded-md"
+          placeholder="Por ejemplo: 20 USD"
+        />
+      </div>
+      <div>
+        <label class="font-semibold text-lg py-2 block">Marca: (*)</label>
+        <select
+          class="form-select w-full px-4 py-2 border border-gray-300 rounded-md"
+          name="marca"
+          [(ngModel)]="marca_id"
+        >
+          <option value="">Seleccione</option>
+          <ng-container *ngFor="let item of marcas">
+            <option [value]="item.id">{{ item.name }}</option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+    <!-- Categorías -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+      <div>
+        <label class="font-semibold text-lg py-2 block">Departamento: (Primer Nivel *)</label>
+        <select
+          class="form-select w-full px-4 py-2 border border-gray-300 rounded-md"
+          name="departament"
+          [(ngModel)]="categorie_first_id"
+          (change)="changeDepartamento()"
+        >
+          <option value="">Seleccione</option>
+          <ng-container *ngFor="let item of categories_first">
+            <option [value]="item.id">{{ item.name }}</option>
+          </ng-container>
+        </select>
+      </div>
+      <div>
+        <label class="font-semibold text-lg py-2 block">Categoría: (Segundo Nivel Opcional)</label>
+        <select
+          class="form-select w-full px-4 py-2 border border-gray-300 rounded-md"
+          name="categorie"
+          [(ngModel)]="categorie_second_id"
+          (change)="changeCategorie()"
+        >
+          <option value="">Seleccione</option>
+          <ng-container *ngFor="let item of categories_seconds_backups">
+            <option [value]="item.id">{{ item.name }}</option>
+          </ng-container>
+        </select>
+      </div>
+      <div>
+        <label class="font-semibold text-lg py-2 block">Subcategoría: (Tercer Nivel Opcional)</label>
+        <select
+          class="form-select w-full px-4 py-2 border border-gray-300 rounded-md"
+          name="categorie"
+          [(ngModel)]="categorie_third_id"
+        >
+          <option value="">Seleccione</option>
+          <ng-container *ngFor="let item of categories_thirds_backups">
+            <option [value]="item.id">{{ item.name }}</option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+    <!-- Palabra y Etiquetas -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+      <div>
+        <label class="font-semibold text-lg py-2 block">Palabra: (*)</label>
+        <input
+          type="text"
+          name="word"
+          (keyup.enter)="addItems()"
+          [(ngModel)]="word"
+          class="form-input w-full px-4 py-2 text-lg border border-gray-300 rounded-md"
+          placeholder="Por ejemplo: XXXXX"
+        />
+      </div>
+      <div *ngIf="!isShowMultiselect">
+        <label class="font-semibold text-lg py-2 block">Etiquetas:</label>
+        <ng-multiselect-dropdown
+          [placeholder]="'Seleccionar Etiquetas'"
+          [settings]="dropdownSettings"
+          [data]="dropdownList"
+          [(ngModel)]="selectedItems"
+          (onSelect)="onItemSelect($event)"
+          (onSelectAll)="onSelectAll($event)"
+        >
+        </ng-multiselect-dropdown>
+      </div>
+    </div>
+    <!-- Imagen -->
+    <div class="mb-6">
+      <label class="font-semibold text-lg py-2 block">Sube tu imagen: (*)</label>
+      <div>
+        <input
+          type="file"
+          class="form-input w-full px-4 py-2 text-lg border border-gray-300 rounded-md"
+          id="customFile"
+          accept=".jpeg, .bmp, .jpg, .png, .gif, .webp"
+          (change)="processFile($event)"
+        />
+        <label class="text-sm text-gray-500" for="customFile">Elige un archivo</label>
+      </div>
+      <div class="py-4">
+        <img class="w-48" [src]="imagen_previsualiza" alt="Vista previa de la imagen" />
+      </div>
+    </div>
+    <!-- Descripción y Resumen -->
+    <div class="">
+      <label class="font-semibold text-lg py-2 block">Descripción:</label>
+      <ckeditor [data]="description" [config]="config" (change)="onChange($event)"></ckeditor>
+    <div>
+
+    <div>
+        <div class="">
+          <label class="font-semibold text-lg py-2 block">Descripción:</label>
+          <ckeditor [data]="description" [config]="config" (change)="onChange($event)"></ckeditor>
+    <div>
+    <div>
+
+        <div >
+              <button class="btn btn-primary" (click)="save()">Guardar</button>
+        </div>

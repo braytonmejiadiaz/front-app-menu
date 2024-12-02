@@ -14,7 +14,7 @@ import { BrowserModule } from '@angular/platform-browser';
   templateUrl: './pages-login.component.html',
   styleUrl: './pages-login.component.css'
 })
-export default class PagesLoginComponent {
+export  class PagesLoginComponent {
 
 
   name:string = "";
