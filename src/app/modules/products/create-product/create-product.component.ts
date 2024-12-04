@@ -2,7 +2,7 @@ import { Component, NgModule } from '@angular/core';
 import { FormsModule, NgModel, NgModelGroup, ReactiveFormsModule } from '@angular/forms';
 import { ProductService } from '../service/product.service';
 import { CommonModule } from '@angular/common';
-import { CKEditorModule } from 'ckeditor4-angular';
+
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 
@@ -10,7 +10,7 @@ import { IDropdownSettings } from 'ng-multiselect-dropdown';
 @Component({
   selector: 'app-create-product',
   standalone: true,
-  imports: [CommonModule,  CKEditorModule, ReactiveFormsModule , FormsModule,  NgMultiSelectDropDownModule],
+  imports: [CommonModule,   ReactiveFormsModule , FormsModule,  NgMultiSelectDropDownModule],
   templateUrl: './create-product.component.html',
   styleUrl: './create-product.component.css'
 })
@@ -56,13 +56,13 @@ export class CreateProductComponent {
   ngOnInit(): void {
     this.isLoading$ = this.productService.isLoading$;
 
-    this.dropdownList = [
-      { item_id: 5, item_text: 'New Delhi' },
-      { item_id: 6, item_text: 'Laravest' }
-    ];
-    this.selectedItems = [
-      { item_id: 6, item_text: 'Laravest' }
-    ];
+    // this.dropdownList = [
+    //   { item_id: 5, item_text: 'New Delhi' },
+    //   { item_id: 6, item_text: 'Laravest' }
+    // ];
+    // this.selectedItems = [
+    //   { item_id: 6, item_text: 'Laravest' }
+    // ];
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'item_id',
@@ -74,6 +74,7 @@ export class CreateProductComponent {
     };
     this.configAll();
   }
+
 
   configAll(){
     this.productService.configAll().subscribe((resp:any) => {
@@ -154,7 +155,7 @@ export class CreateProductComponent {
     formData.append("title",this.title);
     formData.append("sku",this.sku);
     formData.append("price_usd",this.price_usd+"");
-    formData.append("price_pen",this.price_pes+"");
+    formData.append("price_pes",this.price_pes+"");
     formData.append("brand_id",this.marca_id);
     formData.append("portada",this.file_imagen);
     formData.append("categorie_first_id",this.categorie_first_id);

@@ -118,6 +118,7 @@
           placeholder="Por ejemplo: XXXXX"
         />
       </div>
+
       <div *ngIf="!isShowMultiselect">
         <label class="font-semibold text-lg py-2 block">Etiquetas:</label>
         <ng-multiselect-dropdown
@@ -151,13 +152,14 @@
     <!-- Descripción y Resumen -->
     <div class="">
       <label class="font-semibold text-lg py-2 block">Descripción:</label>
-      <ckeditor [data]="description" [config]="config" (change)="onChange($event)"></ckeditor>
+      <!-- <ckeditor [data]="description" [config]="config" (change)="onChange($event)"></ckeditor> -->
     <div>
 
     <div>
         <div class="">
-          <label class="font-semibold text-lg py-2 block">Descripción:</label>
-          <ckeditor [data]="description" [config]="config" (change)="onChange($event)"></ckeditor>
+          <label class="font-semibold text-lg py-2 block">resumen:</label>
+          <textarea class="form-control form-control-solid" rows="3"
+          name="resumen" [(ngModel)]="resumen" placeholder="******"></textarea>
     <div>
     <div>
 
