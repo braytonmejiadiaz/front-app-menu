@@ -1,1 +1,76 @@
-<p>list-product works!</p>
+<div class="card bg-white rounded-lg shadow-md">
+  <!-- Card Header -->
+  <div class="card-header flex flex-col md:flex-row items-center justify-between py-4 px-6">
+    <!-- Spinner -->
+    <span class="spinner-border spinner-border-sm align-middle ms-2" *ngIf="isLoading$ | async"></span>
+    <!-- Search Bar -->
+    <div class="flex flex-col md:flex-row items-center gap-4">
+      <div class="relative">
+        <i class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">🔍</i>
+        <input
+          type="text"
+          (keyup.enter)="searchTo()"
+          [(ngModel)]="search"
+          class="form-input w-64 pl-12 border rounded-md focus:ring focus:ring-indigo-200"
+          placeholder="Search Products"
+        />
+      </div>
+      <select
+        class="form-select w-64 border rounded-md focus:ring focus:ring-indigo-200"
+        name="marca"
+        [(ngModel)]="marca_id"
+      >
+        <option value="">Selec. Marca</option>
+        <ng-container *ngFor="let item of marcas">
+          <option [value]="item.id">{{ item.name }}</option>
+        </ng-container>
+      </select>
+    </div>
+    <!-- Buttons -->
+    <div class="mt-4 md:mt-0">
+      <a routerLink="/products/register" class="btn bg-blue-500 text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600">
+        Add Product
+      </a>
+      <a (click)="searchTo()" class="btn bg-gray-800 text-white px-4 py-2 rounded-md shadow-md hover:bg-gray-900 ml-2">
+        Search
+      </a>
+    </div>
+  </div>
+
+  <!-- Card Body -->
+  <div class="card-body p-6">
+    <div class="overflow-x-auto">
+      <table class="table-auto w-full border-collapse border border-gray-200">
+        <thead class="bg-gray-100">
+          <tr>
+            <th class="px-4 py-2 border">Titulo</th>
+            <th class="px-4 py-2 border">Precios</th>
+            <th class="px-4 py-2 border">Marca</th>
+            <th class="px-4 py-2 border">Departamento</th>
+            <th class="px-4 py-2 border">Categoria</th>
+            <th class="px-4 py-2 border">Subcategoria</th>
+            <th class="px-4 py-2 border">State</th>
+            <th class="px-4 py-2 border text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="text-gray-700">
+          <ng-container *ngFor="let product of products">
+            <tr class="odd:bg-gray-50 even:bg-white">
+              <td class="px-4 py-2 border">{{ product.title }}</td>
+              <td class="px-4 py-2 border">{{ product.price_usd }} USD / {{ product.price_pes }} PES</td>
+              <td class="px-4 py-2 border">{{ product.brand.name }}</td>
+              <td class="px-4 py-2 border">{{ product.categorie_first.name }}</td>
+              <td class="px-4 py-2 border" *ngIf="product.categorie_second">{{ product.categorie_second.name }}</td>
+              <td class="px-4 py-2 border" *ngIf="product.categorie_third">{{ product.categorie_third.name }}</td>
+              <td class="px-4 py-2 border">Active</td>
+              <td class="px-4 py-2 border text-right">
+                <button class="btn bg-blue-500 text-white px-2 py-1 rounded">Edit</button>
+                <button class="btn bg-red-500 text-white px-2 py-1 rounded ml-2">Delete</button>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
