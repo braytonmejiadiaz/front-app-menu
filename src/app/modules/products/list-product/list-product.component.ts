@@ -93,6 +93,23 @@ export class ListProductComponent {
   }
 
   deleteProduct(product:any) {
+    const confirmDelete = confirm(`¿Estás seguro de que deseas eliminar el producto "${product.name}"?`);
+    if (confirmDelete) {
+      this.productService.deleteProduct(product.id).subscribe(
+        (resp: any) => {
+          // Eliminar el producto de la lista
+          const INDEX = this.products.findIndex((item: any) => item.id === product.id);
+          if (INDEX !== -1) {
+            this.products.splice(INDEX, 1);
+          }
+          console.log('Producto eliminado:', resp);
+        },
+        (err: any) => {
+          console.error('Error al eliminar el producto:', err);
+        }
+      );
+    }
+
 
   }
 }
