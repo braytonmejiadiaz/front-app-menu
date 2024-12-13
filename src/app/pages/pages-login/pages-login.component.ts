@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MenuComponent } from '../../shared/menu/menu.component';
+
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
@@ -10,7 +10,7 @@ import { BrowserModule } from '@angular/platform-browser';
 @Component({
   selector: 'app-pages-login',
   standalone: true,
-  imports: [ReactiveFormsModule, MenuComponent, FormsModule, ToastrModule, ],
+  imports: [ReactiveFormsModule,  FormsModule, ToastrModule, ],
   templateUrl: './pages-login.component.html',
   styleUrl: './pages-login.component.css'
 })
