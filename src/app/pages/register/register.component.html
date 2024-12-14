@@ -1,41 +1,33 @@
-<!--
-  <div class="tp-login-input">
-    <input id="email" type="email" [(ngModel)]="email" placeholder="shofy@mail.com">
- </div>
+<div class="flex items-center h-screen justify-center bg-left bg-[url('https://uniformesmedicos.co/wp-content/uploads/2024/12/bg_top.png')]">
 
- <div class="tp-login-input">
-  <input id="tp_password" type="password" [(ngModel)]="password" placeholder="Min. 6 character">
-</div>
-<div class="tp-login-input-title">
-  <label for="tp_password">Password</label>
-</div>
-<div class="tp-login-suggetions d-sm-flex align-items-center justify-content-between mb-20">
-  <div class="tp-login-remeber">
-     <input id="remeber" type="checkbox">
-     <label for="remeber">Remember me</label>
-  </div>
-  <div class="tp-login-forgot">
-     <a href="forgot.html">Forgot Password?</a>
-  </div>
-</div>
-<div class="tp-login-bottom">
-  <a href="#" onclick="return false" (click)="login()" class="tp-login-btn w-100">Login</a>
-</div>  -->
+  <div class="flex items-center justify-center bg-[#fff]  border border-gray-300 shadow-lg shadow-gray-500/50 rounded-[25px]">
+
+      <div class="p-4 flex flex-col justify-center items-start gap-3">
+        <img src="https://restobar.loggro.com/assets/images/restobar/Logo%20Loggro%20Restobar.svg" alt="" width="200px">
+            <p>Te damos la bienvenida<br> a FoodLogic</p>
+            <p>Ingresa aquí con tu correo y contraseña<br> designada para acceder a tu cuenta.</p>
+          <div class="pt-10 w-full " >
+              <div class="mb-4 flex flex-col gap-3">
+                <label class="text-[13px] font-thin" for="">Correo electronico</label>
+                <input class="border border-{#EAEAEA} p-2 rounded-lg text-[14px]" [(ngModel)]="email" type="text"   placeholder="Burger.com.co">
+              </div>
+              <div class="mb-4 flex flex-col gap-3">
+                <label class="text-[13px] font-thin" for="">Contraseña</label>
+                <input class="border border-{#EAEAEA} p-2 rounded-lg text-[14px]" [(ngModel)]="password" type="text"   placeholder="*******">
+              </div>
+              <button class=" mt-3 w-1/4  bg-[#FC4D25] text-white p-2 rounded hover:bg-[#ed401a]" onclick="return false" (click)="login()">Ingresar</button>
+              <p>Crear una cuenta</p>
+              <p>¿No tienes cuenta aún? Prueba Loggro Restobar por 7 días, gratis.</p>
+              <p>¿Quieres ir al sitio de Loggro? Clic aquí</p>
+            </div>
+      </div>
 
 
-
-<div class="w-1/3 p-4 flex flex-col items-center shadow-xl p-20">
-
-  <h2 class="text-3xl">Ingresa tus datos para empezar</h2>
-<div class="pt-10 w-full " >
-    <div class="mb-4 flex flex-col">
-      <label class="text-[13px] font-thin" for="">Correo electronico</label>
-      <input class="border-b border-gray-400 p-2 w-full focus:outline-none focus:border-blue-500" [(ngModel)]="email" type="text"   placeholder="Burger.com.co">
+      <div class="bg-[#FFFFFE] rounded-[25px] ">
+        <img src="https://restobar.loggro.com/assets/images/restobar/img_main_login_Restobar.png" alt="">
     </div>
-     <div class="mb-4 flex flex-col">
-      <label class="text-[13px] font-thin" for="">Contraseña</label>
-      <input class="border-b border-gray-400 p-2 w-full focus:outline-none focus:border-blue-500" [(ngModel)]="password" type="text"   placeholder="*******">
-    </div>
-    <button class=" mt-3 w-full  bg-[#FC4D25] text-white p-2 rounded hover:bg-[#ed401a]" onclick="return false" (click)="login()">Ingresar</button>
+
   </div>
-  </div>
+
+
+</div>
