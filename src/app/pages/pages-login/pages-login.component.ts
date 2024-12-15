@@ -19,6 +19,7 @@ export  class PagesLoginComponent {
 
   name:string = "";
   surname:string = "";
+  name_bussines:string = "";
   email: string = "";
   password: string = "";
   phone: string = "";
@@ -31,6 +32,7 @@ export  class PagesLoginComponent {
   register(){
     if( !this.name ||
       !this.surname ||
+      !this.name_bussines ||
       !this.email ||
       !this.password ||
       !this.phone){
@@ -40,6 +42,7 @@ export  class PagesLoginComponent {
     let data = {
         name  : this.name,
         surname  : this.surname,
+        name_bussines  : this.name_bussines,
         email  : this.email,
         password   : this.password,
         phone   : this.phone,
@@ -61,25 +64,5 @@ export  class PagesLoginComponent {
   //   telefono:      new FormControl(''),
   //   correo:        new FormControl(''),
   // })
-
-
-
-
-  // aqui va le carourel
-
-  public images = [
-    'https://img.freepik.com/vector-gratis/vector-diseno-logotipo-tienda-bicicletas_53876-40626.jpg',
-    'https://img.freepik.com/vector-gratis/plantilla-logotipo-barbacoa-creativa_23-2149017951.jpg',
-    'https://img.freepik.com/vector-gratis/vector-diseno-logotipo-tienda-bicicletas_53876-40626.jpg',
-  ];
-  currentIndex = 0;
-
-  nextImage() {
-    this.currentIndex = (this.currentIndex + 1) % this.images.length;
-  }
-
-  prevImage() {
-    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
-  }
 
 }
