@@ -1,43 +1,44 @@
-<div class="h-screen">
-  <div>
-    <span class="text-[22px] text-[#37394f] font-medium">ADMIN</span>
+<div class="h-screen bg-[#1E1F23] p-5">
+
+  <div class="">
+    <span class="text-[20px] text-[#C6C6C6] font-normal">Mi cuenta</span>
   </div>
-  <div class="p-5 ">
-    <ul class="space-y-3">
-      <li class=" hover:bg-[#000] hover:text-[#fff] p-4 rounded text-black hover:text-white transition-colors duration-200">
-        <i class="fa-solid fa-tv" ></i> Dashboard</li>
-      <li class="text-[#000] hover:bg-[#000] hover:text-[#fff] p-4 rounded text-black hover:text-white transition-colors duration-200" routerLink="lista-plantillas">
-        <i class="fa-regular fa-user"></i> Plantillas de menú</li>
+  <div class="mt-3">
+    <ul class="space-y-4 ">
+      <li class=" hover:bg-[#fff] hover:text-[#1E1F23] p-2 rounded text-[#C6C6C6] hover:text-white transition-colors duration-200" routerLinkActive="bg-[#fff] text-[#fc4d25]">
+        <i class="fa-solid fa-tv text-xs mr-2" ></i> Dashboard</li>
 
-        <li class="text-[#000] hover:bg-[#000] hover:text-[#fff] p-4 rounded text-black hover:text-white transition-colors duration-200 " routerLink="crear-categorias">
-          <i class="fa-solid fa-list" ></i> Crear categoria</li>
+      <li class="text-[#000] hover:bg-[#fff] hover:text-[#1E1F23] hover:cursor-pointer p-2 rounded text-[#C6C6C6] hover:text-white transition-colors duration-200 " routerLink="lista-plantillas"
+        routerLinkActive="bg-[#fff] text-[#fc4d25]">
+        <i class="fa-regular fa-window-restore text-xs mr-2 "></i> Plantillas de Menú</li>
+        </ul>
+  </div>
+  <div class="mt-5 border-t border-[#C6C6C6]"></div>
 
-          <li class="text-[#000] hover:bg-[#000] hover:text-[#fff] p-4 rounded text-black hover:text-white transition-colors duration-200 " routerLink="crear-producto">
-            <i class="fa-solid fa-list" ></i> Crear producto</li>
+  <!-- aqui empieza menu producto -->
 
-          <li class="text-[#000] hover:bg-[#000] hover:text-[#fff] p-4 rounded text-black hover:text-white transition-colors duration-200 " routerLink="lista-producto">
-            <i class="fa-solid fa-list" ></i> Listado de productos</li>
+  <div class="mt-5">
+    <span class="text-[20px] text-[#C6C6C6] font-normal">Producto</span>
+  </div>
+  <div class="mt-3">
+    <ul class="space-y-4 ">
+      <li class="text-[#000] hover:bg-[#fff] hover:text-[#1E1F23] hover:cursor-pointer p-2 rounded text-[#C6C6C6] hover:text-white transition-colors duration-200 " routerLink="lista-producto"
+      routerLinkActive="bg-[#fff] text-[#fc4d25]">
+        <i class="fa-solid fa-list text-xs mr-2" ></i> Listado de productos</li>
 
-          <li class="text-[#000] hover:bg-[#000] hover:text-[#fff] p-4 rounded text-black hover:text-white transition-colors duration-200 " routerLink="atributos/list">
-            <i class="fa-solid fa-list" ></i> atributos</li>
+      <li class="text-[#000] hover:bg-[#fff] hover:text-[#1E1F23] hover:cursor-pointer p-2 rounded text-[#C6C6C6] hover:text-white transition-colors duration-200 " routerLink="crear-producto"
+      routerLinkActive="bg-[#fff] text-[#fc4d25]">
+        <i class="fa-solid fa-hammer text-xs mr-2" ></i> Crear producto</li>
+
+      <li class="text-[#000] hover:bg-[#fff] hover:text-[#1E1F23] hover:cursor-pointer p-2 rounded text-[#C6C6C6] hover:text-white transition-colors duration-200 " routerLink="crear-categorias"
+      routerLinkActive="bg-[#fff] text-[#fc4d25]">
+        <i class="fa-solid fa-marker text-xs mr-2" ></i> Crear categoría</li>
+
+      <li class="text-[#000] hover:bg-[#fff] hover:text-[#1E1F23] hover:cursor-pointer p-2 rounded text-[#C6C6C6] hover:text-white transition-colors duration-200 " routerLink="atributos/list"
+      routerLinkActive="bg-[#fff] text-[#fc4d25]">
+        <i class="fa-solid fa-pencil text-xs mr-2" ></i> Crear atributo</li>
     </ul>
   </div>
-  <div>
-    <span class="text-[22px] text-[#37394f] font-medium">BLOG</span>
-  </div>
-  <div class="p-5">
-    <ul class="space-y-3">
-      <li class="text-[#000] hover:bg-[#000] hover:text-[#fff] p-4 rounded">Post</li>
-      <li class="text-[#000] hover:bg-[#000] hover:text-[#fff] p-4 rounded">Archive</li>
-    </ul>
-  </div>
-  <div>
-    <span class="text-[22px] text-[#37394f] font-medium">PERSONAL</span>
-  </div>
-  <div class="p-5">
-    <ul class="space-y-3">
-      <li class="text-[#000] hover:bg-[#000] hover:text-[#fff] p-4 rounded">Notificaciones</li>
-      <li class="text-[#000] hover:bg-[#000] hover:text-[#fff] p-4 rounded">Mensajes</li>
-    </ul>
-  </div>
+  <div class="mt-5 border-t border-[#C6C6C6]"></div>
+
 </div>
