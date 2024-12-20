@@ -1,0 +1,10 @@
+<!-- Mostrar indicador de carga cuando isLoading es true -->
+<div *ngIf="isLoading" class="loading-spinner">
+  <p>Cargando...</p>
+</div>
+
+<!-- Formulario para subir archivo CSV -->
+<form (ngSubmit)="onSubmit()">
+  <input type="file" (change)="onFileChange($event)" accept=".csv" />
+  <button type="submit" [disabled]="isLoading">Subir archivo</button>
+</form>

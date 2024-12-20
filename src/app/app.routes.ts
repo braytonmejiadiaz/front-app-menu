@@ -63,6 +63,10 @@ export const routes: Routes = [
         path:'list/edit/:id',
         loadComponent: () => import('./modules/products/edit-product/edit-product.component').then((m) => m.EditProductComponent)
       },
+      {
+        path:'subir-masivo',
+        loadComponent: () => import('./modules/carga-productos-csv/import-max/import-max.component').then((m) => m.ImportMaxComponent)
+      },
 
     ]
   }
