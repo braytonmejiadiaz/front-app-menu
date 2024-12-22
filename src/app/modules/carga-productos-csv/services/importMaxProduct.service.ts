@@ -10,22 +10,22 @@ import { url } from 'inspector';
   providedIn: 'root'
 })
 export class ImportMaxProductService {
-  private isLoadingSubject = new BehaviorSubject<boolean>(false);  // Aquí se maneja el estado de carga
 
-  constructor(private http: HttpClient, public authservice: AuthService,) { }
+  isLoading$: Observable<boolean>;
+  isLoadingSubject: BehaviorSubject<boolean>;
 
-  // Método para obtener el estado de carga
-  get isLoading$(): Observable<boolean> {
-    return this.isLoadingSubject.asObservable();
-  }
+  constructor(private http: HttpClient, public authservice: AuthService,) {
+    this.isLoadingSubject = new BehaviorSubject<boolean>(false);
+    this.isLoading$ = this.isLoadingSubject.asObservable();
+   }
+
 
   // Método para importar productos
   importProducts(file: File): Observable<any> {
     this.isLoadingSubject.next(true); // Inicia la carga
-
     const formData = new FormData();
+    const token = localStorage.getItem('token');
     formData.append('file', file);
-    let token = localStorage.getItem('token');
     let headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
     let URL = URL_SERVICIOS + "/admin/product/import";
 

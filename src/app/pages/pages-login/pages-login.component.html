@@ -1,60 +1,53 @@
-
-<div class="flex items-center h-screen justify-center ">
-  <div class="w-4/5  h-screen flex items-center justify-center flex-col  bg-contain bg-left  bg-no-repeat bg-[url('https://uniformesmedicos.co/wp-content/uploads/2024/12/bg_top.png')] "  style="background-size: 600px;">
-    <div>
-   <h1 class="text-center text-[27px] text-[#000] font-bold ">¡COMIENZA TU EXPERIENCIA FOODLOGIC!</h1>
-      <p class="text-[18px] text-[#FC4D25] font-medium text-center">Pruebalo <b>gratis</b> por 1 semana</p>
+<div class="flex flex-col lg:flex-row flex-col-reverse  items-center justify-center min-h-screen">
+  <div class="w-full lg:w-4/5 sm:w-full h-auto lg:h-screen flex items-center justify-center flex-col  bg-contain bg-left bg-no-repeat bg-[url('https://uniformesmedicos.co/wp-content/uploads/2024/12/bg_top.png')]"
+       style="background-size: 600px;">
+    <div class="text-center px-4 lg:px-0">
+      <h1 class="text-[20px] md:text-[27px] text-[#000] font-bold">¡COMIENZA TU EXPERIENCIA FOODLOGIC!</h1>
+      <p class="text-[16px] md:text-[18px] text-[#FC4D25] font-medium">Pruebalo <b>gratis</b> por 1 semana</p>
     </div>
-  <div class="w-4/5  flex-col items-start ">
-    <div class="pt-10  flex">
-
-      <div class="flex-1 mr-4">
+    <div class="w-full lg:w-4/5  sm:flex sm:items-center sm:text-center flex flex-col lg:flex-row items-start px-4 lg:px-0 mt-10">
+      <div class="flex-1 mr-0 lg:mr-4 sm:w-full " style="width: 90%;">
+        <div class="mb-4 flex flex-col gap-3 sm:w-full">
+          <label class="text-[14px] md:text-[15px] font-thin lg:text-left sm:text-center sm:w-full">Nombre*</label>
+          <input class="border border-gray-300 p-2 rounded-lg text-[14px] lg:text-left sm:text-center sm:w-full" [(ngModel)]="name" type="text" placeholder="Tu nombre">
+        </div>
         <div class="mb-4 flex flex-col gap-3">
-          <label class="text-[15px] font-thin" >Nombre*</label>
-          <input class="border border-{#EAEAEA} p-1 rounded-lg text-[14px]" [(ngModel)]="name" type="text"  placeholder="Tu nombre">
+          <label class="text-[14px] md:text-[15px] font-thin lg:text-left sm:text-center">Teléfono de contacto</label>
+          <input class="border border-gray-300 p-2 rounded-lg text-[14px] lg:text-left sm:text-center" [(ngModel)]="phone" type="number" placeholder="315 2164819">
         </div>
-
-        <div class="mb-4 flex flex-col  gap-3">
-          <label class="text-[15px] font-thin" >Teléfono de contacto</label>
-          <input class="border border-{#EAEAEA} p-1 rounded-lg" [(ngModel)]="phone" type="number"  placeholder="315 2164819">
-        </div>
-
-        <div class="mb-4 flex flex-col  gap-3">
-          <label class="text-[15px] font-thin" >Nombre de tu negocio</label>
-          <input class="border border-{#EAEAEA} p-1 rounded-lg" [(ngModel)]="name_bussines" type="text"  placeholder="Nombre de tu negocio">
+        <div class="mb-4 flex flex-col gap-3">
+          <label class="text-[14px] md:text-[15px] font-thin lg:text-left sm:text-center">Nombre de tu negocio</label>
+          <input class="border border-gray-300 p-2 rounded-lg text-[14px] lg:text-left sm:text-center" [(ngModel)]="name_bussines" type="text" placeholder="Nombre de tu negocio">
         </div>
       </div>
 
-      <div class="flex-1 ml-4">
-        <div class="mb-4 flex flex-col  gap-3">
-          <label class="text-[15px] font-thin" >Apellido*</label>
-          <input class="border border-{#EAEAEA} p-1 rounded-lg" [(ngModel)]="surname" type="text"  placeholder="Tu apellido">
+      <div class="flex-1 ml-0 lg:ml-4 sm:w-3/4" style="width: 90%;">
+        <div class="mb-4 flex flex-col gap-3 ">
+          <label class="text-[14px] md:text-[15px] font-thin lg:text-left sm:text-center">Apellido*</label>
+          <input class="border border-gray-300 p-2 rounded-lg text-[14px] lg:text-left sm:text-center " [(ngModel)]="surname" type="text" placeholder="Tu apellido">
         </div>
-        <div class="mb-4 flex flex-col  gap-3">
-          <label class="text-[15px] font-thin" >Correo electronico</label>
-          <input class="border border-{#EAEAEA} p-1 rounded-lg" [(ngModel)]="email" type="text"   placeholder="Burger.com.co">
+        <div class="mb-4 flex flex-col gap-3">
+          <label class="text-[14px] md:text-[15px] font-thin lg:text-left sm:text-center">Correo electronico</label>
+          <input class="border border-gray-300 p-2 rounded-lg text-[14px] lg:text-left sm:text-center" [(ngModel)]="email" type="text" placeholder="Burger.com.co">
         </div>
-         <div class="mb-4 flex flex-col  gap-3">
-          <label class="text-[15px] font-thin" >Contraseña</label>
-          <input class="border border-{#EAEAEA} p-1 rounded-lg" [(ngModel)]="password" type="text"   placeholder="*******">
+        <div class="mb-4 flex flex-col gap-3">
+          <label class="text-[14px] md:text-[15px] font-thin lg:text-left sm:text-center">Contraseña</label>
+          <input class="border border-gray-300 p-2 rounded-lg text-[14px] lg:text-left sm:text-center" [(ngModel)]="password" type="text" placeholder="*******">
         </div>
       </div>
-
-
-      </div>
-
-      <label>
-        <input type="checkbox" class="form-checkbox text-blue-500">
-        <span class="ml-2">Acepto los términos y condiciones</span>
-      </label>
-      <button class=" mt-8 w-full  bg-[#FF7043] text-white p-2 rounded hover:bg-[#ed401a] transition duration-500" onclick="return false" (click)="register()">Registrarme</button>
-
+    </div>
+    <label class="flex items-center gap-2 text-[14px]">
+      <input type="checkbox" class="form-checkbox text-blue-500">
+      <span>Acepto los términos y condiciones</span>
+    </label>
+    <button class="mt-8 mb-5 w-4/5 bg-[#FF7043] text-white p-2 rounded hover:bg-[#ed401a] transition duration-500" (click)="register()">Registrarme</button>
   </div>
 
-</div>
+  <div class="w-full lg:w-4/5 lg:h-screen sm:h-64 sm:p-5 flex flex-col items-center justify-center gap-6
+   px-4 lg:px-0 bg-cover bg-top bg-[url('https://restobar.loggro.com/assets/images/pirpos/img_main_hero_register.png')]" style="padding: 5%;">
+    <h2 class="text-[30px] md:text-[60px] text-center">Bienvenido a <span class="text-[#FC4D25] font-bold">FoodLogic</span></h2>
+    <p class="text-[16px] md:text-[18px]">¿Ya tienes una cuenta? <span class="text-[#FC4D25]"><a href="#">ingresa aquí</a></span></p>
+    <img src="https://restobar.loggro.com/assets/images/restobar/Logo%20Loggro%20Restobar.svg" alt="" class="w-32 md:w-48">
+  </div>
 
-<div class="w-4/5 h-screen flex items-center justify-center flex-col gap-10 bg-cover bg-top bg-[url('https://restobar.loggro.com/assets/images/pirpos/img_main_hero_register.png')]">
-    <h2 class="text-[60px] text-center">Bienvenido a <span class=" text-[#FC4D25]"><b>FoodLogic</b></span></h2>
-    <p>¿Ya tienes una cuenta? <span class=" text-[#FC4D25]"><a href="">ingresa aquí</a></span></p>
-    <img src="https://restobar.loggro.com/assets/images/restobar/Logo%20Loggro%20Restobar.svg" alt="">
 </div>
