@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../services/auth.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +12,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent implements OnInit{
+  mostrarContrasena: boolean = false;
+  formulario: FormGroup;
   email: string = '';
   password: string = '';
   code_user: string ='';
@@ -20,8 +22,15 @@ export class RegisterComponent implements OnInit{
      private authService: AuthService,
      public router: Router,
      public activedRouter: ActivatedRoute,
-    ){}
-
+     public fb: FormBuilder,
+    ){
+      this.formulario = this.fb.group({
+        password: ['', [Validators.required,]]
+      });
+    }
+    alternarContrasena() {
+      this.mostrarContrasena = !this.mostrarContrasena;
+    }
 
   ngOnInit(): void {
   //  this.showScuccess()
