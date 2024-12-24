@@ -24,18 +24,21 @@
 
   <div class="relative inline-block text-left">
     <!-- Botón principal del menú -->
-    <button
-      type="button"
-      class="text-[20px] text-[#C6C6C6] font-normal"
-      (click)="toggleDropdown()"
-    >
-      Producto
-    </button>
+    <button type="button"  class="flex justify-between items-center w-full text-left text-[20px] text-[#C6C6C6] font-normal" (click)="toggleDropdown()">  Producto
+      <i
+      *ngIf="isDropdownOpen"
+      class="fa-solid fa-chevron-right text-xs"
+      ></i>
+      <i
+      *ngIf="!isDropdownOpen"
+      class="fa-solid fa-chevron-down text-xs "
+    ></i>
+   </button>
 
     <!-- Menú desplegable -->
     <div
       *ngIf="isDropdownOpen"
-      class="  mt-1 w-88  focus:outline-none"
+      class="mt-1 w-88  focus:outline-none"
     >
       <div class="py-1">
         <ul class="space-y-4 ">
