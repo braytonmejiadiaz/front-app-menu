@@ -1,50 +1,74 @@
-<div class="sm:items-start md:items-start lg:items-center h-screen flex justify-center bg-left bg-[url('https://uniformesmedicos.co/wp-content/uploads/2024/12/bg_top.png')] bg-cover p-9">
+<div
+  class="sm:items-start md:items-start lg:items-center h-screen flex justify-center bg-left bg-[url('https://uniformesmedicos.co/wp-content/uploads/2024/12/bg_top.png')] bg-cover p-9">
 
-  <div class="sm:items-start  lg:h-auto flex flex-col lg:flex-row items-center bg-white border border-gray-300 shadow-lg shadow-gray-500/50 rounded-[25px]
-  w-full lg:w-auto">
+  <!-- Contenedor principal -->
+  <div
+    class="sm:items-start lg:h-auto flex flex-col lg:flex-row items-center bg-white border border-gray-300 shadow-lg shadow-gray-500/50 rounded-[25px] w-full lg:w-auto">
 
     <!-- Contenido de la izquierda -->
     <div class="p-8 flex flex-col justify-start gap-4 w-full lg:w-2/4">
+      <!-- Logo -->
+      <img src="https://restobar.loggro.com/assets/images/restobar/Logo%20Loggro%20Restobar.svg" alt="Logo"
+        class="w-32 sm:w-40 md:w-48 lg:w-52 mx-auto">
 
-      <!-- Logo ajustable para todas las pantallas -->
-      <img src="https://restobar.loggro.com/assets/images/restobar/Logo%20Loggro%20Restobar.svg" alt="" class="w-32 sm:w-40 md:w-48 lg:w-52 mx-auto">
+      <!-- Texto de bienvenida -->
+      <p class="text-[20px] sm:text-[25px] md:text-[30px] lg:text-[35px] text-center md:text-left">
+        Te damos la bienvenida
+      </p>
+      <p class="text-[25px] sm:text-[30px] md:text-[35px] font-bold text-[#FC4D25] text-center md:text-left">
+        a FoodLogic
+      </p>
+      <p class="text-[#000] text-[12px] sm:text-[14px]">
+        Ingresa aquí con tu correo y contraseña<br> designada para acceder a tu cuenta.
+      </p>
 
-      <!-- Texto ajustable -->
-      <p class="text-[20px] sm:text-[25px] md:text-[30px] lg:text-[35px] text-center md:text-left">Te damos la bienvenida</p>
-      <p class="text-[25px] sm:text-[30px] md:text-[35px] font-bold text-[#FC4D25] text-center md:text-left">a FoodLogic</p>
-      <p class="text-[#000] text-[12px] sm:text-[14px]">Ingresa aquí con tu correo y contraseña<br> designada para acceder a tu cuenta.</p>
-
-      <div class="pt-5 w-full">
-        <div class="mb-4 flex flex-col gap-3">
-          <label class="text-[12px] sm:text-[13px] font-thin" for="">Correo electrónico</label>
-          <input class="border border-[#EAEAEA] p-2 rounded-lg text-[14px] focus:outline-none" [(ngModel)]="email" type="text" placeholder="Burger.com.co">
-        </div>
-
-        <div class="mb-4 flex flex-col gap-3">
-          <label class="text-[12px] sm:text-[13px] font-thin" for="">Contraseña</label>
-          <div class="border border-[#EAEAEA] p-2 rounded-lg flex justify-between items-center">
-          <input id="password" class="text-[14px] focus:outline-none" [(ngModel)]="password" [type]="mostrarContrasena ? 'text' : 'password'"
-          formControlName="password" placeholder="*******" ><i class="fa-solid fa-eye text-ls  " type="button"
-          (click)="alternarContrasena()"> {{ mostrarContrasena ? '' : '' }}</i>
+      <!-- Formulario -->
+      <form [formGroup]="formulario" (ngSubmit)="login()" class="w-full">
+        <!-- Correo electrónico -->
+        <div class="pt-5 w-full">
+          <div class="mb-4 flex flex-col gap-3">
+            <label class="text-[12px] sm:text-[13px] font-thin" for="email">Correo electrónico</label>
+            <input id="email" formControlName="email" type="email" placeholder="Burger.com.co"
+              class="border border-[#EAEAEA] p-2 rounded-lg text-[14px] focus:outline-none">
           </div>
 
+          <!-- Contraseña -->
+          <div class="mb-4 flex flex-col gap-3">
+            <label class="text-[12px] sm:text-[13px] font-thin" for="password">Contraseña</label>
+            <div class="border border-[#EAEAEA] p-2 rounded-lg flex justify-between items-center">
+              <input id="password" [type]="mostrarContrasena ? 'text' : 'password'" formControlName="password"
+                placeholder="*******" class="text-[14px] focus:outline-none">
+              <i class="fa-solid fa-eye text-ls" type="button" (click)="alternarContrasena()"></i>
+            </div>
+          </div>
+
+          <!-- Botón de envío -->
+          <button type="submit"
+            class="mt-3 w-full md:w-1/4 bg-[#FC4D25] text-white p-2 rounded-lg hover:bg-[#ed401a]">
+            Ingresar
+          </button>
         </div>
+      </form>
 
-        <button class="mt-3 w-full md:w-1/4 bg-[#FC4D25] text-white p-2 rounded-lg hover:bg-[#ed401a]" onclick="return false" (click)="login()">Ingresar</button>
-
-        <a href="/register">
-          <p class="pt-2 text-sm text-[#01BBF2] underline text-center md:text-left">Crear una cuenta</p>
-        </a>
-        <p class="pt-2 text-sm text-center md:text-left">¿No tienes cuenta aún? <span class="text-[#01BBF2] underline">Prueba FoodLogic por 7 días, gratis.</span></p>
-        <p class="text-sm text-center md:text-left">¿Quieres ir al sitio de FoodLogic?<span class="text-[#01BBF2] underline"> Clic aquí</span></p>
-      </div>
+      <!-- Enlaces adicionales -->
+      <a href="/register" class="pt-2 text-sm text-[#01BBF2] underline text-center md:text-left">
+        Crear una cuenta
+      </a>
+      <p class="pt-2 text-sm text-center md:text-left">
+        ¿No tienes cuenta aún?
+        <span class="text-[#01BBF2] underline">Prueba FoodLogic por 7 días, gratis.</span>
+      </p>
+      <p class="text-sm text-center md:text-left">
+        ¿Quieres ir al sitio de FoodLogic?
+        <span class="text-[#01BBF2] underline">Clic aquí</span>
+      </p>
     </div>
 
-    <!-- Contenido de la derecha (imagen) -->
-    <div class="bg-[#FFFFFE] rounded-[25px] shadow-lg shadow-gray-300/50 w-full mt-6 lg:mt-0 lg:w-full bg-cover">
-      <img src="https://restobar.loggro.com/assets/images/restobar/img_main_login_Restobar.png" alt="" class="w-full  rounded-[25px]">
+    <!-- Contenido de la derecha -->
+    <div
+      class="bg-[#FFFFFE] rounded-[25px] shadow-lg shadow-gray-300/50 w-full mt-6 lg:mt-0 lg:w-full bg-cover hidden sm:block">
+      <img src="https://restobar.loggro.com/assets/images/restobar/img_main_login_Restobar.png" alt=""
+        class="w-full rounded-[25px]">
     </div>
-
   </div>
-
 </div>

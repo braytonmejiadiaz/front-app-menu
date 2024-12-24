@@ -14,83 +14,91 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 export class RegisterComponent implements OnInit{
   mostrarContrasena: boolean = false;
   formulario: FormGroup;
-  email: string = '';
-  password: string = '';
-  code_user: string ='';
+  code_user: string = '';
 
-  constructor(private toastr: ToastrService,
-     private authService: AuthService,
-     public router: Router,
-     public activedRouter: ActivatedRoute,
-     public fb: FormBuilder,
-    ){
-      this.formulario = this.fb.group({
-        password: ['', [Validators.required,]]
-      });
-    }
-    alternarContrasena() {
-      this.mostrarContrasena = !this.mostrarContrasena;
-    }
+  constructor(
+    private toastr: ToastrService,
+    private authService: AuthService,
+    private router: Router,
+    private activedRouter: ActivatedRoute,
+    private fb: FormBuilder
+  ) {
+    // Inicializar el formulario reactivo
+    this.formulario = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
+
+  alternarContrasena() {
+    this.mostrarContrasena = !this.mostrarContrasena;
+  }
 
   ngOnInit(): void {
-  //  this.showScuccess()
-  if(this.authService.token && this.authService.user){
-    setTimeout(()=>{
-      this.router.navigateByUrl("/")
-    },500);
-      return;
-  }
-
-  this.activedRouter.queryParams.subscribe((resp:any)=>{
-    this.code_user = resp.code;
-  });
-
-    if(this.code_user){
-      let data = {
-        code_user: this.code_user
-      }
-      this.authService.verifiedAuth(data).subscribe((resp:any)=>{
-        console.log(resp);
-        if(resp.message == 403){
-      this.toastr.error("validacion", "El codigo no pertenece a  ningun usuario");
-        };
-
-        if(resp.message == 200){
-          this.toastr.success("exito", "El correo se verifico");
-
-          setTimeout(()=>{
-            this.router.navigateByUrl("/login");
-          },500);
-
-        };
-      })
-    }
-
-  }
-
-
-  login(){
-    if(!this.email || !this.password){
-      this.toastr.error("validacion", "necesitas ingresar todos los campo");
+    if (this.authService.token && this.authService.user) {
+      setTimeout(() => {
+        this.router.navigateByUrl('/');
+      }, 500);
       return;
     }
-    this.authService.login(this.email, this.password).subscribe((resp:any)=>{
-      console.log(resp);
-      if(resp.error && resp.error.error){
-         this.toastr.error("validacion", 'las credenciales son incorrectas');
-         return;
-      }
-      if(resp == true){
-        this.toastr.success("exito", 'Bienvenido a la tienda');
-        this.router.navigateByUrl("/usuario")
-        return;
-      }
-    },(error) =>{
-      console.log(error);
-    })
+
+    // Obtener el código de usuario desde los parámetros de consulta
+    this.activedRouter.queryParams.subscribe((params: any) => {
+      this.code_user = params.code;
+    });
+
+    if (this.code_user) {
+      const data = { code_user: this.code_user };
+      this.authService.verifiedAuth(data).subscribe(
+        (resp: any) => {
+          if (resp.message === 403) {
+            this.toastr.error(
+              'Validación',
+              'El código no pertenece a ningún usuario'
+            );
+          }
+
+          if (resp.message === 200) {
+            this.toastr.success('Éxito', 'El correo se verificó');
+
+            setTimeout(() => {
+              this.router.navigateByUrl('/login');
+            }, 500);
+          }
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+    }
+  }
+
+  login() {
+    if (this.formulario.invalid) {
+      this.toastr.error('Validación', 'Necesitas ingresar todos los campos');
+      return;
     }
 
-  showSuccess(){
-  this.toastr.success('Hello world!', 'Toastr fun!');
+    const { email, password } = this.formulario.value;
+    this.authService.login(email, password).subscribe(
+      (resp: any) => {
+        if (resp.error?.error) {
+          this.toastr.error('Validación', 'Las credenciales son incorrectas');
+          return;
+        }
+        if (resp === true) {
+          this.toastr.success('Éxito', 'Bienvenido a la tienda');
+          this.router.navigateByUrl('/usuario');
+        }
+      },
+      (error) => {
+        console.error(error);
+        this.toastr.error('Error', 'Ocurrió un problema al iniciar sesión');
+      }
+    );
+  }
+
+  showSuccess() {
+    this.toastr.success('Hello world!', 'Toastr fun!');
   }
 }
