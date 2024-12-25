@@ -1,4 +1,84 @@
-<div class="card border border-gray-300 rounded-lg shadow-lg">
+<div class="h-full overflow-auto flex justify-between p-5 gap-8">
+
+  <!-- imagen de producto -->
+  <div class="w-1/3">
+    <div class="border border-1 border-gray-200 pl-6 pr-6 pb-6 rounded-lg shadow-sm ">
+      <div class="border-b pt-3 pb-3 flex items-center">
+      <p class="text-lg font-medium ">Imagenes de producto</p>
+      </div>
+      <div class="mt-4">
+        <img class=" rounded rounded-lg" src="https://t4.ftcdn.net/jpg/04/90/59/73/360_F_490597390_Tcz55Gxb0SbSg7Z73XIwnraSMGf5YMbu.jpg" alt="">
+      </div>
+      <div class="mt-4 flex items-center">
+        <i class="fa-regular fa-circle-question text-sm mr-2 "></i> <p>Necesitas al menos 1 imagenes para poder publicar tu producto*</p>
+      </div>
+    </div>
+
+    <!-- Estado de producto -->
+    <!-- <div class="border border-1 border-gray-200 p-5 rounded-lg shadow-sm mt-5">
+        <div class="border-b p-2">
+        <p class="text-lg font-medium">Estado de producto</p>
+        </div>
+        <div class="mt-4">
+          <p>borrador o publico</p>
+        </div>
+        <div class="mt-4 flex items-center">
+          <i class="fa-regular fa-circle-question text-sm mr-2 "></i> <p>Necesitas al menos 1 imagenes para poder publicar tu producto*</p>
+        </div>
+    </div> -->
+
+  </div>
+
+
+  <div class="w-2/3">
+    <!-- categoria de producto -->
+    <div class="border border-1 border-gray-200 pl-6 pr-6 pb-6 rounded-lg shadow-sm ">
+      <div class="border-b pt-3 pb-3 flex justify-between">
+      <p class="text-lg font-medium">Categoría de producto</p>
+      <a href="" class="flex items-center"> <i class="fa-regular fa-plus text-sm mr-2 text-[#fc4d25]"></i> <p class="text-lg font-medium text-[#fc4d25]">Añadir categoría</p></a>
+      </div>
+      <div class="mt-4">
+        <div class="flex gap-4">
+          <div
+            *ngFor="let item of categories_first"
+            class="border rounded-lg p-4 w-1/4 flex flex-col items-center cursor-pointer transition hover:shadow-md active:border-blue-500"
+            [ngClass]="{
+              'border-[#fc4d25]': selectedCategoryId === item.id,
+              'border-gray-300': selectedCategoryId !== item.id
+            }"
+            (click)="selectCategory(item.id)"
+            (change)="changeDepartamento()"
+          >
+            <i class="fa-solid fa-laptop text-xl"></i>
+            <span class="text-lg font-medium text-gray-700">{{ item.name }}</span>
+            <span class="text-sm text-gray-500">{{ item.itemsCount }} items</span>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4 flex items-center">
+        <i class="fa-regular fa-circle-question text-sm mr-2"></i> <p>Necesitas al menos 1 imagenes para poder publicar tu producto*</p>
+      </div>
+    </div>
+    <div>
+     <p>aqui van los detalles</p>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="h-full overflow-auto">
   <!-- Card body -->
   <span class="spinner-border spinner-border-sm align-middle ms-2" *ngIf="isLoading$ | async"></span>
   <div class="card-body border-t p-9">

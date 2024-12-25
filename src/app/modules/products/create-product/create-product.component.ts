@@ -53,6 +53,12 @@ export class CreateProductComponent {
 
   }
 
+  selectedCategoryId: number | null = null;
+
+  selectCategory(id: number) {
+    this.selectedCategoryId = id;
+  }
+
   ngOnInit(): void {
     this.isLoading$ = this.productService.isLoading$;
 
