@@ -21,11 +21,11 @@ export class CreateProductComponent {
 
   title:string = '';
   sku:string = '';
-  resumen:string = '';
+  // resumen:string = '';
   price_pes:number = 0;
-  price_usd:number = 0;
-  description:any = "<p>Hello, world!</p>";
-  imagen_previsualiza:any = "https://preview.keenthemes.com/metronic8/demo1/assets/media/svg/illustrations/easy/2.svg";
+  // price_usd:number = 0;
+  description:any = "";
+  imagen_previsualiza:any = "https://tucartaya.com/wp-content/uploads/2024/12/upload-media.png";
   file_imagen:any = null;
   marca_id:string = '';
   marcas:any = []
@@ -150,8 +150,8 @@ export class CreateProductComponent {
 
   save(){
 
-    if(!this.title || !this.sku || !this.price_usd || !this.price_pes || !this.marca_id
-      || !this.file_imagen|| !this.categorie_first_id|| !this.description|| !this.resumen|| (this.selectedItems == 0)){
+    if(!this.title || !this.sku  || !this.price_pes || !this.marca_id
+      || !this.file_imagen|| !this.categorie_first_id|| !this.description||  (this.selectedItems == 0)){
       // this.toastr.error("Validacion","Los campos con el * son obligatorio");
       return;
     }
@@ -160,7 +160,7 @@ export class CreateProductComponent {
     let formData = new FormData();
     formData.append("title",this.title);
     formData.append("sku",this.sku);
-    formData.append("price_usd",this.price_usd+"");
+    // formData.append("price_usd",this.price_usd+"");
     formData.append("price_pes",this.price_pes+"");
     formData.append("brand_id",this.marca_id);
     formData.append("portada",this.file_imagen);
@@ -172,7 +172,7 @@ export class CreateProductComponent {
       formData.append("categorie_third_id",this.categorie_third_id);
     }
     formData.append("description",this.description);
-    formData.append("resumen",this.resumen);
+    // formData.append("resumen",this.resumen);
     formData.append("multiselect",JSON.stringify(this.selectedItems));
 
     this.productService.createProducts(formData).subscribe((resp:any) => {
@@ -184,14 +184,14 @@ export class CreateProductComponent {
         this.title = '';
         this.file_imagen = null;
         this.sku = '';
-        this.price_usd = 0;
+        // this.price_usd = 0;
         this.price_pes = 0;
         this.marca_id = '';
         this.categorie_first_id = '';
         this.categorie_second_id = '';
         this.categorie_third_id = '';
         this.description = '';
-        this.resumen = '';
+        // this.resumen = '';
         this.selectedItems = [];
 
         this.imagen_previsualiza = "https://preview.keenthemes.com/metronic8/demo1/assets/media/svg/illustrations/easy/2.svg";

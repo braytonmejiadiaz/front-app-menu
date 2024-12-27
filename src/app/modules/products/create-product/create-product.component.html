@@ -4,13 +4,25 @@
   <div class="w-1/3">
     <div class="border border-1 border-gray-200 pl-6 pr-6 pb-6 rounded-lg shadow-sm ">
       <div class="border-b pt-3 pb-3 flex items-center">
-      <p class="text-lg font-medium ">Imagenes de producto</p>
+      <p class="text-lg font-medium ">Imagen de producto</p>
       </div>
       <div class="mt-4">
-        <img class=" rounded rounded-lg" src="https://t4.ftcdn.net/jpg/04/90/59/73/360_F_490597390_Tcz55Gxb0SbSg7Z73XIwnraSMGf5YMbu.jpg" alt="">
+        <div class="py-4">
+          <img class="w-1/2" [src]="imagen_previsualiza" alt="Vista previa de la imagen" />
+        </div>
       </div>
+      <label class="font-semibold text-lg py-2 block">Subir imagen: (*)</label>
+
+          <input
+            type="file"
+            class="form-input w-full px-4 py-2 text-sm border border-gray-300 rounded-md"
+            id="customFile"
+            accept=".jpeg, .bmp, .jpg, .png, .gif, .webp"
+            (change)="processFile($event)"
+          />
+
       <div class="mt-4 flex items-center">
-        <i class="fa-regular fa-circle-question text-sm mr-2 "></i> <p>Necesitas al menos 1 imagenes para poder publicar tu producto*</p>
+        <i class="fa-regular fa-circle-question text-sm mr-2 "></i> <p>Necesitas una foto para poder crear tu producto*</p>
       </div>
     </div>
 
@@ -41,7 +53,7 @@
         <div class="flex gap-4">
           <div
             *ngFor="let item of categories_first"
-            class="border rounded-lg p-4 w-1/4 flex flex-col items-center cursor-pointer transition hover:shadow-md active:border-blue-500"
+            class="border rounded-lg p-4 w-1/4 flex flex-col items-center cursor-pointer transition hover:shadow-md"
             [ngClass]="{
               'border-[#fc4d25]': selectedCategoryId === item.id,
               'border-gray-300': selectedCategoryId !== item.id
@@ -49,40 +61,104 @@
             (click)="selectCategory(item.id)"
             (change)="changeDepartamento()"
           >
-            <i class="fa-solid fa-laptop text-xl"></i>
+            <i class="fa-regular fa-circle-check text-xl"></i>
             <span class="text-lg font-medium text-gray-700">{{ item.name }}</span>
             <span class="text-sm text-gray-500">{{ item.itemsCount }} items</span>
           </div>
         </div>
       </div>
       <div class="mt-4 flex items-center">
-        <i class="fa-regular fa-circle-question text-sm mr-2"></i> <p>Necesitas al menos 1 imagenes para poder publicar tu producto*</p>
+        <i class="fa-regular fa-circle-question text-sm mr-2"></i> <p class="text-sm">Necesitas al menos 1 imagenes para poder publicar tu producto*</p>
       </div>
     </div>
-    <div>
-     <p>aqui van los detalles</p>
+
+    <!-- aqui van los detalles de producto -->
+
+    <div class="border border-1 border-gray-200 pl-6 pr-6 pb-6 rounded-lg shadow-sm mt-5 ">
+      <div class="border-b pt-3 pb-3 flex justify-between">
+      <p class="text-lg font-medium">Detalles de producto</p>
+      </div>
+    <div class="pt-2 flex justify-between gap-5">
+      <div class="w-full">
+        <label class="font-semibold text-sm py-2 block">Nombre de producto: (*)</label>
+        <input
+          type="text"
+          name="title"
+          [(ngModel)]="title"
+          class="form-input w-full px-4 py-2 text-sm border border-gray-300 rounded-md"
+          placeholder="ejemplo: Perro caliente completo"
+        />
+      </div>
+      <div class="w-full">
+        <label class="font-semibold text-sm py-2 block">SKU: (*)</label>
+        <input
+          type="text"
+          name="sku"
+          [(ngModel)]="sku"
+          class="form-input w-full px-4 py-2 text-sm border border-gray-300 rounded-md"
+          placeholder="Ejemplo: ZDR456"
+        />
+      </div>
     </div>
+
+    <div class="pt-4 flex gap-5">
+
+      <div class="w-full">
+       <label class="font-semibold text-sm py-2 block">Precio PESOS: (*)</label>
+        <input
+        type="number"
+        name="price_pen"
+        [(ngModel)]="price_pes"
+        class="form-input w-full px-4 py-2 text-sm border border-gray-300 rounded-md"
+        placeholder="Ejemplo: $20.000 COP"
+       />
+      </div>
+
+      <div class="w-full ">
+        <label class="font-semibold text-sm py-2 block">Marca: (*)</label>
+        <select
+          class="text-sm form-select w-full px-4 py-2 border border-gray-300 rounded-md"
+          name="marca"
+          [(ngModel)]="marca_id"
+        >
+          <option value="" >Seleccione</option>
+          <ng-container *ngFor="let item of marcas">
+            <option [value]="item.id">{{ item.name }}</option>
+          </ng-container>
+        </select>
+      </div>
+    </div>
+    </div>
+
+    <div class="border border-1 border-gray-200 pl-6 pr-6 pb-6 rounded-lg shadow-sm mt-5 ">
+      <div class="border-b pt-3 pb-3 flex justify-between">
+      <p class="text-lg font-medium">Resumen (Descripción del producto):</p>
+      </div>
+      <div class="w-full pt-5">
+        <textarea class="text-sm border p-2 rounded-md form-control form-control-solid w-full disabled:bg-gray-200" rows="3"
+        name="description" [(ngModel)]="description" placeholder="Hamburguesa de dos carnes de res de 60 gr con salsa bbq, queso americano..."></textarea>
+      </div>
+
+      <div class="pt-5">
+        <button class="btn bg-[#fc4d25] rounded-lg p-2 text-[#fff] text-sm font-medium shadow-sm" (click)="save()">Crear producto</button>
+      </div>
+
+      <div class="mt-8 flex items-center">
+        <i class="fa-regular fa-circle-question text-sm mr-2"></i> <p class="text-sm">Necesitas rellenar todos los campos para poder publicar tu producto*</p>
+    </div>
+
   </div>
+ </div>
 </div>
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-<div class="h-full overflow-auto">
-  <!-- Card body -->
+<!-- <div class="h-full overflow-auto">
+  Card body
   <span class="spinner-border spinner-border-sm align-middle ms-2" *ngIf="isLoading$ | async"></span>
   <div class="card-body border-t p-9">
-    <!-- Título y SKU -->
+    Título y SKU
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
       <div>
         <label class="font-semibold text-lg py-2 block">Título: (*)</label>
@@ -105,7 +181,7 @@
         />
       </div>
     </div>
-    <!-- Precios -->
+    Precios
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
       <div>
         <label class="font-semibold text-lg py-2 block">Precio PESOS: (*)</label>
@@ -141,7 +217,7 @@
         </select>
       </div>
     </div>
-    <!-- Categorías -->
+    Categorías
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
       <div>
         <label class="font-semibold text-lg py-2 block">Departamento: (Primer Nivel *)</label>
@@ -185,7 +261,7 @@
         </select>
       </div>
     </div>
-    <!-- Palabra y Etiquetas -->
+    Palabra y Etiquetas
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
       <div>
         <label class="font-semibold text-lg py-2 block">Palabra: (*)</label>
@@ -212,7 +288,7 @@
         </ng-multiselect-dropdown>
       </div>
     </div>
-    <!-- Imagen -->
+    Imagen
     <div class="mb-6">
       <label class="font-semibold text-lg py-2 block">Sube tu imagen: (*)</label>
       <div>
@@ -229,10 +305,10 @@
         <img class="w-48" [src]="imagen_previsualiza" alt="Vista previa de la imagen" />
       </div>
     </div>
-    <!-- Descripción y Resumen -->
+    Descripción y Resumen
     <div class="">
       <label class="font-semibold text-lg py-2 block">Descripción:</label>
-      <!-- <ckeditor [data]="description" [config]="config" (change)="onChange($event)"></ckeditor> -->
+      <ckeditor [data]="description" [config]="config" (change)="onChange($event)"></ckeditor>
     <div>
 
     <div>
@@ -246,3 +322,4 @@
         <div >
               <button class="btn btn-primary" (click)="save()">Guardar</button>
         </div>
+  -->
