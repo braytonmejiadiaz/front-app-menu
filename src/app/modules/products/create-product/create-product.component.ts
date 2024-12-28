@@ -41,7 +41,7 @@ export class CreateProductComponent {
 
   isLoading$:any;
 
-  categorie_first_id:string = '';
+  //categorie_first_id:string = '';
   // categorie_second_id:string = '';
   // categorie_third_id:string = '';
   categories_first:any = [];
@@ -63,10 +63,10 @@ export class CreateProductComponent {
 
   }
 
-  selectedCategoryId: number | null = null;
+  categorie_first_id: number | null = null;
 
   selectCategory(id: number) {
-    this.selectedCategoryId = id;
+    this.categorie_first_id = id;
   }
 
   ngOnInit(): void {
@@ -135,19 +135,6 @@ export class CreateProductComponent {
     }, 50);
   }
 
-  // AQUI HACEMOS EL LLAMADO A LAS CATEGORIAS Y SUBCATEGORIAS DEL PRINCIPAL LLAMADO
-
-  // changeDepartamento(){
-  //   this.categories_seconds_backups = this.categories_seconds.filter((item:any) =>
-  //   item.categorie_second_id == this.categorie_first_id
-  //   )
-  // }
-  // changeCategorie(){
-  //   this.categories_thirds_backups = this.categories_thirds.filter((item:any) =>
-  //   item.categorie_second_id == this.categorie_second_id
-  //   )
-  // }
-
   public onChange(event: any) {
     this.description = event.editor.getData();
   }
@@ -163,10 +150,11 @@ export class CreateProductComponent {
 
     if(!this.title || !this.sku  || !this.price_pes || !this.marca_id
       || !this.file_imagen||  !this.description || !this.categorie_first_id){
-      // this.toastr.error("Validacion","Los campos con el * son obligatorio");
+      
+      console.log(this.categorie_first_id)
+      console.log("Los campos con el * son obligatorio");
 
     }
-
     else{
       let formData = new FormData();
       formData.append("title",this.title);
@@ -175,15 +163,9 @@ export class CreateProductComponent {
       formData.append("price_pes",this.price_pes+"");
       formData.append("brand_id",this.marca_id);
       formData.append("portada",this.file_imagen);
-      formData.append("categorie_first_id",this.categorie_first_id);
-      // if(this.categorie_second_id){
-      //   formData.append("categorie_second_id",this.categorie_second_id);
-      // }
-      // if(this.categorie_third_id){
-      //   formData.append("categorie_third_id",this.categorie_third_id);
-      // }
+      formData.append("categorie_first_id",this.categorie_first_id+"");
+      
       formData.append("description",this.description);
-      // formData.append("resumen",this.resumen);
       // formData.append("multiselect",JSON.stringify(this.selectedItems));
 
       this.productService.createProducts(formData).subscribe((resp:any) => {
@@ -199,15 +181,14 @@ export class CreateProductComponent {
           // this.price_usd = 0;
           this.price_pes = 0;
           this.marca_id = '';
-          this.categorie_first_id = '';
-          // this.categorie_second_id = '';
-          // this.categorie_third_id = '';
+          //this.categorie_first_id = '';
+          this.categorie_first_id = 0;
           this.description = '';
-          // this.resumen = '';
+          this.description = '';
           // this.selectedItems = [];
 
           this.imagen_previsualiza = "https://preview.keenthemes.com/metronic8/demo1/assets/media/svg/illustrations/easy/2.svg";
-          // this.toastr.success("Exito","El product se registro perfectamente");
+          console.log("El product se registro perfectamente");
         }
 
 
