@@ -150,7 +150,7 @@ export class CreateProductComponent {
 
     if(!this.title || !this.sku  || !this.price_pes || !this.marca_id
       || !this.file_imagen||  !this.description || !this.categorie_first_id){
-      
+
       console.log(this.categorie_first_id)
       console.log("Los campos con el * son obligatorio");
 
@@ -164,7 +164,7 @@ export class CreateProductComponent {
       formData.append("brand_id",this.marca_id);
       formData.append("portada",this.file_imagen);
       formData.append("categorie_first_id",this.categorie_first_id+"");
-      
+
       formData.append("description",this.description);
       // formData.append("multiselect",JSON.stringify(this.selectedItems));
 
