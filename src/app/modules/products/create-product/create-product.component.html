@@ -1,4 +1,4 @@
-<div class="h-full overflow-auto flex justify-between p-5 gap-8">
+<div class="h-full overflow-auto flex justify-between p-5 gap-8 z-0">
 
   <!-- imagen de producto -->
   <div class="w-1/3">
@@ -46,9 +46,15 @@
     <!-- categoria de producto -->
     <div class="border border-1 border-gray-200 pl-6 pr-6 pb-6 rounded-lg shadow-sm ">
       <div class="border-b pt-3 pb-3 flex justify-between">
-      <p class="text-lg font-medium">Categoría de producto</p>
-      <a href="" class="flex items-center"> <i class="fa-regular fa-plus text-sm mr-2 text-[#fc4d25]"></i> <p class="text-lg font-medium text-[#fc4d25]">Añadir categoría</p></a>
+        <div>
+          <p class="text-lg font-medium">Categoría de producto</p>
+        </div>
+        <div (click)="openModal()" class="flex items-center cursor-pointer"><i class="fa-regular fa-plus text-sm mr-2 text-[#fc4d25]"></i> <p class="text-lg font-medium text-[#fc4d25]">Añadir categoría</p>
+        </div>
+      <div *ngIf="modalSwitch == true">
+        <app-create-categorie></app-create-categorie>
       </div>
+    </div>
       <div class="mt-4">
         <div class="flex gap-4">
           <div
@@ -59,7 +65,7 @@
               'border-gray-300': selectedCategoryId !== item.id
             }"
             (click)="selectCategory(item.id)"
-            (change)="changeDepartamento()"
+
           >
             <i class="fa-regular fa-circle-check text-xl"></i>
             <span class="text-lg font-medium text-gray-700">{{ item.name }}</span>
@@ -138,6 +144,7 @@
         <textarea class="text-sm border p-2 rounded-md form-control form-control-solid w-full disabled:bg-gray-200" rows="3"
         name="description" [(ngModel)]="description" placeholder="Hamburguesa de dos carnes de res de 60 gr con salsa bbq, queso americano..."></textarea>
       </div>
+
 
       <div class="pt-5">
         <button class="btn bg-[#fc4d25] rounded-lg p-2 text-[#fff] text-sm font-medium shadow-sm" (click)="save()">Crear producto</button>

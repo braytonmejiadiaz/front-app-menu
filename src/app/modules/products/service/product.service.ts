@@ -1,5 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, finalize } from 'rxjs';
 import { URL_SERVICIOS } from '../../../config/config';
 import { AuthService } from '../../../pages/services/auth.service';
@@ -99,4 +99,7 @@ export class ProductService {
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
+
+
+  $modal = new EventEmitter<any>();
 }

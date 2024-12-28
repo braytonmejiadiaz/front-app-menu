@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, finalize, Observable } from 'rxjs';
-import { AuthService } from '../../../../services/auth.service';
-import { URL_SERVICIOS } from '../../../../../config/config';
+
 import { Injectable } from '@angular/core';
+import { URL_SERVICIOS } from '../../../config/config';
+import { AuthService } from '../../../pages/services/auth.service';
 
 @Injectable({providedIn: 'root'})
 

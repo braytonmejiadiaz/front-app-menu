@@ -5,16 +5,25 @@ import { CommonModule } from '@angular/common';
 
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { CreateCategorieComponent } from "../../categories/create-categorie/create-categorie.component";
 
 
 @Component({
   selector: 'app-create-product',
   standalone: true,
-  imports: [CommonModule,   ReactiveFormsModule , FormsModule,  NgMultiSelectDropDownModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgMultiSelectDropDownModule, CreateCategorieComponent],
   templateUrl: './create-product.component.html',
   styleUrl: './create-product.component.css'
 })
 export class CreateProductComponent {
+
+  modalSwitch: boolean = false;
+
+  openModal(){
+    this.modalSwitch = true;
+  }
+
+
   config: any = {
     versionCheck: false,
 }
@@ -33,22 +42,23 @@ export class CreateProductComponent {
   isLoading$:any;
 
   categorie_first_id:string = '';
-  categorie_second_id:string = '';
-  categorie_third_id:string = '';
+  // categorie_second_id:string = '';
+  // categorie_third_id:string = '';
   categories_first:any = [];
-  categories_seconds:any = [];
-  categories_seconds_backups:any = [];
-  categories_thirds:any = [];
-  categories_thirds_backups:any = [];
+  // categories_seconds:any = [];
+  // categories_seconds_backups:any = [];
+  // categories_thirds:any = [];
+  // categories_thirds_backups:any = [];
 
-  dropdownList:any = [];
-  selectedItems:any = [];
-  dropdownSettings:IDropdownSettings = {};
-  word:string = '';
+  // dropdownList:any = [];
+  // selectedItems:any = [];
+  // dropdownSettings:IDropdownSettings = {};
+  // word:string = '';
 
-  isShowMultiselect:Boolean = false;
+  // isShowMultiselect:Boolean = false;
   constructor(
     public productService: ProductService,
+    public modalSS: ProductService,
   ) {
 
   }
@@ -60,8 +70,9 @@ export class CreateProductComponent {
   }
 
   ngOnInit(): void {
-    this.isLoading$ = this.productService.isLoading$;
 
+    this.modalSS.$modal.subscribe((v)=>{this.modalSwitch = v})
+    this.isLoading$ = this.productService.isLoading$;
     // this.dropdownList = [
     //   { item_id: 5, item_text: 'New Delhi' },
     //   { item_id: 6, item_text: 'Laravest' }
@@ -69,15 +80,15 @@ export class CreateProductComponent {
     // this.selectedItems = [
     //   { item_id: 6, item_text: 'Laravest' }
     // ];
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
-      selectAllText: 'Select All',
-      unSelectAllText: 'UnSelect All',
-      // itemsShowLimit: 3,
-      allowSearchFilter: true
-    };
+    // this.dropdownSettings = {
+    //   singleSelection: false,
+    //   idField: 'item_id',
+    //   textField: 'item_text',
+    //   selectAllText: 'Select All',
+    //   unSelectAllText: 'UnSelect All',
+    //   // itemsShowLimit: 3,
+    //   allowSearchFilter: true
+    // };
     this.configAll();
   }
 
@@ -87,23 +98,23 @@ export class CreateProductComponent {
       console.log(resp);
       this.marcas = resp.brands;
       this.categories_first = resp.categories_first;
-      this.categories_seconds = resp.categories_seconds;
-      this.categories_thirds = resp.categories_thirds;
+      // this.categories_seconds = resp.categories_seconds;
+      // this.categories_thirds = resp.categories_thirds;
     })
   }
 
   // FUNCION PARA AÑADIR UNA NUEVA ETIQUETA
-  addItems(){
-    this.isShowMultiselect = true;
-    let time_date = new Date().getTime();
-    this.dropdownList.push({ item_id: time_date, item_text: this.word });
-    this.selectedItems.push({ item_id: time_date, item_text: this.word });
-    setTimeout(() => {
-      this.word = '';
-      this.isShowMultiselect = false;
-      this.isLoadingView();
-    }, 100);
-  }
+  // addItems(){
+  //   this.isShowMultiselect = true;
+  //   let time_date = new Date().getTime();
+  //   this.dropdownList.push({ item_id: time_date, item_text: this.word });
+  //   this.selectedItems.push({ item_id: time_date, item_text: this.word });
+  //   setTimeout(() => {
+  //     this.word = '';
+  //     this.isShowMultiselect = false;
+  //     this.isLoadingView();
+  //   }, 100);
+  // }
 
   processFile($event:any){
     if($event.target.files[0].type.indexOf("image") < 0){
@@ -126,79 +137,84 @@ export class CreateProductComponent {
 
   // AQUI HACEMOS EL LLAMADO A LAS CATEGORIAS Y SUBCATEGORIAS DEL PRINCIPAL LLAMADO
 
-  changeDepartamento(){
-    this.categories_seconds_backups = this.categories_seconds.filter((item:any) =>
-    item.categorie_second_id == this.categorie_first_id
-    )
-  }
-  changeCategorie(){
-    this.categories_thirds_backups = this.categories_thirds.filter((item:any) =>
-    item.categorie_second_id == this.categorie_second_id
-    )
-  }
+  // changeDepartamento(){
+  //   this.categories_seconds_backups = this.categories_seconds.filter((item:any) =>
+  //   item.categorie_second_id == this.categorie_first_id
+  //   )
+  // }
+  // changeCategorie(){
+  //   this.categories_thirds_backups = this.categories_thirds.filter((item:any) =>
+  //   item.categorie_second_id == this.categorie_second_id
+  //   )
+  // }
 
   public onChange(event: any) {
     this.description = event.editor.getData();
   }
 // FUNCIONES DEL DROWNP DEL SELECT MULTI
-  onItemSelect(item: any) {
-    console.log(item);
-  }
-  onSelectAll(items: any) {
-    console.log(items);
-  }
+  // onItemSelect(item: any) {
+  //   console.log(item);
+  // }
+  // onSelectAll(items: any) {
+  //   console.log(items);
+  // }
 
   save(){
 
     if(!this.title || !this.sku  || !this.price_pes || !this.marca_id
-      || !this.file_imagen|| !this.categorie_first_id|| !this.description||  (this.selectedItems == 0)){
+      || !this.file_imagen||  !this.description || !this.categorie_first_id){
       // this.toastr.error("Validacion","Los campos con el * son obligatorio");
-      return;
+
+    }
+
+    else{
+      let formData = new FormData();
+      formData.append("title",this.title);
+      formData.append("sku",this.sku);
+      // formData.append("price_usd",this.price_usd+"");
+      formData.append("price_pes",this.price_pes+"");
+      formData.append("brand_id",this.marca_id);
+      formData.append("portada",this.file_imagen);
+      formData.append("categorie_first_id",this.categorie_first_id);
+      // if(this.categorie_second_id){
+      //   formData.append("categorie_second_id",this.categorie_second_id);
+      // }
+      // if(this.categorie_third_id){
+      //   formData.append("categorie_third_id",this.categorie_third_id);
+      // }
+      formData.append("description",this.description);
+      // formData.append("resumen",this.resumen);
+      // formData.append("multiselect",JSON.stringify(this.selectedItems));
+
+      this.productService.createProducts(formData).subscribe((resp:any) => {
+        console.log(resp);
+
+        if(resp.message == 403){
+          console.log("Validación",resp.message_text);
+          // this.toastr.error("Validación",resp.message_text);
+        }else{
+          this.title = '';
+          this.file_imagen = null;
+          this.sku = '';
+          // this.price_usd = 0;
+          this.price_pes = 0;
+          this.marca_id = '';
+          this.categorie_first_id = '';
+          // this.categorie_second_id = '';
+          // this.categorie_third_id = '';
+          this.description = '';
+          // this.resumen = '';
+          // this.selectedItems = [];
+
+          this.imagen_previsualiza = "https://preview.keenthemes.com/metronic8/demo1/assets/media/svg/illustrations/easy/2.svg";
+          // this.toastr.success("Exito","El product se registro perfectamente");
+        }
+
+
+      })
+    }
+
     }
 
 
-    let formData = new FormData();
-    formData.append("title",this.title);
-    formData.append("sku",this.sku);
-    // formData.append("price_usd",this.price_usd+"");
-    formData.append("price_pes",this.price_pes+"");
-    formData.append("brand_id",this.marca_id);
-    formData.append("portada",this.file_imagen);
-    formData.append("categorie_first_id",this.categorie_first_id);
-    if(this.categorie_second_id){
-      formData.append("categorie_second_id",this.categorie_second_id);
-    }
-    if(this.categorie_third_id){
-      formData.append("categorie_third_id",this.categorie_third_id);
-    }
-    formData.append("description",this.description);
-    // formData.append("resumen",this.resumen);
-    formData.append("multiselect",JSON.stringify(this.selectedItems));
-
-    this.productService.createProducts(formData).subscribe((resp:any) => {
-      console.log(resp);
-
-      if(resp.message == 403){
-        // this.toastr.error("Validación",resp.message_text);
-      }else{
-        this.title = '';
-        this.file_imagen = null;
-        this.sku = '';
-        // this.price_usd = 0;
-        this.price_pes = 0;
-        this.marca_id = '';
-        this.categorie_first_id = '';
-        this.categorie_second_id = '';
-        this.categorie_third_id = '';
-        this.description = '';
-        // this.resumen = '';
-        this.selectedItems = [];
-
-        this.imagen_previsualiza = "https://preview.keenthemes.com/metronic8/demo1/assets/media/svg/illustrations/easy/2.svg";
-        // this.toastr.success("Exito","El product se registro perfectamente");
-      }
-
-
-    })
-  }
 }
