@@ -5,26 +5,23 @@ import { catchError, map, of } from 'rxjs';
 import { URL_SERVICIOS } from '../../config/config';
 
 
-@Injectable({providedIn: 'root'})
-
+@Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  token:string = '';
-  user:any;
+  token: string = '';
+  user: any;
 
   constructor(
-
-    public http : HttpClient,
+    public http: HttpClient,
     public router: Router
+  ) {
+    this.initAuth();
+  }
 
-  ){
-      this.initAuth();
-   }
 
-
-  initAuth(){
-    const token = localStorage.getItem("token");
-    const userData = localStorage.getItem("user");
+  initAuth() {
+    const token = sessionStorage.getItem("token");
+    const userData = sessionStorage.getItem("user");
 
     if (token) {
       this.token = token;
@@ -38,66 +35,66 @@ export class AuthService {
   }
 
 
-  login(email:string,password:string){
-    let URL = URL_SERVICIOS+"/auth/login";
-    return this.http.post(URL,{email,password}).pipe(
-      map((resp:any)=>{
+  login(email: string, password: string) {
+    let URL = URL_SERVICIOS + "/auth/login";
+    return this.http.post(URL, { email, password }).pipe(
+      map((resp: any) => {
         console.log(resp);
-        const result = this.saveLocalStorage(resp);
+        const result = this.saveSessionStorage(resp);
         return result;
       }),
-      catchError((err:any)=>{
+      catchError((err: any) => {
         console.log(err);
-        return of(err)
+        return of(err);
       })
     );
   }
 
-  saveLocalStorage(resp:any){
+  saveSessionStorage(resp: any) {
 
-    if(resp && resp.access_token){
-      localStorage.setItem("token",resp.access_token);
-      localStorage.setItem("user",JSON.stringify(resp.user));
+    if (resp && resp.access_token) {
+      sessionStorage.setItem("token", resp.access_token);
+      sessionStorage.setItem("user", JSON.stringify(resp.user));
       return true;
     }
     return false;
   }
 
-  register(data:any){
-    let URL = URL_SERVICIOS+"/auth/register";
-    return this.http.post(URL,data)
+  register(data: any) {
+    let URL = URL_SERVICIOS + "/auth/register";
+    return this.http.post(URL, data);
   }
 
-  verifiedAuth(data:any){
-    let URL = URL_SERVICIOS+"/auth/verified_auth";
-    return this.http.post(URL,data)
+  verifiedAuth(data: any) {
+    let URL = URL_SERVICIOS + "/auth/verified_auth";
+    return this.http.post(URL, data);
   }
 
-  verifiedMail(data:any){
-    let URL = URL_SERVICIOS+"/auth/verified_email";
-    return this.http.post(URL,data)
+  verifiedMail(data: any) {
+    let URL = URL_SERVICIOS + "/auth/verified_email";
+    return this.http.post(URL, data);
   }
 
-  verifiedCode(data:any){
-    let URL = URL_SERVICIOS+"/auth/verified_code";
-    return this.http.post(URL,data)
+  verifiedCode(data: any) {
+    let URL = URL_SERVICIOS + "/auth/verified_code";
+    return this.http.post(URL, data);
   }
 
-  verifiedNewPassword(data:any){
-    let URL = URL_SERVICIOS+"/auth/verified_password";
-    return this.http.post(URL,data)
+  verifiedNewPassword(data: any) {
+    let URL = URL_SERVICIOS + "/auth/verified_password";
+    return this.http.post(URL, data);
   }
 
-  logout(){
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+  logout() {
+    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("user");
     this.user = null;
     this.token = '';
 
     setTimeout(() => {
 
-      this.router.navigateByUrl("/login")
+      this.router.navigateByUrl("/login");
 
-    },500);
+    }, 500);
   }
 }
