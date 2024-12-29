@@ -4,15 +4,25 @@ import { DeleteProductComponent } from '../delete-product/delete-product.compone
 import { ProductService } from '../service/product.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CreateProductComponent } from "../create-product/create-product.component";
+import { CreateProductModalComponent } from "../create-product-modal/create-product-modal.component";
 
 @Component({
   selector: 'app-list-product',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,  CreateProductModalComponent],
   templateUrl: './list-product.component.html',
   styleUrl: './list-product.component.css'
 })
 export class ListProductComponent {
+
+  modalSwitchProduct: boolean = false;
+  openModalCreate(){
+    this.modalSwitchProduct = true;
+  }
+
+
+
   products:any = [];
   search:string = '';
   totalPages:number = 0;
@@ -38,6 +48,7 @@ export class ListProductComponent {
   }
 
   ngOnInit(): void {
+    this.productService.$modalProductCreate.subscribe((v) => {this.modalSwitchProduct = v})
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.listProducts();

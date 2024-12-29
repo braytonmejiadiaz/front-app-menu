@@ -102,4 +102,6 @@ export class ProductService {
 
 
   $modal = new EventEmitter<any>();
+  $modalProductCreate = new EventEmitter<any>();
+
 }
