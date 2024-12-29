@@ -23,13 +23,13 @@ export class ListProductComponent {
   marcas:any = [];
   marca_id:string = '';
   categorie_first_id:string = '';
-  categorie_second_id:string = '';
-  categorie_third_id:string = '';
+  // categorie_second_id:string = '';
+  // categorie_third_id:string = '';
   categories_first:any = [];
-  categories_seconds:any = [];
-  categories_seconds_backups:any = [];
-  categories_thirds:any = [];
-  categories_thirds_backups:any = [];
+  // categories_seconds:any = [];
+  // categories_seconds_backups:any = [];
+  // categories_thirds:any = [];
+  // categories_thirds_backups:any = [];
   constructor(
     public productService: ProductService,
 
@@ -50,8 +50,8 @@ export class ListProductComponent {
       console.log(resp);
       this.marcas = resp.brands;
       this.categories_first = resp.categories_first;
-      this.categories_seconds = resp.categories_seconds;
-      this.categories_thirds = resp.categories_thirds;
+      // this.categories_seconds = resp.categories_seconds;
+      // this.categories_thirds = resp.categories_thirds;
     })
   }
   listProducts(page = 1){
@@ -59,8 +59,8 @@ export class ListProductComponent {
       search: this.search,
       brand_id: this.marca_id,
       categorie_first_id: this.categorie_first_id,
-      categorie_second_id: this.categorie_second_id,
-      categorie_third_id: this.categorie_third_id,
+      // categorie_second_id: this.categorie_second_id,
+      // categorie_third_id: this.categorie_third_id,
     }
     this.productService.listProducts(page,data).subscribe((resp:any) => {
       console.log(resp);
@@ -72,16 +72,16 @@ export class ListProductComponent {
     })
   }
 
-  changeDepartamento(){
-    this.categories_seconds_backups = this.categories_seconds.filter((item:any) =>
-    item.categorie_second_id == this.categorie_first_id
-    )
-  }
-  changeCategorie(){
-    this.categories_thirds_backups = this.categories_thirds.filter((item:any) =>
-    item.categorie_second_id == this.categorie_second_id
-    )
-  }
+  // changeDepartamento(){
+  //   this.categories_seconds_backups = this.categories_seconds.filter((item:any) =>
+  //   item.categorie_second_id == this.categorie_first_id
+  //   )
+  // }
+  // changeCategorie(){
+  //   this.categories_thirds_backups = this.categories_thirds.filter((item:any) =>
+  //   item.categorie_second_id == this.categorie_second_id
+  //   )
+  // }
 
   searchTo(){
     this.listProducts();

@@ -22,7 +22,7 @@ export class CategoriesService {
 
   listCategories(page:number = 1,search:string){
     this.isLoadingSubject.next(true);
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     let headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
 
     let URL = URL_SERVICIOS+"/admin/categories?page="+page+"&search="+search;
@@ -43,7 +43,7 @@ export class CategoriesService {
   createCategories(data: any) {
     this.isLoadingSubject.next(true);
     // Obtén el token desde el almacenamiento local (asegúrate de que esté guardado correctamente)
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     let headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
     let URL = URL_SERVICIOS + "/admin/categories";
     return this.http.post(URL, data, { headers: headers }).pipe(
