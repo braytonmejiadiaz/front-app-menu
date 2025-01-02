@@ -24,7 +24,7 @@ export class ImportMaxProductService {
   importProducts(file: File): Observable<any> {
     this.isLoadingSubject.next(true); // Inicia la carga
     const formData = new FormData();
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     formData.append('file', file);
     let headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
     let URL = URL_SERVICIOS + "/admin/product/import";

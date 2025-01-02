@@ -69,7 +69,7 @@ export class ListProductComponent {
     let data = {
       search: this.search,
       brand_id: this.marca_id,
-      categorie_first_id: this.categorie_first_id,
+      // categorie_first_id: this.categorie_first_id,
       // categorie_second_id: this.categorie_second_id,
       // categorie_third_id: this.categorie_third_id,
     }

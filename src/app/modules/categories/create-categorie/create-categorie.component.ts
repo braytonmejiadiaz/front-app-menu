@@ -173,4 +173,26 @@ closeModal(){
     })
   }
 
+
+  deleteCategory(categorie:any) {
+    const confirmDelete = confirm("¿Estás seguro de que deseas eliminar la categoria?");
+    if (confirmDelete) {
+      this.categorieService.deleteCategorie(categorie.id).subscribe(
+        (resp: any) => {
+          // Eliminar la categoria de la lista
+          const INDEX = this.categories.findIndex((item: any) => item.id === categorie.id);
+          if (INDEX !== -1) {
+            this.categories.splice(INDEX, 1);
+          }
+          console.log('Producto eliminado:', resp);
+        },
+        (err: any) => {
+          console.error('Error al eliminar el producto:', err);
+        }
+      );
+    }
+
+
+  }
+
 }

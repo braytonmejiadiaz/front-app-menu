@@ -5,27 +5,12 @@
     <button (click)="closeModal()"> <i class="fa-solid fa-xmark pr-1"></i>Cerrar</button>
   </div>
   <div class="w-full">
-    <div class="bg-white shadow-lg rounded-lg p-6 m-4 ">
-      <!-- <span class="spinner-border spinner-border-sm align-middle ms-2" *ngIf="isLoading$ | async"></span> -->
-      <div class="border-t ">
 
-          <div class="pt-5">
+    <div class="p-3">
+      <div class="border border-gray-200 bg-white shadow-lg rounded-md p-5">
+
+
               <span class="font-semibold text-gray-800">Crear categoría</span>
-          </div>
-          <!-- <div>
-            <label class="flex items-center p-6 cursor-pointer" [ngClass]="{'bg-gray-200': type_categorie == 2}" (click)="changeTypeCategorie(2)">
-              <input class="form-check-input" type="radio" name="usage" value="2" class="mr-3">
-              <span class="text-lg font-bold">Categoria</span>
-              <small class="block">Segundo Nivel</small>
-            </label>
-          </div>
-          <div>
-            <label class="flex items-center p-6 cursor-pointer" [ngClass]="{'bg-gray-200': type_categorie == 3}" (click)="changeTypeCategorie(3)">
-              <input class="form-check-input" type="radio" name="usage" value="3" class="mr-3">
-              <span class="text-lg font-bold">Subcategoria</span>
-              <small class="block">Tercer Nivel</small>
-            </label>
-          </div> -->
 
 
         <div class="pt-5 grid grid-cols-2 gap-6">
@@ -39,62 +24,17 @@
           </div>
         </div>
 
-        <!-- <div class="grid grid-cols-2 gap-6 mb-6">
-          <div class="my-2">
-            <label class="font-semibold text-sm py-2">Sube tu imagen: ({{ type_categorie == 1 ? '*' : 'Opcional' }})</label>
-            <div class="relative">
-              <input type="file" id="customFile" accept=".jpeg, .bmp, .jpg, .png, .gif, .webp" (change)="processFile($event)" class="absolute opacity-0 w-full h-full" />
-              <button class="bg-gray-300 p-3 rounded-md">Choose file</button>
-            </div>
-            <img *ngIf="imagen_previsualiza" class="py-4" [src]="imagen_previsualiza" width="200" alt="">
-          </div>
-          <div>
-            <label class="font-semibold text-sm py-2">Posición: (*)</label>
-            <input type="number" name="position" [(ngModel)]="position" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Por ejemplo: 4">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-6 mb-6" *ngIf="type_categorie != 1">
-          <div *ngIf="type_categorie == 2">
-            <label class="font-semibold text-sm py-2">Departamento:(Primer Nivel *)</label>
-            <select name="departament" [(ngModel)]="categorie_second_id" class="w-full p-3 border border-gray-300 rounded-lg">
-              <option value="">Selec.</option>
-              <ng-container *ngFor="let item of categories_first">
-                <option [value]="item.id">{{ item.name }}</option>
-              </ng-container>
-            </select>
-          </div>
-          <div *ngIf="type_categorie == 3">
-            <label class="font-semibold text-sm py-2">Departamento:(Primer Nivel *)</label>
-            <select name="departament" [(ngModel)]="categorie_third_id" (change)="changeDepartamento()" class="w-full p-3 border border-gray-300 rounded-lg">
-              <option value="">Selec.</option>
-              <ng-container *ngFor="let item of categories_first">
-                <option [value]="item.id">{{ item.name }}</option>
-              </ng-container>
-            </select>
-          </div>
-          <div *ngIf="type_categorie == 3">
-            <label class="font-semibold text-sm py-2">Categoria:(Segundo Nivel *)</label>
-            <select name="categorie" [(ngModel)]="categorie_second_id" class="w-full p-3 border border-gray-300 rounded-lg">
-              <option value="">Selec.</option>
-              <ng-container *ngFor="let item of categories_seconds_backups">
-                <option [value]="item.id">{{ item.name }}</option>
-              </ng-container>
-            </select>
-          </div>
-        </div> -->
 
         <div class="flex justify-start mt-6">
           <button class="btn bg-[#fc4d25] rounded-lg p-2 text-[#fff] text-sm font-medium shadow-sm" (click)="save()">Guardar</button>
         </div>
-      </div>
+    </div>
     </div>
 
 
 
     <div class=" mt-7 w-full">
 
-      <!-- <span class="spinner-border spinner-border-sm align-middle ms-2" *ngIf="isLoading$ | async"></span> -->
       <section class="px-4 text-gray-600 antialiased">
       <div class="flex h-full flex-col ">
           <!-- Table -->
@@ -134,20 +74,16 @@
                                  <td class="p-2">
                                      <div class="flex justify-center">
                                          <button>
-                                             <svg class="h-8 w-8 rounded-full p-1 hover:bg-gray-100 hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                             </svg>
+                                          <i class="fa-solid fa-pen-to-square"></i>
                                          </button>
                                      </div>
                                  </td>
                                  <td class="p-2">
                                    <div class="flex justify-center">
-                                       <button>
-                                           <svg class="h-8 w-8 rounded-full p-1 hover:bg-gray-100 hover:text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
-                                           </svg>
-                                       </button>
-                                   </div>
+                                    <button (click)="deleteCategory(categorie)">
+                                    <i class="fa-solid fa-trash"></i>
+                                    </button>
+                                  </div>
                                </td>
                              </tr>
                            </ng-container>

@@ -29,6 +29,16 @@ export class ProductService {
     );
   }
 
+  listLandingMenu(data:any){
+    this.isLoadingSubject.next(true);
+    const token = sessionStorage.getItem('token');
+    let headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
+    let URL = URL_SERVICIOS+"/admin/products/index";
+    return this.http.post(URL,data,{headers: headers}).pipe(
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+
   configAll(){
     this.isLoadingSubject.next(true);
     const token = sessionStorage.getItem('token');

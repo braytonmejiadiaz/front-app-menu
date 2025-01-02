@@ -28,14 +28,29 @@ export class ImportMaxComponent {
 
   onSubmit(): void {
     if (this.file) {
+      const validTypes = ['text/csv', 'application/vnd.ms-excel'];
+      if (!validTypes.includes(this.file.type)) {
+        alert('El archivo debe ser un CSV válido');
+        return;
+      }
+
       this.productImportService.importProducts(this.file).subscribe(
         (response) => {
           alert(response.message); // Mensaje de éxito
         },
         (error) => {
-          alert('Error al importar productos'); // Mensaje de error
+          alert('Error al importar productos'); // Mensaje de error para el usuario
+          console.error('Error completo:', error); // Imprime el objeto completo del error
+          if (error.error) {
+            console.error('Detalles del error (backend):', error.error); // Imprime detalles específicos del backend
+          }
+          if (error.status === 422) {
+            console.error('Error de validación:', error.error.errors); // Si hay errores de validación, imprímelos
+          }
         }
       );
+    } else {
+      alert('No se seleccionó ningún archivo');
     }
   }
 }

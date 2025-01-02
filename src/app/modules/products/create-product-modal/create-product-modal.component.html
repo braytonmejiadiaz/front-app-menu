@@ -1,10 +1,10 @@
 
-<div class="fixed inset-0 bg-[#00000099] z-10  flex justify-center items-center">
-  <div class="bg-white w-3/4 h-[80%] overflow-auto rounded-md">
+<div class="fixed inset-0 bg-[#00000099] z-10 flex justify-center items-center">
+  <div class="bg-white w-3/4 h-[85%] overflow-auto rounded-md">
   <div class="flex justify-end items-center p-3">
     <button (click)="closeModal()"> <i class="fa-solid fa-xmark pr-1"></i>Cerrar</button>
   </div>
-<div class="h-full flex justify-between p-5 gap-8 ">
+<div class="h-full flex justify-between p-5 gap-8">
 
   <!-- imagen de producto -->
   <div class="w-1/3">
@@ -50,7 +50,7 @@
 
   <div class="w-2/3">
     <!-- categoria de producto -->
-    <div class="border border-1 border-gray-200 pl-6 pr-6 pb-6 rounded-lg shadow-sm ">
+    <div class=" border border-1 border-gray-200 pl-6 pr-6 pb-6 rounded-lg shadow-sm ">
       <div class="border-b pt-3 pb-3 flex justify-between">
         <div>
           <p class="text-lg font-medium">Categoría de producto</p>
@@ -62,10 +62,10 @@
       </div>
     </div>
       <div class="mt-4">
-        <div class="flex gap-4">
+        <div class="flex gap-4 overflow-auto scrollbar scrollbar-thin scrollbar-thumb-[#383B3E] scrollbar-track-gray-100">
           <div
             *ngFor="let item of categories_first"
-            class="border rounded-lg p-4 w-1/4 flex flex-col items-center cursor-pointer transition hover:shadow-md"
+            class="border rounded-lg p-4 w-1/4 flex flex-col items-center cursor-pointer transition hover:shadow-md mb-5"
             [ngClass]="{
               'border-[#fc4d25]': categorie_first_id === item.id,
               'border-gray-300': categorie_first_id !== item.id
@@ -74,7 +74,7 @@
 
           >
             <i class="fa-regular fa-circle-check text-xl"></i>
-            <span class="text-lg font-medium text-gray-700">{{ item.name }}</span>
+            <span class="text-[17px] font-medium text-gray-700">{{ item.name }}</span>
             <span class="text-sm text-gray-500">{{ item.itemsCount }} items</span>
           </div>
         </div>
@@ -142,10 +142,12 @@
     </div>
     </div>
 
-    <div class="border border-1 border-gray-200 pl-6 pr-6 pb-6 rounded-lg shadow-sm mt-5 ">
+    <div class="border border-1 border-gray-200 pl-6 pr-6 pb-6 rounded-lg shadow-sm">
+
       <div class="border-b pt-3 pb-3 flex justify-between">
       <p class="text-lg font-medium">Resumen (Descripción del producto):</p>
       </div>
+
       <div class="w-full pt-5">
         <textarea class="text-sm border p-2 rounded-md form-control form-control-solid w-full disabled:bg-gray-200" rows="3"
         name="description" [(ngModel)]="description" placeholder="Hamburguesa de dos carnes de res de 60 gr con salsa bbq, queso americano..."></textarea>
@@ -158,7 +160,7 @@
 
       <div class="mt-8 flex items-center">
         <i class="fa-regular fa-circle-question text-sm mr-2"></i> <p class="text-sm">Necesitas rellenar todos los campos para poder publicar tu producto*</p>
-    </div>
+      </div>
 
   </div>
  </div>
