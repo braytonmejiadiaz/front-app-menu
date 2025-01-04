@@ -1,76 +1,74 @@
-<div class="p-5 z-0">
-<div class="card bg-white rounded-lg shadow-md overflow-auto z-0">
-  <!-- Card Header -->
-  <div class="card-header flex flex-col md:flex-row items-center justify-between py-4 px-6">
-    <!-- Spinner -->
-    <span class="spinner-border spinner-border-sm align-middle ms-2" *ngIf="isLoading$ | async"></span>
-    <!-- Search Bar -->
-    <div class="flex flex-col md:flex-row items-center gap-4">
-      <div class="relative">
-        <i class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">🔍</i>
-        <input
-          type="text"
-          (keyup.enter)="searchTo()"
-          [(ngModel)]="search"
-          class="text-sm p-2 form-input w-64 pl-12 border rounded-md focus:ring focus:ring-indigo-200"
-          placeholder="Buscar producto"
-        />
-      </div>
-      <!-- <select
-        class="form-select w-64 border rounded-md focus:ring focus:ring-indigo-200"
-        name="marca"
-        [(ngModel)]="marca_id"
-      >
-        <option value="">Selec. Marca</option>
-        <ng-container *ngFor="let item of marcas">
-          <option [value]="item.id">{{ item.name }}</option>
-        </ng-container>
-      </select> -->
-    </div>
-    <!-- Buttons -->
-    <div class="mt-4 md:mt-0">
-      <a (click)="openModalCreate()" class="btn bg-[#fc4d25] text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 cursor-pointer">
-        Crear un nuevo producto
-      </a>
-      <div *ngIf="modalSwitchProduct == true">
-       <app-create-product-modal/>
-      </div>
-      <!-- <a (click)="searchTo()" class="btn bg-gray-800 text-white px-4 py-2 rounded-md shadow-md hover:bg-gray-900 ml-2">
-        Search
-      </a> -->
-    </div>
-  </div>
+<div class="w-full h-full p-5 z-0 overflow-auto">
+  <div class="card bg-white rounded-lg shadow-md overflow-auto z-0">
+    <!-- Card Header -->
+    <div class="card-header flex flex-col md:flex-row items-center justify-between gap-4 py-4 px-4 md:px-6">
+      <!-- Spinner -->
+      <span class="spinner-border spinner-border-sm align-middle ms-2" *ngIf="isLoading$ | async"></span>
 
-  <!-- Card Body -->
-  <div class="card-body p-6 ">
-    <div class="overflow-x-auto rounded-md">
-      <table class="table-auto w-full border-collapse border border-gray-200 ">
-        <thead class="bg-gray-100">
-          <tr class="text-lg">
-            <th class="px-4 py-2 border">Titulo</th>
-            <th class="px-4 py-2 border">Precio</th>
-            <th class="px-4 py-2 border">Marca</th>
-            <th class="px-4 py-2 border">Categoría</th>
-            <th class="px-4 py-2 border text-right">Acción</th>
+      <!-- Search Bar -->
+      <div class="flex flex-col md:flex-row items-center gap-4 w-full">
+        <div class="relative w-full md:w-auto">
+          <i class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">🔍</i>
+          <input
+            type="text"
+            (keyup.enter)="searchTo()"
+            [(ngModel)]="search"
+            class="text-sm p-2 form-input w-full md:w-64 pl-12 border rounded-md focus:ring focus:ring-indigo-200"
+            placeholder="Buscar producto"
+          />
+        </div>
+      </div>
 
-          </tr>
-        </thead>
-        <tbody class="text-gray-700">
-          <ng-container *ngFor="let product of products">
-            <tr class="odd:bg-gray-50 even:bg-white text-center text-sm">
-              <td class="px-4 py-2 border">{{ product.title }}</td>
-              <td class="px-4 py-2 border">{{ product.price_pes }} PES</td>
-              <td class="px-4 py-2 border">{{ product.brand.name }}</td>
-              <td class="px-4 py-2 border">{{ product.categorie_first.name }}</td>
-              <td class="px-4 py-2 border text-right">
-                <button class=" text-sm btn bg-blue-500 text-white px-2 py-1 rounded">Editar</button>
-                <button class="text-sm btn bg-red-500 text-white px-2 py-1 rounded ml-2" (click)="deleteProduct(product)">Eliminar</button>
-              </td>
+      <!-- Buttons -->
+      <div class="items-center mt-4 md:mt-0 w-full flex justify-end">
+        <div *ngIf="modalSwitchProduct == true">
+          <app-create-product-modal></app-create-product-modal>
+        </div>
+        <a
+          (click)="openModalCreate()"
+          class="btn bg-[#fc4d25] text-white px-4 py-2 rounded-md shadow-md hover:bg-blue-600 cursor-pointer w-full md:w-auto text-center"
+        >
+          Crear un nuevo producto
+        </a>
+      </div>
+    </div>
+
+    <!-- Card Body -->
+    <div class="card-body p-4 md:p-6 ">
+      <div class="overflow-x-auto rounded-md">
+        <table class="table-auto w-full border-collapse border border-gray-200 text-sm">
+          <thead class="bg-gray-100 ">
+            <tr class="text-sm md:text-lg">
+              <th class="px-4 py-2 border break-words">Titulo</th>
+              <th class="px-4 py-2 border break-words">Precio</th>
+              <th class="px-4 py-2 border break-words">Marca</th>
+              <th class="px-4 py-2 border break-words">Categoría</th>
+              <th class="px-4 py-2 border text-right">Acción</th>
             </tr>
-          </ng-container>
-        </tbody>
-      </table>
+          </thead>
+          <tbody class="text-gray-700 ">
+            <ng-container *ngFor="let product of products">
+              <tr class="odd:bg-gray-50 even:bg-white text-center">
+                <td class="px-4 py-2 border break-words">{{ product.title }}</td>
+                <td class="px-4 py-2 border break-words">{{ product.price_pes }} PES</td>
+                <td class="px-4 py-2 border break-words">{{ product.brand.name }}</td>
+                <td class="px-4 py-2 border break-words">{{ product.categorie_first.name }}</td>
+                <td class="px-4 py-2 border text-right">
+                  <button class="btn bg-blue-500 text-white px-2 py-1 rounded text-sm">
+                    Editar
+                  </button>
+                  <button
+                    class="btn bg-red-500 text-white px-2 py-1 rounded ml-2 text-sm"
+                    (click)="deleteProduct(product)"
+                  >
+                    Eliminar
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-</div>
 </div>

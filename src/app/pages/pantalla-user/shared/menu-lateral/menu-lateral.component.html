@@ -1,4 +1,4 @@
-<div class="bg-[#222529] flex flex-col h-full">
+<div class="flex flex-col h-full ">
   <!-- Botón de menú hamburguesa visible en mobile -->
   <div class="flex items-center justify-between px-4 py-3 md:hidden">
     <img class="w-3/5" src="https://fu.do/assets/img/fudo_logo_color-15654b45.svg" alt="Logo">
@@ -13,10 +13,12 @@
   <!-- Menú (sidebar) -->
   <div
     [ngClass]="{
-      'hidden': !isMenuOpen,
-      'block': !isMenuOpen
+      'hidden': !isMenuOpen ,
+      'block': !isMenuOpen,
+      'bg-[#363738] p-3 rounded ' :!isDesktop()
     }"
     class="flex flex-col h-full"
+
   >
     <!-- Logo para pantallas grandes -->
     <div class="hidden md:block px-4">
@@ -29,10 +31,10 @@
 
     <div class="mt-3 px-4">
       <ul class="space-y-4">
-        <li class="cursor-pointer hover:bg-[#fff] hover:text-[#000] p-2 rounded text-[#C6C6C6] transition-colors duration-200" routerLinkActive="bg-[#fff] text-[#fc4d25]">
+        <li class="cursor-pointer hover:bg-[#fff] hover:text-[#000] p-2 rounded text-[#C6C6C6] transition-colors duration-200" (click)="closeMenuOnMobile()" routerLinkActive="bg-[#fff] text-[#fc4d25]">
           <i class="fa-solid fa-tv text-xs mr-2"></i> Dashboard
         </li>
-        <li class="cursor-pointer hover:bg-[#fff] hover:text-[#000] p-2 rounded text-[#C6C6C6] transition-colors duration-200" routerLink="lista-plantillas" routerLinkActive="bg-[#fff] text-[#fc4d25]">
+        <li class="cursor-pointer hover:bg-[#fff] hover:text-[#000] p-2 rounded text-[#C6C6C6] transition-colors duration-200" (click)="closeMenuOnMobile()" routerLink="lista-plantillas" routerLinkActive="bg-[#fff] text-[#fc4d25]">
           <i class="fa-regular fa-window-restore text-xs mr-2"></i> Plantillas de Menú
         </li>
       </ul>
@@ -59,13 +61,13 @@
       </button>
       <div *ngIf="isDropdownOpenn" class="mt-1">
         <ul class="space-y-4">
-          <li class="cursor-pointer hover:bg-[#fff] hover:text-[#000] p-2 rounded text-[#C6C6C6] transition-colors duration-200" routerLink="crear-producto" routerLinkActive="bg-[#fff] text-[#fc4d25]">
+          <li class="cursor-pointer hover:bg-[#fff] hover:text-[#000] p-2 rounded text-[#C6C6C6] transition-colors duration-200"  (click)="closeMenuOnMobile()" routerLink="crear-producto" routerLinkActive="bg-[#fff] text-[#fc4d25]">
             <i class="fa-solid fa-hammer text-xs mr-2"></i> Crear producto
           </li>
-          <li class="cursor-pointer hover:bg-[#fff] hover:text-[#000] p-2 rounded text-[#C6C6C6] transition-colors duration-200" routerLink="lista-producto" routerLinkActive="bg-[#fff] text-[#fc4d25]">
+          <li class="cursor-pointer hover:bg-[#fff] hover:text-[#000] p-2 rounded text-[#C6C6C6] transition-colors duration-200"  (click)="closeMenuOnMobile()"  routerLink="lista-producto" routerLinkActive="bg-[#fff] text-[#fc4d25]">
             <i class="fa-solid fa-list text-xs mr-2"></i> Listado de productos
           </li>
-          <li class="cursor-pointer hover:bg-[#fff] hover:text-[#000] p-2 rounded text-[#C6C6C6] transition-colors duration-200" routerLink="subir-masivo" routerLinkActive="bg-[#fff] text-[#fc4d25]">
+          <li class="cursor-pointer hover:bg-[#fff] hover:text-[#000] p-2 rounded text-[#C6C6C6] transition-colors duration-200" (click)="closeMenuOnMobile()"  routerLink="subir-masivo" routerLinkActive="bg-[#fff] text-[#fc4d25]">
             <i class="fa-solid fa-list text-xs mr-2"></i> Subir masivamente
           </li>
         </ul>

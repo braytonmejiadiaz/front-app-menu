@@ -37,7 +37,9 @@ export class MenuLateralComponent {
   }
 
   toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
+    if (!this.isDesktop()) {
+      this.isMenuOpen = !this.isMenuOpen;
+    }
   }
 
   toggleDropdownn() {
@@ -46,5 +48,11 @@ export class MenuLateralComponent {
 
   isDesktop(): boolean {
     return window.innerWidth >= 768;
+  }
+
+  closeMenuOnMobile() {
+    if (!this.isDesktop()) {
+      this.isMenuOpen = false;
+    }
   }
 }

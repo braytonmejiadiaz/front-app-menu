@@ -25,59 +25,51 @@
     />
   </div>
   <header class="bg-[#CA9C78] flex justify-center">
-    <div
-      class="w-full max-w-3xl flex items-center justify-between py-2 gap-5 text-black font-bold px-4"
-    >
+    <div class="w-full max-w-3xl flex items-center justify-between py-2 gap-5 text-black font-bold px-4">
       <p class="text-sm">Contáctanos</p>
       <div class="w-0.5 h-7 bg-white"></div>
       <p class="text-sm">Recomendados</p>
     </div>
   </header>
   <div class="bg-white flex justify-center py-4">
-    <ul class="flex space-x-4">
-      <li class="" *ngFor="let product of products">
-        <p class="">{{ product.categorie_first.name }}</p>
-      </li>
-    </ul>
+    <!-- No es necesario este ul ya que se agrupan por categoría en el TS -->
   </div>
 
   <!-- Contenido del menú -->
   <main [ngClass]="isMobileMode ? 'max-w-md mx-auto' : 'max-w-full mx-auto'">
-    <!-- Sección de Entradas -->
-    <section class="bg-black flex flex-col items-center w-full">
+    <!-- Iterar sobre las categorías agrupadas -->
+    <section class="bg-black flex flex-col items-center w-full" *ngFor="let category of groupedCategories">
       <!-- Título de la categoría -->
       <div
-        class="p-5 w-full max-w-3xl bg-[url('https://tucartaya.com/wp-content/uploads/2024/12/asd.jpg')] bg-cover bg-center"
+        class="p-5 w-full max-w-3xl bg-cover bg-center"
       >
         <div class="flex justify-center">
           <h2
             class="w-2/3 bg-[#00000098] rounded-md p-2 text-3xl md:text-6xl font-semibold text-[#B68765] mb-8 text-center font-[poiret-one]"
           >
-            Entradas
+            {{ category.name }}
           </h2>
         </div>
 
         <!-- Contenedor de productos -->
         <div class="grid grid-cols-2 gap-3 p-2">
           <div
-            *ngFor="let product of products"
+            *ngFor="let product of category.products"
             class="w-full bg-[#00000095] text-center rounded-md shadow-md"
           >
             <img
-              [src]="product.imagen"
+              [src]="product.imagen || 'path/to/default-product-image.jpg'"
               class="rounded-t-md w-full"
               [alt]="product.title"
             />
             <div class="p-2">
-              <h3
-                class="text-[#B68765] text-2xl font-semibold font-[poiret-one]"
-              >
+              <h3 class="text-[#B68765] text-2xl font-semibold font-[poiret-one]">
                 {{ product.title }}
               </h3>
               <p class="text-white text-sm">{{ product.description }}</p>
               <p class="text-lg text-white font-bold font-[poiret-one]">
                 $ {{ product.price_pes }}
-              </p >
+              </p>
             </div>
           </div>
         </div>
