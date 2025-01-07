@@ -10,6 +10,8 @@ import { RouterModule } from '@angular/router';
   styleUrl: './menu-lateral.component.css'
 })
 export class MenuLateralComponent {
+
+
   isDropdownOpen = false;
 
   // Método para alternar la visibilidad del menú
@@ -30,6 +32,7 @@ export class MenuLateralComponent {
   onResize() {
     this.updateMenuState(); // Actualiza el estado al cambiar el tamaño
   }
+
 
   updateMenuState() {
     // Si es desktop, muestra el menú; si es mobile, ciérralo
@@ -55,4 +58,6 @@ export class MenuLateralComponent {
       this.isMenuOpen = false;
     }
   }
+
+
 }

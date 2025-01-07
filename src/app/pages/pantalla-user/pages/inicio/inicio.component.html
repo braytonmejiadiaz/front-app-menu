@@ -1,17 +1,16 @@
-<div class="flex w-full h-screen bg-[#222529]  p-2">
+<div class="flex w-full h-screen bg-[#222529]  p-2 ">
   <!-- Menú lateral o botón hamburguesa -->
   <div
     [ngClass]="{
-      'w-1/5 h-[100%] p-5 hidden md:block': isDesktop(), 'absolute top-0 right-0 w-3/4 h-full pt-2 z-20  ': !isDesktop()
+      'w-1/5 h-[100%] p-5 hidden md:block': isDesktop(), 'absolute top-0 right-0 w-3/4 h-full pt-2 ': !isDesktop()
     }"
-    class="transition-all duration-300"
   >
-    <app-menu-lateral></app-menu-lateral>
+    <app-menu-lateral ></app-menu-lateral>
   </div>
 
   <!-- Contenido principal -->
-  <div [ngClass]="{ 'w-full': isDesktop(), 'w-auto mt-[13%] ' :!isDesktop()  }" class="p-4">
-    <div class="w-full h-full bg-[#FFFFFE] rounded-2xl ">
+  <div [ngClass]="{ 'w-full': isDesktop(), 'w-auto mt-[13%] overflow-auto z-40' :!isDesktop()  }" class="p-4 ">
+    <div class="w-full h-full bg-[#FFFFFE] rounded-2xl overflow-auto">
       <router-outlet></router-outlet>
     </div>
   </div>
