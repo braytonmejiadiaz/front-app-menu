@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CreateProductComponent } from "../create-product/create-product.component";
 import { CreateProductModalComponent } from "../create-product-modal/create-product-modal.component";
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-list-product',
   standalone: true,
-  imports: [CommonModule, FormsModule,  CreateProductModalComponent],
+  imports: [CommonModule, FormsModule,  CreateProductModalComponent, RouterModule],
   templateUrl: './list-product.component.html',
   styleUrl: './list-product.component.css'
 })
@@ -33,13 +34,7 @@ export class ListProductComponent {
   marcas:any = [];
   marca_id:string = '';
   categorie_first_id:string = '';
-  // categorie_second_id:string = '';
-  // categorie_third_id:string = '';
   categories_first:any = [];
-  // categories_seconds:any = [];
-  // categories_seconds_backups:any = [];
-  // categories_thirds:any = [];
-  // categories_thirds_backups:any = [];
   constructor(
     public productService: ProductService,
 
@@ -61,17 +56,14 @@ export class ListProductComponent {
       console.log(resp);
       this.marcas = resp.brands;
       this.categories_first = resp.categories_first;
-      // this.categories_seconds = resp.categories_seconds;
-      // this.categories_thirds = resp.categories_thirds;
+
     })
   }
   listProducts(page = 1){
     let data = {
       search: this.search,
       brand_id: this.marca_id,
-      // categorie_first_id: this.categorie_first_id,
-      // categorie_second_id: this.categorie_second_id,
-      // categorie_third_id: this.categorie_third_id,
+
     }
     this.productService.listProducts(page,data).subscribe((resp:any) => {
       console.log(resp);
@@ -82,17 +74,6 @@ export class ListProductComponent {
       console.log(err);
     })
   }
-
-  // changeDepartamento(){
-  //   this.categories_seconds_backups = this.categories_seconds.filter((item:any) =>
-  //   item.categorie_second_id == this.categorie_first_id
-  //   )
-  // }
-  // changeCategorie(){
-  //   this.categories_thirds_backups = this.categories_thirds.filter((item:any) =>
-  //   item.categorie_second_id == this.categorie_second_id
-  //   )
-  // }
 
   searchTo(){
     this.listProducts();

@@ -2,40 +2,32 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, finalize } from 'rxjs/operators';
+import { URL_BACKEND, URL_SERVICIOS } from '../../../config/config';
 import { AuthService } from '../../../pages/services/auth.service';
-import { URL_SERVICIOS } from '../../../config/config';
-import { url } from 'inspector';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImportMaxProductService {
 
-  isLoading$: Observable<boolean>;
-  isLoadingSubject: BehaviorSubject<boolean>;
+  private isLoadingSubject = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpClient, public authservice: AuthService,) {
-    this.isLoadingSubject = new BehaviorSubject<boolean>(false);
-    this.isLoading$ = this.isLoadingSubject.asObservable();
-   }
+  constructor(private http: HttpClient  ,public authservice: AuthService,) {}
 
-
-  // Método para importar productos
-  importProducts(file: File): Observable<any> {
-    this.isLoadingSubject.next(true); // Inicia la carga
-    const formData = new FormData();
+  // Método para subir el archivo de Excel
+  uploadExcel(data: FormData) {
+    this.isLoadingSubject.next(true);
     const token = sessionStorage.getItem('token');
-    formData.append('file', file);
-    let headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
-    let URL = URL_SERVICIOS + "/admin/product/import";
-
-    return this.http.post<any>(URL, formData, { headers: headers }).pipe(
-      finalize(() => this.isLoadingSubject.next(false)), // Finaliza la carga
-      catchError((error) => {
-        this.isLoadingSubject.next(false); // En caso de error, también se detiene la carga
-        throw error;  // Propaga el error
-      })
+    const headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
+    const URL = URL_SERVICIOS+'/admin/customer/import';
+    return this.http.post(URL, data, { headers }).pipe(
+      finalize(() => this.isLoadingSubject.next(false))
     );
   }
 
+  // Método para obtener el estado de carga
+  getLoadingStatus() {
+    return this.isLoadingSubject.asObservable();
+  }
 }

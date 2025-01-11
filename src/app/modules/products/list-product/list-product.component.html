@@ -54,7 +54,8 @@
                 <td class="px-4 py-2 border break-words">{{ product.brand.name }}</td>
                 <td class="px-4 py-2 border break-words">{{ product.categorie_first.name }}</td>
                 <td class="px-4 py-2 border text-right">
-                  <button class="btn bg-blue-500 text-white px-2 py-1 rounded text-sm">
+
+                  <button class="btn bg-blue-500 text-white px-2 py-1 rounded text-sm" [routerLink]="'/usuario/producto/edit/'+product.id" routerLinkActive="router-link-active" >
                     Editar
                   </button>
                   <button

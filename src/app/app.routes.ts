@@ -5,6 +5,8 @@ import { ListaDePlantillasMenuComponent } from './modules/plantillas menu/lista-
 import { AttributesComponent } from './modules/attributes/attributes.component';
 import { ListAttributeComponent } from './modules/attributes/list-attribute/list-attribute.component';
 import { CreateCategorieComponent } from './modules/categories/create-categorie/create-categorie.component';
+import { ProfileUserComponent } from './modules/profile-user/profile-user.component';
+import { DashboardInitComponent } from './modules/dashboard-init/dashboard-init.component';
 
 
 export const routes: Routes = [
@@ -27,18 +29,16 @@ export const routes: Routes = [
     title:'usuario',
     children:[
       {
+        path:'mi-perfil',
+        component:ProfileUserComponent
+      },
+      {
         path:'crear-categorias',
         component:CreateCategorieComponent,
       },
       {
-        path:'atributos',
-        component:AttributesComponent,
-        children:[
-          {
-            path:'list',
-            component:ListAttributeComponent,
-          }
-        ]
+        path:'dashboard',
+        component:DashboardInitComponent,
       },
       {
         path:'lista-plantillas',
@@ -60,7 +60,7 @@ export const routes: Routes = [
         loadComponent: () => import('./modules/products/list-product/list-product.component').then((m) => m.ListProductComponent)
       },
       {
-        path:'list/edit/:id',
+        path:'producto/edit/:id',
         loadComponent: () => import('./modules/products/edit-product/edit-product.component').then((m) => m.EditProductComponent)
       },
       {

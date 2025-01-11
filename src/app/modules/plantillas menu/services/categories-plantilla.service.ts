@@ -20,14 +20,17 @@ export class CategoriesServicePlantilla {
   }
 
 
-  listCategoriesMenu(){
+  listProductsMenu(){
     this.isLoadingSubject.next(true);
     const token = sessionStorage.getItem('token');
-    let headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    let headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
     let URL = URL_SERVICIOS+"/admin/categories-with-products";
     return this.http.get(URL,{ headers: headers }).pipe(
       finalize(() => this.isLoadingSubject.next(false))
     );
   }
+
+
+
 
 }

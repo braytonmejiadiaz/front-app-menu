@@ -1,0 +1,7 @@
+/* Agregar al archivo CSS o dentro de <style> en el componente */
+@media (max-width: 1024px) {
+  .reduce-content {
+    transform: scale(0.8); /* Ajusta este valor según lo que necesites */
+    transform-origin: top;
+  }
+}

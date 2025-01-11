@@ -73,22 +73,7 @@ export class CreateProductComponent {
 
     this.modalSS.$modal.subscribe((v)=>{this.modalSwitch = v})
     this.isLoading$ = this.productService.isLoading$;
-    // this.dropdownList = [
-    //   { item_id: 5, item_text: 'New Delhi' },
-    //   { item_id: 6, item_text: 'Laravest' }
-    // ];
-    // this.selectedItems = [
-    //   { item_id: 6, item_text: 'Laravest' }
-    // ];
-    // this.dropdownSettings = {
-    //   singleSelection: false,
-    //   idField: 'item_id',
-    //   textField: 'item_text',
-    //   selectAllText: 'Select All',
-    //   unSelectAllText: 'UnSelect All',
-    //   // itemsShowLimit: 3,
-    //   allowSearchFilter: true
-    // };
+
     this.configAll();
   }
 
@@ -98,23 +83,9 @@ export class CreateProductComponent {
       console.log(resp);
       this.marcas = resp.brands;
       this.categories_first = resp.categories_first;
-      // this.categories_seconds = resp.categories_seconds;
-      // this.categories_thirds = resp.categories_thirds;
+
     })
   }
-
-  // FUNCION PARA AÑADIR UNA NUEVA ETIQUETA
-  // addItems(){
-  //   this.isShowMultiselect = true;
-  //   let time_date = new Date().getTime();
-  //   this.dropdownList.push({ item_id: time_date, item_text: this.word });
-  //   this.selectedItems.push({ item_id: time_date, item_text: this.word });
-  //   setTimeout(() => {
-  //     this.word = '';
-  //     this.isShowMultiselect = false;
-  //     this.isLoadingView();
-  //   }, 100);
-  // }
 
   processFile($event:any){
     if($event.target.files[0].type.indexOf("image") < 0){
@@ -138,13 +109,7 @@ export class CreateProductComponent {
   public onChange(event: any) {
     this.description = event.editor.getData();
   }
-// FUNCIONES DEL DROWNP DEL SELECT MULTI
-  // onItemSelect(item: any) {
-  //   console.log(item);
-  // }
-  // onSelectAll(items: any) {
-  //   console.log(items);
-  // }
+
 
   save(){
 

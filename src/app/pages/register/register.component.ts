@@ -88,7 +88,7 @@ export class RegisterComponent implements OnInit{
         }
         if (resp === true) {
           this.toastr.success('Éxito', 'Bienvenido a la tienda');
-          this.router.navigateByUrl('/usuario');
+          this.router.navigateByUrl('/usuario/lista-plantillas');
         }
       },
       (error) => {

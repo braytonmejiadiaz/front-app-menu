@@ -12,48 +12,66 @@ import { CategoriesServicePlantilla } from '../services/categories-plantilla.ser
   styleUrls: ['./plantilla-menu-1.component.css'],
 })
 export class PlantillaMenu1Component implements OnInit {
-  groupedCategories: any[] = []; // Almacenará las categorías agrupadas
-
+  groupedCategories: any[] = [];
   public isMobileMode: boolean = false;
 
   constructor(
     private router: Router,
-    public productService: ProductService,
-
+    public productService: CategoriesServicePlantilla,
   ) {}
 
   ngOnInit(): void {
-    this.listProduct();
-    this.checkMobileMode(); // Verifica si estamos en modo móvil al inicio
+    this.listProduct(); // Llama al método para obtener productos
+    this.checkMobileMode(); // Modo móvil al inicio
+  }
+
+  scrollToCategory(categoryName: string) {
+    const element = document.getElementById(categoryName);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 
   // Método para obtener los productos y agruparlos por categorías
   listProduct() {
-    const data = {};  // Puedes agregar los parámetros necesarios aquí
-    this.productService.listLandingMenu(data).subscribe({
+    this.productService.listProductsMenu().subscribe({
       next: (resp: any) => {
-        const products = resp.products.data || [];
-        this.groupedCategories = this.groupProductsByCategory(products);
+        console.log("Respuesta del servicio:", resp);
+
+        // Accede a groupedCategories que es un arreglo dentro de la respuesta
+        if (resp && Array.isArray(resp.groupedCategories)) {
+          this.groupedCategories = this.groupProductsByCategory(resp.groupedCategories);
+          console.log("Categorías agrupadas:", this.groupedCategories);
+        } else {
+          console.error('La respuesta no contiene un arreglo válido en groupedCategories:', resp);
+        }
       },
+      error: (err) => {
+        console.error('Error al obtener productos:', err);
+      }
     });
   }
 
-  // Agrupa los productos por categoría
-  private groupProductsByCategory(products: any[]): any[] {
-    const categoryMap = new Map();
 
-    products.forEach((product) => {
-      const categoryName = product.category?.name || 'Sin categoría'; // Maneja el caso de categorías sin nombre
-      console.log('Category Name:', categoryName);
-      if (!categoryMap.has(categoryName)) {
-        categoryMap.set(categoryName, {
-          name: categoryName,
-          products: [],
-        });
+  // Agrupa los productos por categoría
+  groupProductsByCategory(categoriesWithProducts: any[]): any[] {
+    console.log('Antes de agrupar:', categoriesWithProducts);
+    const categoryMap = new Map<string, { name: string, products: any[] }>();
+
+    categoriesWithProducts.forEach((categoryData) => {
+      if (categoryData && categoryData.name && Array.isArray(categoryData.products)) {
+        const categoryName = categoryData.name;
+
+        if (!categoryMap.has(categoryName)) {
+          categoryMap.set(categoryName, {
+            name: categoryName,
+            products: categoryData.products
+          });
+        }
+      } else {
+        console.warn('Datos no válidos:', categoryData);
       }
-      categoryMap.get(categoryName).products.push(product);
     });
-    console.log('Grouped Categories:', Array.from(categoryMap.values()));  // Verifica el resultado final
 
     return Array.from(categoryMap.values());
   }
@@ -81,6 +99,6 @@ export class PlantillaMenu1Component implements OnInit {
 
   // Verifica si estamos en modo móvil basándonos en el ancho de la ventana
   checkMobileMode() {
-    this.isMobileMode = window.innerWidth <= 768;  // Puedes ajustar el valor según tus necesidades
+    this.isMobileMode = window.innerWidth <= 768; // Puedes ajustar el valor según tus necesidades
   }
 }
