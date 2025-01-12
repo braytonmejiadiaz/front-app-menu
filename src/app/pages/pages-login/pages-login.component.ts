@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {  FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { BrowserModule } from '@angular/platform-browser';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-pages-login',
   standalone: true,
-  imports: [ReactiveFormsModule,  FormsModule, ToastrModule, ],
+  imports: [ReactiveFormsModule,FormsModule,],
   templateUrl: './pages-login.component.html',
-  styleUrl: './pages-login.component.css'
+  styleUrl: './pages-login.component.css',
+
 })
 export  class PagesLoginComponent {
 
@@ -36,7 +36,7 @@ export  class PagesLoginComponent {
       !this.email ||
       !this.password ||
       !this.phone){
-        this.toastr.error("validacion","necesitas ingresar todos los campos");
+        this.toastr.error("Necesitas ingresar todos los campos para poder registrate");
       return;
     }
     let data = {
