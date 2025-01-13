@@ -87,7 +87,7 @@ export class RegisterComponent implements OnInit{
           return;
         }
         if (resp === true) {
-          this.toastr.success('Éxito', 'Bienvenido a la tienda');
+          this.toastr.success('Bienvenido a FoodLogic');
           this.router.navigateByUrl('/usuario/lista-plantillas');
         }
       },

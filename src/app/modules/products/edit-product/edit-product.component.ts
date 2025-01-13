@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateCategorieComponent } from '../../categories/create-categorie/create-categorie.component';
 import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-product',
@@ -38,7 +39,8 @@ export class EditProductComponent {
   constructor(
     public productService: ProductService,
     public modalSS: ProductService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private toastr:ToastrService
   ) {}
 
 
@@ -58,7 +60,6 @@ export class EditProductComponent {
 
   showProduct(){
     this.productService.showProduct(this.PRODUCT_ID).subscribe((resp:any) =>{
-
     this.PRODUCT_SELECTED = resp.product
     this.title = resp.product.title
     this.sku = resp.product.sku
@@ -110,7 +111,7 @@ export class EditProductComponent {
       || !this.description || !this.categorie_first_id){
 
       console.log(this.categorie_first_id)
-      console.log("Los campos con el * son obligatorio");
+      this.toastr.error('Debes seleccionar una categoría');
 
     }
     else{
@@ -127,16 +128,16 @@ export class EditProductComponent {
       formData.append("description",this.description);
 
       this.productService.updateProducts(this.PRODUCT_ID,formData).subscribe((resp:any) => {
-        console.log(resp);
 
         if(resp.message == 403){
-          console.log("Validación",resp.message_text);
+          this.toastr.error('Error al editar tu producto');
         }else{
 
           this.file_imagen = null;
 
           this.imagen_previsualiza = "https://preview.keenthemes.com/metronic8/demo1/assets/media/svg/illustrations/easy/2.svg";
           console.log("El product se actualizo perfectamente");
+          this.toastr.success('Producto actualizado con exito');
         }
 
 

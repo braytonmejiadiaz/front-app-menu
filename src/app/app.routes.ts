@@ -6,7 +6,6 @@ import { AttributesComponent } from './modules/attributes/attributes.component';
 import { ListAttributeComponent } from './modules/attributes/list-attribute/list-attribute.component';
 import { CreateCategorieComponent } from './modules/categories/create-categorie/create-categorie.component';
 import { ProfileUserComponent } from './modules/profile-user/profile-user.component';
-import { DashboardInitComponent } from './modules/dashboard-init/dashboard-init.component';
 
 
 export const routes: Routes = [
@@ -35,10 +34,6 @@ export const routes: Routes = [
       {
         path:'crear-categorias',
         component:CreateCategorieComponent,
-      },
-      {
-        path:'dashboard',
-        component:DashboardInitComponent,
       },
       {
         path:'lista-plantillas',

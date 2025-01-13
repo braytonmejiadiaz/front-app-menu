@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { DeleteProductComponent } from '../delete-product/delete-product.component';
 import { ProductService } from '../service/product.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { CreateProductComponent } from "../create-product/create-product.component";
 import { CreateProductModalComponent } from "../create-product-modal/create-product-modal.component";
 import { RouterModule } from '@angular/router';
 
@@ -22,25 +20,19 @@ export class ListProductComponent {
     this.modalSwitchProduct = true;
   }
 
-
-
   products:any = [];
   search:string = '';
   totalPages:number = 0;
   currentPage:number = 1;
-
   isLoading$:any;
-
   marcas:any = [];
   marca_id:string = '';
   categorie_first_id:string = '';
   categories_first:any = [];
   constructor(
     public productService: ProductService,
-
-  ) {
-
-  }
+    private toast: ToastrService
+  ) {}
 
   ngOnInit(): void {
     this.productService.$modalProductCreate.subscribe((v) => {this.modalSwitchProduct = v})
@@ -53,7 +45,6 @@ export class ListProductComponent {
 
   configAll(){
     this.productService.configAll().subscribe((resp:any) => {
-      console.log(resp);
       this.marcas = resp.brands;
       this.categories_first = resp.categories_first;
 
@@ -66,12 +57,11 @@ export class ListProductComponent {
 
     }
     this.productService.listProducts(page,data).subscribe((resp:any) => {
-      console.log(resp);
       this.products = resp.products.data;
       this.totalPages = resp.total;
       this.currentPage = page;
     },(err:any) => {
-      console.log(err);
+
     })
   }
 
@@ -84,24 +74,20 @@ export class ListProductComponent {
     this.listProducts($event);
   }
 
-  deleteProduct(product:any) {
-    const confirmDelete = confirm(`¿Estás seguro de que deseas eliminar el producto "${product.name}"?`);
-    if (confirmDelete) {
+  deleteProduct(product: any) {
+    if (confirm('¿Estás seguro de que deseas eliminar este producto?')) {
       this.productService.deleteProduct(product.id).subscribe(
         (resp: any) => {
-          // Eliminar el producto de la lista
           const INDEX = this.products.findIndex((item: any) => item.id === product.id);
           if (INDEX !== -1) {
             this.products.splice(INDEX, 1);
           }
-          console.log('Producto eliminado:', resp);
+          this.toast.success("Producto eliminado con éxito");
         },
         (err: any) => {
-          console.error('Error al eliminar el producto:', err);
+          this.toast.error("Error al eliminar el producto");
         }
       );
     }
-
-
   }
 }
