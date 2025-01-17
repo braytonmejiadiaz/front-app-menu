@@ -34,6 +34,7 @@ export class CategoriesServicePlantilla {
 
   exportTemplate(data: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/export-template`, data);
+
   }
 
 
