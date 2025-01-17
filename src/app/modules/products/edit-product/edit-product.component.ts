@@ -40,7 +40,8 @@ export class EditProductComponent {
     public productService: ProductService,
     public modalSS: ProductService,
     private activeRoute: ActivatedRoute,
-    private toastr:ToastrService
+    private toastr:ToastrService,
+    public loadingTemplate: ProductService
   ) {}
 
 
@@ -128,10 +129,10 @@ export class EditProductComponent {
       formData.append("description",this.description);
 
       this.productService.updateProducts(this.PRODUCT_ID,formData).subscribe((resp:any) => {
-
         if(resp.message == 403){
           this.toastr.error('Error al editar tu producto');
         }else{
+
 
           this.file_imagen = null;
 
@@ -145,4 +146,9 @@ export class EditProductComponent {
     }
 
     }
+
+
+
+
+
 }

@@ -6,6 +6,8 @@ import { AttributesComponent } from './modules/attributes/attributes.component';
 import { ListAttributeComponent } from './modules/attributes/list-attribute/list-attribute.component';
 import { CreateCategorieComponent } from './modules/categories/create-categorie/create-categorie.component';
 import { ProfileUserComponent } from './modules/profile-user/profile-user.component';
+import { PlantillaMenu3Component } from './modules/plantillas menu/plantilla-menu-3/plantilla-menu-3.component';
+
 
 
 export const routes: Routes = [
@@ -40,10 +42,13 @@ export const routes: Routes = [
         component:ListaDePlantillasMenuComponent,
         children:[
           {
+            path:'demo-3',
+            loadComponent: () => import('./modules/plantillas menu/plantilla-menu-3/plantilla-menu-3.component').then((m) => m.PlantillaMenu3Component)
+          },
+          {
             path:'demo-1',
-            component:PlantillaMenu1Component,
-            pathMatch:'full'
-          }
+            loadComponent: () => import('./modules/plantillas menu/plantilla-menu-1/plantilla-menu-1.component').then((m) => m.PlantillaMenu1Component)
+          },
         ]
       },
       {

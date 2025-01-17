@@ -3,6 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { Observable, BehaviorSubject, finalize } from 'rxjs';
 import { URL_SERVICIOS } from '../../../config/config';
 import { AuthService } from '../../../pages/services/auth.service';
+import { CategoriesServicePlantilla } from '../../plantillas menu/services/categories-plantilla.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,11 @@ import { AuthService } from '../../../pages/services/auth.service';
 export class ProductService {
   isLoading$: Observable<boolean>;
   isLoadingSubject: BehaviorSubject<boolean>;
-
+ groupedCategories: any[] = [];
   constructor(
     private http: HttpClient,
     public authservice: AuthService,
+    public productService: CategoriesServicePlantilla,
   ) {
     this.isLoadingSubject = new BehaviorSubject<boolean>(false);
     this.isLoading$ = this.isLoadingSubject.asObservable();
@@ -113,5 +115,25 @@ export class ProductService {
 
   $modal = new EventEmitter<any>();
   $modalProductCreate = new EventEmitter<any>();
+
+  // Método para actualizar la plantilla en el backend
+// updateTemplate() {
+//   const data = {
+//     categories: this.groupedCategories
+//   };
+
+//   this.productService.exportTemplate(data).subscribe({
+//     next: (response: any) => {
+//       if (response && response.url) {
+//         // Actualiza la URL de la plantilla exportada automáticamente
+
+//         console.error('No se pudo generar la URL de la plantilla');
+//       }
+//     },
+//     error: (error) => {
+//       console.error('Error al actualizar la plantilla:', error);
+//     }
+//   });
+// }
 
 }

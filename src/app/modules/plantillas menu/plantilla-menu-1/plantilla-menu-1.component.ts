@@ -13,6 +13,8 @@ import { CategoriesServicePlantilla } from '../services/categories-plantilla.ser
 })
 export class PlantillaMenu1Component implements OnInit {
   groupedCategories: any[] = [];
+
+
   public isMobileMode: boolean = false;
 
   constructor(
@@ -23,6 +25,7 @@ export class PlantillaMenu1Component implements OnInit {
   ngOnInit(): void {
     this.listProduct(); // Llama al método para obtener productos
     this.checkMobileMode(); // Modo móvil al inicio
+
   }
 
   scrollToCategory(categoryName: string) {
@@ -101,4 +104,28 @@ export class PlantillaMenu1Component implements OnInit {
   checkMobileMode() {
     this.isMobileMode = window.innerWidth <= 768; // Puedes ajustar el valor según tus necesidades
   }
+
+
+
+    // Método para exportar la plantilla solo cuando se hace clic en el botón
+    exportTemplate(templateName: string) {
+      const data = {
+          templateName: templateName,
+          categories: this.groupedCategories,
+          isMobileMode: this.isMobileMode,
+      };
+
+      this.productService.exportTemplate(data).subscribe({
+          next: (response: any) => {
+              if (response && response.url) {
+                  window.open(response.url, '_blank');
+              } else {
+                  console.error('No se pudo generar la URL');
+              }
+          },
+          error: (error) => {
+              console.error('Error al exportar la plantilla:', error);
+          }
+      });
+    }
 }

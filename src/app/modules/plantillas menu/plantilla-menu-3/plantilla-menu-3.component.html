@@ -1,1 +1,70 @@
-<p>plantilla-menu-3 works!</p>
+<!-- Encabezado del menú -->
+<div class="bg-[#F5F5F4] flex items-center justify-between p-5">
+  <div>
+    <button class="bg-blue-500 text-white p-2 rounded" (click)="exportTemplate('plantilla-menu-2')">Guardar plantilla</button>
+  </div>
+  <div class="space-x-5 flex items-center">
+    <i class="fa-solid fa-mobile-screen text-3xl cursor-pointer" (click)="toggleMode()"></i>
+    <i class="fa-solid fa-desktop text-3xl cursor-pointer" (click)="toggleDesktop()"></i>
+  </div>
+  <div>
+    <button class="bg-[#FC4D25] text-white p-2 rounded hover:bg-[#ed401a]" (click)="navigateBack()">Ir atrás</button>
+  </div>
+</div>
+
+<div [ngClass]="isMobileMode ? 'max-w-md mx-auto h-[90%] overflow-auto' : 'max-w-full mx-auto h-[90%] overflow-auto rounded-md'" class="p-4">
+  <!-- Encabezado -->
+  <div class="flex justify-center bg-black pt-5 pb-5">
+    <img class="w-[60%] max-w-[250px]" src="https://dvzwo3mu4ucsq.cloudfront.net/images/restaurants/tizones/0be8d6b5-8588-4a5d-8939-5140f745ccde.webp" alt="Logo" />
+  </div>
+
+<!-- Menú de categorías -->
+<div class="flex justify-center bg-white py-2 space-x-4">
+  <ng-container *ngFor="let category of groupedCategories">
+    <a *ngIf="category.products && category.products.length > 0"
+       (click)="scrollToCategory(category.name)"
+       class="cursor-pointer text-md font-semibold text-black/90 hover:underline">
+      {{ category.name }}
+    </a>
+  </ng-container>
+</div>
+
+  <!-- Contenido del menú -->
+  <main [ngClass]="isMobileMode ? 'max-w-md mx-auto' : 'max-w-full mx-auto'">
+    <ng-container *ngFor="let category of groupedCategories">
+      <!-- Verificar si la categoría tiene productos antes de mostrarla -->
+      <section [id]="category.name" class="bg-[url('https://tucartaya.com/wp-content/uploads/2024/12/asd.jpg')] bg-cover bg-repeat-y flex flex-col items-center w-full pt-5" *ngIf="category.products && category.products.length > 0">
+        <div>
+          <!-- Título de la categoría -->
+          <div class="p-5 w-full max-w-3xl bg-cover bg-center">
+            <div class="flex justify-center">
+                <h2 class="lg:w-2/3 md:w-full sm:w-full bg-[#00000098] rounded-md p-2 text-3xl md:text-6xl font-semibold text-[#B68765] mb-8 text-center font-[poiret-one]">
+                {{ category.name }}
+              </h2>
+            </div>
+            <!-- Contenedor de productos -->
+            <div class="grid grid-cols-2 gap-3 p-2">
+              <div *ngFor="let product of category.products" class="w-full bg-[#00000095] text-center rounded-md shadow-md">
+                <img [src]="product.imagen ? 'http://localhost:8000/storage/' + product.imagen : 'assets/images/default-product-image.jpg'" class="rounded-t-md w-full" [alt]="product.title" />
+                <div class="p-2">
+                  <h3 class="text-[#B68765] text-2xl font-semibold font-[poiret-one]">
+                    {{ product.title }}
+                  </h3>
+                  <p class="text-white text-sm">{{ product.description }}</p>
+                  <p class="text-lg text-white font-bold font-[poiret-one]">
+                    $ {{ product.price_pes }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </ng-container>
+  </main>
+
+  <!-- Pie de página -->
+  <footer class="bg-gray-800 text-white text-center py-4">
+    <p>&copy; 2024 Restaurante Gourmet. Todos los derechos reservados.</p>
+  </footer>
+</div>
