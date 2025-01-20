@@ -1,0 +1,67 @@
+<!-- Encabezado del menú -->
+<div class="bg-[#F5F5F4] flex items-center justify-between p-5">
+  <div>
+    <button class="bg-blue-500 text-white p-3 rounded-lg flex gap-2 " (click)="exportTemplate('plantilla-menu-3')">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+       stroke-linejoin="round" width="24" height="24" stroke-width="2">
+        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+        <path d="M9 12l2 2l4 -4"></path>
+      </svg>
+      Usar plantilla</button>
+  </div>
+
+  <div>
+    <button type="button" class="text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none
+     focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center
+      dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40 me-2 mb-2" (click)="navigateBack()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2">
+        <path d="M11 7l-5 5l5 5"></path>
+        <path d="M17 7l-5 5l5 5"></path>
+      </svg>
+      Ir atrás
+
+      </button>
+    </div>
+</div>
+
+
+<!-- Contenido principal -->
+<div class="mx-auto px-4 py-8 bg-[#FAFAFA]">
+  <header class="bg-[#2C3E50] text-white text-center py-8">
+    <h1 class="text-4xl font-serif">Modern Bistro</h1>
+  </header>
+
+  <nav class="flex justify-around bg-[#34495E] p-4">
+    <ng-container *ngFor="let category of groupedCategories">
+      <a *ngIf="category.products && category.products.length > 0"
+         (click)="scrollToCategory(category.name)"
+         class="cursor-pointer text-md font-semibold text-white hover:text-[#1ABC9C] hover:underline">
+        {{ category.name }}
+      </a>
+    </ng-container>
+  </nav>
+
+  <div class="menu-container mx-auto px-4 py-8 bg-white rounded-lg shadow-lg">
+    <div *ngFor="let category of groupedCategories">
+      <section *ngIf="category.products.length > 0" id="{{ category.name }}" class="mb-8 ">
+        <h2 class="text-3xl text-[#2C3E50] border-b-2 border-[#1ABC9C] pb-4">{{ category.name }}</h2>
+        <div class="menu-items grid grid-cols-2 gap-8 mt-4">
+          <div *ngFor="let product of category.products" class="menu-item bg-[#F8F8F8] rounded-lg
+          shadow-md hover:transform hover:translate-y-2 transition duration-300">
+            <img [src]="product.imagen ? 'http://localhost:8000/storage/' + product.imagen : 'assets/images/default-product-image.jpg'"
+            [alt]="product.title" class="w-full h-56 object-cover rounded-t-lg">
+            <div class="p-4">
+              <h3 class="text-2xl text-[#34495E]">{{ product.title }}</h3>
+              <p class="text-sm text-[#7F8C8D]">{{ product.description }}</p>
+              <p class="text-lg font-bold text-[#2C3E50] mt-3">${{ product.price_pes | number:'1.0-0' }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <footer class="bg-[#2C3E50] text-white text-center py-6 mt-8">
+    <p>&copy; 2025 Modern Bistro. All Rights Reserved.</p>
+  </footer>
+</div>

@@ -41,13 +41,22 @@ export const routes: Routes = [
         path:'lista-plantillas',
         component:ListaDePlantillasMenuComponent,
         children:[
+
+          {
+            path:'demo-1',
+            loadComponent: () => import('./modules/plantillas menu/plantilla-menu-1/plantilla-menu-1.component').then((m) => m.PlantillaMenu1Component)
+          },
           {
             path:'demo-3',
             loadComponent: () => import('./modules/plantillas menu/plantilla-menu-3/plantilla-menu-3.component').then((m) => m.PlantillaMenu3Component)
           },
           {
-            path:'demo-1',
-            loadComponent: () => import('./modules/plantillas menu/plantilla-menu-1/plantilla-menu-1.component').then((m) => m.PlantillaMenu1Component)
+            path:'demo-4',
+            loadComponent: () => import('./modules/plantillas menu/plantilla-menu-4/plantilla-menu-4.component').then((m) => m.PlantillaMenu4Component)
+          },
+          {
+            path:'demo-5',
+            loadComponent: () => import('./modules/plantillas menu/plantilla-menu-5/plantilla-menu-5.component').then((m) => m.PlantillaMenu5Component)
           },
         ]
       },

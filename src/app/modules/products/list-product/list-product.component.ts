@@ -36,8 +36,6 @@ export class ListProductComponent {
 
   ngOnInit(): void {
     this.productService.$modalProductCreate.subscribe((v) => {this.modalSwitchProduct = v})
-    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
-    //Add 'implements OnInit' to the class.
     this.listProducts();
     this.isLoading$ = this.productService.isLoading$;
     this.configAll();
@@ -47,14 +45,12 @@ export class ListProductComponent {
     this.productService.configAll().subscribe((resp:any) => {
       this.marcas = resp.brands;
       this.categories_first = resp.categories_first;
-
     })
   }
   listProducts(page = 1){
     let data = {
       search: this.search,
       brand_id: this.marca_id,
-
     }
     this.productService.listProducts(page,data).subscribe((resp:any) => {
       this.products = resp.products.data;
@@ -85,7 +81,7 @@ export class ListProductComponent {
           this.toast.success("Producto eliminado con éxito");
         },
         (err: any) => {
-          this.toast.error("Error al eliminar el producto");
+          this.toast.error("Error al eliminar el producto", err);
         }
       );
     }

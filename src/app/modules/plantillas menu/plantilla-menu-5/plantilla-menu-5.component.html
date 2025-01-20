@@ -1,0 +1,71 @@
+<!-- Encabezado del menú -->
+<div class="bg-[#F5F5F4] flex items-center justify-between p-5">
+  <div>
+    <button class="bg-blue-500 text-white p-3 rounded-lg flex gap-2 " (click)="exportTemplate('plantilla-menu-4')">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
+       stroke-linejoin="round" width="24" height="24" stroke-width="2">
+        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+        <path d="M9 12l2 2l4 -4"></path>
+      </svg>
+      Usar plantilla</button>
+  </div>
+  <div>
+    <button type="button" class="text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none
+     focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center
+      dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40 me-2 mb-2" (click)="navigateBack()">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="24" height="24" stroke-width="2">
+        <path d="M11 7l-5 5l5 5"></path>
+        <path d="M17 7l-5 5l5 5"></path>
+      </svg>
+      Ir atrás
+
+      </button>
+    </div>
+</div>
+
+
+
+
+
+<body class="bg-[#f3f1eb] font-sans">
+
+  <header class="bg-[#d32f2f] text-white text-center py-8">
+    <h1 class="font-cursive text-4xl font-[Lobster]">La Pizzeria</h1>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+  </header>
+
+  <nav class="bg-[#b71c1c] py-2 text-center">
+    <ng-container *ngFor="let category of groupedCategories">
+      <a *ngIf="category.products && category.products.length > 0"
+         (click)="scrollToCategory(category.name)"
+         class="text-white mx-6 text-lg font-semibold hover:underline">
+        {{ category.name }}
+      </a>
+    </ng-container>
+  </nav>
+
+
+  <div class="max-w-6xl mx-auto py-6 px-4 bg-white rounded-lg shadow-md" *ngFor="let category of groupedCategories">
+    <div  *ngIf="category.products.length > 0">
+      <section [id]="category.name" class="mb-12">
+        <h2 class="font-cursive text-[#d32f2f] text-3xl mb-6 text-center font-[Lobster]">{{ category.name }}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div *ngFor="let product of category.products" class="bg-[#f9f3f3] rounded-xl p-4 text-center transform transition duration-300 hover:scale-105">
+            <img [src]="product.imagen ? 'http://localhost:8000/storage/' + product.imagen : 'assets/images/default-product-image.jpg'" alt="{{ product.title }}" class="w-full h-auto rounded-xl object-cover">
+            <div class="mt-4">
+              <h3 class="font-cursive text-[#d32f2f] text-xl font-[Lobster]">{{ product.title }}</h3>
+              <p class="text-gray-700 text-sm">{{ product.description }}</p>
+              <p class="font-bold text-[#d32f2f] text-lg mt-3">${{ product.price_pes | number: '1.0-0' }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <footer class="bg-[#d32f2f] text-white text-center py-4">
+    <p>&copy; 2025 La Pizzeria. Todos los derechos reservados.</p>
+  </footer>
+
+</body>

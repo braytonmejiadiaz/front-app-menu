@@ -3,6 +3,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { ProductService } from '../../products/service/product.service';
 import { CategoriesServicePlantilla } from '../services/categories-plantilla.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-plantilla-menu-1',
@@ -12,20 +13,19 @@ import { CategoriesServicePlantilla } from '../services/categories-plantilla.ser
   styleUrls: ['./plantilla-menu-1.component.css'],
 })
 export class PlantillaMenu1Component implements OnInit {
+
   groupedCategories: any[] = [];
-
-
   public isMobileMode: boolean = false;
 
   constructor(
     private router: Router,
     public productService: CategoriesServicePlantilla,
+    private toastr: ToastrService,
   ) {}
 
   ngOnInit(): void {
     this.listProduct(); // Llama al método para obtener productos
     this.checkMobileMode(); // Modo móvil al inicio
-
   }
 
   scrollToCategory(categoryName: string) {
@@ -43,6 +43,7 @@ export class PlantillaMenu1Component implements OnInit {
 
         // Accede a groupedCategories que es un arreglo dentro de la respuesta
         if (resp && Array.isArray(resp.groupedCategories)) {
+          // Agrupa los productos por categoría
           this.groupedCategories = this.groupProductsByCategory(resp.groupedCategories);
           console.log("Categorías agrupadas:", this.groupedCategories);
         } else {
@@ -54,7 +55,6 @@ export class PlantillaMenu1Component implements OnInit {
       }
     });
   }
-
 
   // Agrupa los productos por categoría
   groupProductsByCategory(categoriesWithProducts: any[]): any[] {
@@ -84,15 +84,7 @@ export class PlantillaMenu1Component implements OnInit {
     this.router.navigate(['/usuario/lista-plantillas']);
   }
 
-  // Cambia a modo móvil
-  toggleMode() {
-    this.isMobileMode = true;
-  }
 
-  // Cambia a modo escritorio
-  toggleDesktop() {
-    this.isMobileMode = false;
-  }
 
   // Detecta el tamaño de la pantalla y ajusta el modo
   @HostListener('window:resize', ['$event'])
@@ -105,27 +97,26 @@ export class PlantillaMenu1Component implements OnInit {
     this.isMobileMode = window.innerWidth <= 768; // Puedes ajustar el valor según tus necesidades
   }
 
+  // Método para exportar la plantilla solo cuando se hace clic en el botón
+  exportTemplate(templateName: string) {
+    const data = {
+        templateName: templateName,
+        categories: this.groupedCategories,
+        isMobileMode: this.isMobileMode,
+    };
 
-
-    // Método para exportar la plantilla solo cuando se hace clic en el botón
-    exportTemplate(templateName: string) {
-      const data = {
-          templateName: templateName,
-          categories: this.groupedCategories,
-          isMobileMode: this.isMobileMode,
-      };
-
-      this.productService.exportTemplate(data).subscribe({
-          next: (response: any) => {
-              if (response && response.url) {
-                  window.open(response.url, '_blank');
-              } else {
-                  console.error('No se pudo generar la URL');
-              }
-          },
-          error: (error) => {
-              console.error('Error al exportar la plantilla:', error);
-          }
-      });
-    }
+    this.productService.exportTemplate(data).subscribe({
+        next: (response: any) => {
+            if (response && response.url) {
+                window.open(response.url, '_blank');
+                this.toastr.success('Tu plantilla se guardo correctamente');
+            } else {
+                console.error('No se pudo generar la URL');
+            }
+        },
+        error: (error) => {
+            console.error('Error al exportar la plantilla:', error);
+        }
+    });
+  }
 }

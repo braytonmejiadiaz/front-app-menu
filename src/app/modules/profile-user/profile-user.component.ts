@@ -3,6 +3,7 @@ import { ProfileUserService } from './service/profile.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile-user',
@@ -19,14 +20,15 @@ export class ProfileUserComponent {
   phone:string = "";
   name_bussines:string = "";
   addres:string = "";
-  avatar:any = null;
+  avatar:any = "";
   fb: string = "";
   ins: string = "";
   tikTok: string = "";
   youtube: string = "";
 
 
-  constructor(public profileClient: ProfileUserService ){
+
+  constructor(public profileClient: ProfileUserService, private toast: ToastrService){
     this.profileClient.showUsers().subscribe((resp:any) =>{
       console.log(resp)
       this.name = resp.name
@@ -40,6 +42,7 @@ export class ProfileUserComponent {
       this.ins = resp.ins
       this.tikTok = resp.tikTok
       this.youtube = resp.youtube
+
     })
   }
 
@@ -65,24 +68,25 @@ export class ProfileUserComponent {
       ins: this.ins,
       tikTok: this.tikTok,
       youtube: this.youtube,
+
     }
 
 
     this.profileClient.updateProfile(data).subscribe((resp:any) =>{
       console.log(resp)
       if(resp.message ==403){
-        console.log( "el correo ya esta en uso" )
+        this.toast.error("El correo ya esta en uso")
       }else{
-        console.log("se edito con exito")
+        this.toast.success("Tu perfil se edito con éxito")
       }
-    })
+      })
   }
 
 
   imagen_previsualiza:any = "https://tucartaya.com/wp-content/uploads/2024/12/upload-media.png";
   processFile($event:any){
     if($event.target.files[0].type.indexOf("image") < 0){
-      // this.toastr.error("Validacion","El archivo no es una imagen");
+      this.toast.error("Validacion","El archivo no es una imagen");
       return;
     }
     this.avatar = $event.target.files[0];

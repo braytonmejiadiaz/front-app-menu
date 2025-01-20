@@ -14,15 +14,11 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './edit-product.component.css'
 })
 export class EditProductComponent {
-
-
   PRODUCT_ID : string = '';
   PRODUCT_SELECTED : any;
-
   config: any = {
     versionCheck: false,
 }
-
   title:string = '';
   sku:string = '';
   price_pes:number = 0;
@@ -31,7 +27,6 @@ export class EditProductComponent {
   file_imagen:any = null;
   marca_id:string = '';
   marcas:any = []
-
   isLoading$:any;
   categories_first:any = [];
   categorie_first_id: number | null = null;
@@ -43,8 +38,6 @@ export class EditProductComponent {
     private toastr:ToastrService,
     public loadingTemplate: ProductService
   ) {}
-
-
   selectCategory(id: number) {
     this.categorie_first_id = id;
   }
@@ -56,7 +49,6 @@ export class EditProductComponent {
     this.activeRoute.paramMap.subscribe((resp:any) =>{
       this.PRODUCT_ID = resp.get('id');
     });
-
   }
 
   showProduct(){
@@ -75,17 +67,15 @@ export class EditProductComponent {
 
   configAll(){
     this.productService.configAll().subscribe((resp:any) => {
-       console.log('Categories:', resp.categories_first);
       this.marcas = resp.brands;
       this.categories_first = resp.categories_first;
       this.showProduct();
     })
   }
 
-
   processFile($event:any){
     if($event.target.files[0].type.indexOf("image") < 0){
-      // this.toastr.error("Validacion","El archivo no es una imagen");
+      this.toastr.error("Validacion","El archivo no es una imagen");
       return;
     }
     this.file_imagen = $event.target.files[0];
@@ -110,10 +100,7 @@ export class EditProductComponent {
 
     if(!this.title || !this.sku  || !this.price_pes || !this.marca_id
       || !this.description || !this.categorie_first_id){
-
-      console.log(this.categorie_first_id)
       this.toastr.error('Debes seleccionar una categoría');
-
     }
     else{
       let formData = new FormData();
@@ -132,23 +119,11 @@ export class EditProductComponent {
         if(resp.message == 403){
           this.toastr.error('Error al editar tu producto');
         }else{
-
-
           this.file_imagen = null;
-
           this.imagen_previsualiza = "https://preview.keenthemes.com/metronic8/demo1/assets/media/svg/illustrations/easy/2.svg";
-          console.log("El product se actualizo perfectamente");
           this.toastr.success('Producto actualizado con exito');
         }
-
-
       })
     }
-
     }
-
-
-
-
-
 }

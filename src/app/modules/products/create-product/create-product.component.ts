@@ -17,14 +17,10 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './create-product.component.css'
 })
 export class CreateProductComponent {
-
   modalSwitch: boolean = false;
-
   openModal(){
     this.modalSwitch = true;
   }
-
-
   config: any = {
     versionCheck: false,
   }
@@ -44,27 +40,21 @@ export class CreateProductComponent {
     public productService: ProductService,
     public modalSS: ProductService,
     private toastr:ToastrService
-  ) {
-
-  }
+  ) {}
 
   categorie_first_id: number | null = null;
-
   selectCategory(id: number) {
     this.categorie_first_id = id;
   }
 
   ngOnInit(): void {
-
     this.modalSS.$modal.subscribe((v)=>{this.modalSwitch = v})
     this.isLoading$ = this.productService.isLoading$;
     this.configAll();
   }
 
-
   configAll(){
     this.productService.configAll().subscribe((resp:any) => {
-      console.log(resp);
       this.marcas = resp.brands;
       this.categories_first = resp.categories_first;
 
@@ -112,8 +102,6 @@ export class CreateProductComponent {
       formData.append("description",this.description);
 
       this.productService.createProducts(formData).subscribe((resp:any) => {
-        console.log(resp);
-
         if(resp.message == 403){
           this.toastr.error("Validación",resp.message_text);
         }else{
@@ -128,12 +116,8 @@ export class CreateProductComponent {
           this.imagen_previsualiza = "https://preview.keenthemes.com/metronic8/demo1/assets/media/svg/illustrations/easy/2.svg";
           this.toastr.success("El producto se creo con exito");
         }
-
-
       })
     }
 
-    }
-
-
+  }
 }

@@ -9,8 +9,12 @@
     </div>
     <div class="flex flex-col">
       <span class="text-3xl font-medium text-black/80">{{name_bussines}}</span>
-      <span class="text-black/60">Responsable: {{name}}</span>
+      <span class="text-black/60">Responsable: {{name}} {{surname}}</span>
     </div>
+
+  </div>
+  <div class="flex justify-end">
+    <button class="bg-[#FC4D25] p-2 rounded-md text-white font-semibold hover:scale-105 transition-all" type="button" (click)="updateUser()">Actualizar datos</button>
   </div>
 
   <div class="border-b-2 pt-5"></div>
@@ -46,6 +50,7 @@
         <label class="text-[12px] sm:text-[13px] font-thin" for="addres">Dirección de tu negocio</label>
         <input type="text" name="addres" [(ngModel)]="addres" placeholder="Dirección de tu negocio" class="border border-gray-300 p-2 rounded-lg text-[14px] sm:text-left text-center">
       </div>
+
     </div>
   </div>
 
@@ -74,7 +79,7 @@
   <div class="flex flex-col sm:flex-row items-start gap-5 mt-5 p-5">
     <div class="flex flex-col w-full sm:w-1/2">
       <span class="text-lg font-medium text-black/80">Mis redes sociales</span>
-      <span class="text-black/60">Estos datos se usaran para optimizar tu menu</span>
+      <span class="text-black/60">Estos datos se usaran para optimizar tu menú</span>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 w-full gap-5">
       <div class="flex flex-col gap-2">
@@ -96,7 +101,5 @@
     </div>
   </div>
 
-  <div class="flex justify-end py-5">
-    <button class="bg-[#FC4D25] p-2 rounded-md text-white font-semibold hover:scale-105 transition-all" type="button" (click)="updateUser()">Actualizar datos</button>
-  </div>
+
 </section>

@@ -11,8 +11,6 @@ export class CategoriesServicePlantilla {
   isLoading$: Observable<boolean>;
   isLoadingSubject: BehaviorSubject<boolean>;
 
-  private apiUrl = 'http://localhost:8000/api';
-
   constructor(
     private http: HttpClient,
     public authservice: AuthService,
@@ -32,10 +30,14 @@ export class CategoriesServicePlantilla {
     );
   }
 
-  exportTemplate(data: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}/export-template`, data);
+ // Método para exportar la plantilla, ahora con el token en los encabezados
+ exportTemplate(data: any) {
+  const token = sessionStorage.getItem('token');
+  let headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
+  let URL = URL_SERVICIOS + "/admin/export-template";
+  return this.http.post(URL, data, { headers: headers });
+}
 
-  }
 
 
 }

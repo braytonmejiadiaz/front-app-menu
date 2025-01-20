@@ -11,7 +11,7 @@ import { CategoriesServicePlantilla } from '../../plantillas menu/services/categ
 export class ProductService {
   isLoading$: Observable<boolean>;
   isLoadingSubject: BehaviorSubject<boolean>;
- groupedCategories: any[] = [];
+  groupedCategories: any[] = [];
   constructor(
     private http: HttpClient,
     public authservice: AuthService,
@@ -41,15 +41,17 @@ export class ProductService {
     );
   }
 
-  configAll(){
-    this.isLoadingSubject.next(true);
+  configAll() {
+    this.productService.isLoadingSubject.next(true);
     const token = sessionStorage.getItem('token');
     let headers = new HttpHeaders({'Authorization': `Bearer ${token}`});
-    let URL = URL_SERVICIOS+"/admin/products/config";
-    return this.http.get(URL,{headers: headers}).pipe(
-      finalize(() => this.isLoadingSubject.next(false))
+    let URL = URL_SERVICIOS + "/admin/products/config";  // Asegúrate de que la API devuelve solo categorías del usuario autenticado
+
+    return this.http.get(URL, { headers: headers }).pipe(
+      finalize(() => this.productService.isLoadingSubject.next(false))
     );
   }
+
 
   createProducts(data:any){
     this.isLoadingSubject.next(true);
@@ -116,24 +118,5 @@ export class ProductService {
   $modal = new EventEmitter<any>();
   $modalProductCreate = new EventEmitter<any>();
 
-  // Método para actualizar la plantilla en el backend
-// updateTemplate() {
-//   const data = {
-//     categories: this.groupedCategories
-//   };
-
-//   this.productService.exportTemplate(data).subscribe({
-//     next: (response: any) => {
-//       if (response && response.url) {
-//         // Actualiza la URL de la plantilla exportada automáticamente
-
-//         console.error('No se pudo generar la URL de la plantilla');
-//       }
-//     },
-//     error: (error) => {
-//       console.error('Error al actualizar la plantilla:', error);
-//     }
-//   });
-// }
 
 }
