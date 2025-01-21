@@ -1,4 +1,6 @@
 <!-- Encabezado del menú -->
+<app-modal-url-plantilla></app-modal-url-plantilla>
+
 <div class="bg-[#F5F5F4] flex items-center justify-between p-5">
   <div>
     <button class="bg-blue-500 text-white p-3 rounded-lg flex gap-2 " (click)="exportTemplate('plantilla-menu-4')">
@@ -29,8 +31,9 @@
 
 <body class="bg-[#f3f1eb] font-sans">
 
-  <header class="bg-[#d32f2f] text-white text-center py-8">
-    <h1 class="font-cursive text-4xl font-[Lobster]">La Pizzeria</h1>
+  <header class="bg-[#d32f2f] text-white text-center py-8 flex justify-center">
+    <img class="w-[60%] max-w-[250px] "
+    src="{{avatar}}" alt="Logo" />
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 
   </header>
@@ -64,8 +67,35 @@
     </div>
   </div>
 
-  <footer class="bg-[#d32f2f] text-white text-center py-4">
-    <p>&copy; 2025 La Pizzeria. Todos los derechos reservados.</p>
-  </footer>
+  <!-- Footer -->
+  <footer class="bg-[#d32f2f] text-white py-6">
+    <div class="container mx-auto px-4 text-center">
+        <!-- Redes Sociales -->
+        <div class="mb-4">
+            <a href="{{fb}}" class="text-white hover:text-white mx-2">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <a href="{{ins}}" class="text-white hover:text-white mx-2">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="{{tikTok}}" class="text-white hover:text-white mx-2">
+              <i class="fa-brands fa-tiktok"></i>
+            </a>
+        </div>
+        <!-- Información de Contacto -->
+        <div class="text-white/90">
+            <p class="mb-2"><i class="fas fa-map-marker-alt mr-2"></i>{{addres}}</p>
+            <p class="mb-2"><i class="fas fa-phone mr-2"></i>{{phone}}</p>
+
+        </div>
+        <!-- Copyright -->
+        <div class="mt-4 text-white/80">
+            <p>&copy; 2025 Desarrollado con la tecnología de FoodLogic.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- Include Font Awesome for icons -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
 </body>

@@ -25,8 +25,6 @@ export class EditProductComponent {
   description:any = "";
   imagen_previsualiza:any = "https://tucartaya.com/wp-content/uploads/2024/12/upload-media.png";
   file_imagen:any = null;
-  marca_id:string = '';
-  marcas:any = []
   isLoading$:any;
   categories_first:any = [];
   categorie_first_id: number | null = null;
@@ -59,7 +57,6 @@ export class EditProductComponent {
     this.price_pes = resp.product.price_pes
     this.description = resp.product.description
     this.imagen_previsualiza = resp.product.imagen
-    this.marca_id = resp.product.brand_id
     this.categories_first = resp.categorie.categorie_first_id
   })
   }
@@ -67,7 +64,6 @@ export class EditProductComponent {
 
   configAll(){
     this.productService.configAll().subscribe((resp:any) => {
-      this.marcas = resp.brands;
       this.categories_first = resp.categories_first;
       this.showProduct();
     })
@@ -98,8 +94,7 @@ export class EditProductComponent {
 
   save(){
 
-    if(!this.title || !this.sku  || !this.price_pes || !this.marca_id
-      || !this.description || !this.categorie_first_id){
+    if(!this.title || !this.sku  || !this.price_pes || !this.description || !this.categorie_first_id){
       this.toastr.error('Debes seleccionar una categoría');
     }
     else{
@@ -107,7 +102,6 @@ export class EditProductComponent {
       formData.append("title",this.title);
       formData.append("sku",this.sku);
       formData.append("price_pes",this.price_pes+"");
-      formData.append("brand_id",this.marca_id);
       if(this.file_imagen){
         formData.append("portada",this.file_imagen);
       }

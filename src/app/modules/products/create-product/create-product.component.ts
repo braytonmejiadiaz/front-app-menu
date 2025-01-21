@@ -31,8 +31,6 @@ export class CreateProductComponent {
   description:any = "";
   imagen_previsualiza:any = "https://tucartaya.com/wp-content/uploads/2024/12/upload-media.png";
   file_imagen:any = null;
-  marca_id:string = '';
-  marcas:any = []
   isLoading$:any;
   categories_first:any = [];
 
@@ -55,7 +53,6 @@ export class CreateProductComponent {
 
   configAll(){
     this.productService.configAll().subscribe((resp:any) => {
-      this.marcas = resp.brands;
       this.categories_first = resp.categories_first;
 
     })
@@ -87,8 +84,7 @@ export class CreateProductComponent {
 
   save(){
 
-    if(!this.title || !this.sku  || !this.price_pes || !this.marca_id
-      || !this.file_imagen||  !this.description || !this.categorie_first_id){
+    if(!this.title || !this.sku  || !this.price_pes  || !this.file_imagen||  !this.description || !this.categorie_first_id){
       this.toastr.error("Debes rellenar todos los campos para crear un producto")
     }
     else{
@@ -96,7 +92,6 @@ export class CreateProductComponent {
       formData.append("title",this.title);
       formData.append("sku",this.sku);
       formData.append("price_pes",this.price_pes+"");
-      formData.append("brand_id",this.marca_id);
       formData.append("portada",this.file_imagen);
       formData.append("categorie_first_id",this.categorie_first_id+"");
       formData.append("description",this.description);
@@ -109,7 +104,6 @@ export class CreateProductComponent {
           this.file_imagen = null;
           this.sku = '';
           this.price_pes = 0;
-          this.marca_id = '';
           this.categorie_first_id = 0;
           this.description = '';
           this.description = '';

@@ -28,7 +28,6 @@ closeModal(){
 
 // esta es la parte de creacion de categoria
   name:string = '';
-  icon:string = '';
   constructor(
     public categorieService: CategoriesService,
     private toastr: ToastrService,
@@ -44,7 +43,6 @@ closeModal(){
 
   listCategories(page = 1){
     this.categorieService.listCategories(page,this.search).subscribe((resp:any) =>{
-      console.log(resp)
       this.categories = resp.categories.data;
       this.totalPages = resp.total;
       this.currentPage = page;
@@ -69,9 +67,6 @@ closeModal(){
 
     let formData = new FormData();
     formData.append("name",this.name);
-    if(this.icon){
-      formData.append("icon",this.icon);
-    }
 
     this.categorieService.createCategories(formData).subscribe((resp:any) => {
       console.log(resp);
@@ -81,7 +76,6 @@ closeModal(){
         return;
       }
       this.name = '';
-      this.icon = '';
       this.toastr.success("Exito","La categoria se registro perfectamente");
     })
   }

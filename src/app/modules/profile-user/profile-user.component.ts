@@ -20,11 +20,12 @@ export class ProfileUserComponent {
   phone:string = "";
   name_bussines:string = "";
   addres:string = "";
-  avatar:any = "";
+  avatar: string = "";
   fb: string = "";
   ins: string = "";
   tikTok: string = "";
   youtube: string = "";
+  exported_template_url: string = ""
 
 
 
@@ -42,6 +43,7 @@ export class ProfileUserComponent {
       this.ins = resp.ins
       this.tikTok = resp.tikTok
       this.youtube = resp.youtube
+      this.exported_template_url = resp.exported_template_url
 
     })
   }
@@ -84,15 +86,19 @@ export class ProfileUserComponent {
 
 
   imagen_previsualiza:any = "https://tucartaya.com/wp-content/uploads/2024/12/upload-media.png";
-  processFile($event:any){
-    if($event.target.files[0].type.indexOf("image") < 0){
-      this.toast.error("Validacion","El archivo no es una imagen");
+  processFile($event: any) {
+    if ($event.target.files[0].type.indexOf("image") < 0) {
+      this.toast.error("Validacion", "El archivo no es una imagen");
       return;
     }
-    this.avatar = $event.target.files[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(this.avatar);
-    reader.onloadend = () => this.imagen_previsualiza = reader.result;
-  }
 
+    let file = $event.target.files[0];
+    let reader = new FileReader();
+
+    reader.readAsDataURL(file); // Leer como base64
+    reader.onloadend = () => {
+      this.imagen_previsualiza = reader.result;  // Aquí guardamos la imagen en base64 para previsualización
+      this.avatar = reader.result as string;  // Asignamos el base64 a avatar como string
+    };
+  }
 }

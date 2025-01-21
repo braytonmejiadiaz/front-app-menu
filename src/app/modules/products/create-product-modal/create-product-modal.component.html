@@ -114,19 +114,6 @@
                 placeholder="Ejemplo: $20.000 COP"
               />
             </div>
-
-            <div class="w-full">
-              <label class="font-semibold text-sm py-2 block">Marca: (*)</label>
-              <select
-                class="text-sm form-select w-full px-4 py-2 border border-gray-300 rounded-md"
-                name="marca"
-                [(ngModel)]="marca_id">
-                <option value="">Seleccione</option>
-                <ng-container *ngFor="let item of marcas">
-                  <option [value]="item.id">{{ item.name }}</option>
-                </ng-container>
-              </select>
-            </div>
           </div>
         </div>
 

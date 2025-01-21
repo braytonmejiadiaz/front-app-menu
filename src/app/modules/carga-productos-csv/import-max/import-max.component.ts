@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import {  FormsModule } from '@angular/forms';
 import { ImportMaxProductService } from '../services/importMaxProduct.service';
 import { HttpClient } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -15,7 +16,7 @@ import { HttpClient } from '@angular/common/http';
 export class ImportMaxComponent {
   selectedFile: File | null = null;
 
-  constructor(private productService: ImportMaxProductService) {}
+  constructor(private productService: ImportMaxProductService, private toastr: ToastrService,) {}
 
   onFileChange(event: any) {
     this.selectedFile = event.target.files[0];
@@ -27,10 +28,11 @@ export class ImportMaxComponent {
       formData.append('import_file', this.selectedFile);
       this.productService.uploadExcel(formData).subscribe(
         response => {
-          console.log('Importación exitosa', response);
+          this.toastr.success('Importación exitosa')
+
         },
         error => {
-          console.error('Error en la importación', error);
+          this.toastr.error('Error en la importación')
         }
       );
     }
