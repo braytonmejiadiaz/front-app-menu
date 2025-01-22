@@ -23,6 +23,8 @@ export class PlantillaMenu1Component implements OnInit {
   name_bussines:string = "";
   phone:string = "";
   groupedCategories: any[] = [];
+  exportedUrl: string = ''; // URL generada para la plantilla
+  qrData: string = ''; // Datos del QR (en este caso, la URL generada)
   public isMobileMode: boolean = false;
 
   constructor(
@@ -128,6 +130,8 @@ export class PlantillaMenu1Component implements OnInit {
     this.productService.exportTemplate(data).subscribe({
       next: (response: any) => {
         if (response && response.url) {
+          this.exportedUrl = response.url;
+          this.qrData = this.exportedUrl;
           // Aquí estamos pasando la URL generada al modal
           this.modalS.setExportedUrl(response.url); // Método que definimos para emitir la URL
           this.modalS.openModal(); // Abrimos el modal automáticamente

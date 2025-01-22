@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { ProfileUserService } from '../../../../modules/profile-user/service/profile.service';
 
 @Component({
   selector: 'app-menu-lateral',
@@ -11,6 +12,17 @@ import { RouterModule } from '@angular/router';
 })
 export class MenuLateralComponent {
 
+  // trae la data del user
+
+  name_bussines:string = "";
+  avatar: string = "";
+
+  constructor(public profileClient: ProfileUserService){
+    this.profileClient.showUsers().subscribe((resp:any) =>{
+    this.name_bussines = resp.name_bussines
+      this.avatar = resp.avatar
+    })
+  }
 
   isDropdownOpen = false;
 
