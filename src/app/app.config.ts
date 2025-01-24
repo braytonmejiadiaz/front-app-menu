@@ -6,9 +6,10 @@ import { provideClientHydration } from '@angular/platform-browser';
 import {  provideHttpClient } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { QRCodeComponent, QRCodeModule } from 'angularx-qrcode';
 
 export const appConfig: ApplicationConfig = {
 
   providers: [  provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),
-     provideClientHydration(), provideHttpClient(), provideToastr(),provideAnimations(), ]
+     provideClientHydration(), provideHttpClient(), provideToastr(),provideAnimations(), QRCodeModule, QRCodeComponent ]
 };

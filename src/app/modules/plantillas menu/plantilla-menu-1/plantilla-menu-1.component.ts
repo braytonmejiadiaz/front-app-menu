@@ -6,11 +6,12 @@ import { CategoriesServicePlantilla } from '../services/categories-plantilla.ser
 import { ToastrService } from 'ngx-toastr';
 import { ProfileUserService } from '../../profile-user/service/profile.service';
 import { ModalUrlPlantillaComponent } from "../modal-url-plantilla/modal-url-plantilla.component";
+import { QRCodeModule } from 'angularx-qrcode';
 
 @Component({
   selector: 'app-plantilla-menu-1',
   standalone: true,
-  imports: [RouterModule, CommonModule, ModalUrlPlantillaComponent],
+  imports: [RouterModule, CommonModule, ModalUrlPlantillaComponent, QRCodeModule],
   templateUrl: './plantilla-menu-1.component.html',
   styleUrls: ['./plantilla-menu-1.component.css'],
 })
