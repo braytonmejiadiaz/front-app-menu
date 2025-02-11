@@ -1,20 +1,30 @@
-<section class="flex flex-col md:flex-row justify-center items-center min-h-screen gap-8 p-6">
+<section class="flex flex-col md:flex-col justify-center items-center min-h-screen gap-16 p-6">
+  <p>Si deseas importar tus productos masivamente sigue la siguiente plantilla de excel para poder hacerlo.
+    <a href="/public/Ejemplo-importar-productos.xlsx" download class="underline">Descargar aquí 👈🏻</a>
+  </p>
   <div class="bg-white bg-opacity-20 p-8 rounded-lg shadow-lg backdrop-blur-md w-full md:max-w-lg">
     <div class="flex flex-col gap-2 text-center pb-5">
       <span class="text-2xl font-bold">Importar archivo</span>
       <span class="text-sm">Selecciona el archivo que deseas importar.</span>
     </div>
     <div class="border-2 border-dashed p-9 rounded-lg flex flex-col items-center gap-5">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" width="45" height="45" stroke-width="2">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-linecap="round" stroke-linejoin="round" width="45" height="45" stroke-width="2">
         <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
         <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"></path>
         <path d="M12 11v6"></path>
         <path d="M9.5 13.5l2.5 -2.5l2.5 2.5"></path>
       </svg>
       <form (submit)="onSubmit()" class="flex flex-col gap-4 w-full">
-        <input class="px-4 py-2 rounded-md border-2 border-white bg-transparent text-black placeholder-white focus:outline-none focus:ring-2 focus:ring-purple-300" type="file" (change)="onFileChange($event)" accept=".xlsx, .xls" required placeholder="Selecciona un archivo">
-        <button class="px-6 py-2 bg-[#FF5023] hover:bg-purple-700 text-white rounded-md shadow-md transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-300" type="submit">Importar Productos</button>
+        <input class="px-4 py-2 rounded-md border-2 border-white bg-transparent text-black placeholder-white focus:outline-none focus:ring-2
+         focus:ring-purple-300" type="file" (change)="onFileChange($event)" accept=".csv" required placeholder="Selecciona un archivo">
+        <button class="px-6 py-2 bg-[#FF5023] hover:bg-purple-700 text-white rounded-md shadow-md transition-transform transform hover:scale-105
+         focus:outline-none focus:ring-2 focus:ring-purple-300" type="submit" [disabled]="isLoading">Importar Productos</button>
       </form>
+      <!-- Barra de progreso -->
+      <div *ngIf="isLoading" class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+        <div class="bg-[#FF5023] h-2.5 rounded-full" [style.width.%]="progress"></div>
+      </div>
     </div>
   </div>
 </section>

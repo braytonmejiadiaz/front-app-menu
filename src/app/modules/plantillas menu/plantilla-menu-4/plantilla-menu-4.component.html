@@ -50,7 +50,7 @@
         <div class="menu-items grid grid-cols-2 gap-8 mt-4">
           <div *ngFor="let product of category.products" class="menu-item bg-[#F8F8F8] rounded-lg
           shadow-md hover:transform hover:translate-y-2 transition duration-300">
-            <img [src]="product.imagen ? 'http://localhost:8000/storage/' + product.imagen : 'assets/images/default-product-image.jpg'"
+            <img [src]="product.imagen ? 'https://api.foodlogic.com.co/storage/' + product.imagen : 'assets/images/default-product-image.jpg'"
             [alt]="product.title" class="w-full h-56 object-cover rounded-t-lg">
             <div class="p-4">
               <h3 class="text-2xl text-[#34495E]">{{ product.title }}</h3>

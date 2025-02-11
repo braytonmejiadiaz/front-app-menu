@@ -70,4 +70,26 @@
       </div>
     </div>
   </div>
+
+
+  <div class="flex justify-center mt-4 space-x-2">
+    <button
+      class="px-3 py-2 bg-gray-300 rounded disabled:opacity-50"
+      (click)="loadPage(currentPage - 1)"
+      [disabled]="currentPage === 1">
+      Anterior
+    </button>
+
+    <span class="px-3 py-2 bg-white border rounded">
+      Página {{ currentPage }} de {{ totalPages }}
+    </span>
+
+    <button
+      class="px-3 py-2 bg-gray-300 rounded disabled:opacity-50"
+      (click)="loadPage(currentPage + 1)"
+      [disabled]="currentPage >= totalPages">
+      Siguiente
+    </button>
+  </div>
+
 </div>

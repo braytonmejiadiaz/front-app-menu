@@ -69,6 +69,16 @@ export class CategoriesService {
     );
   }
 
+  updateCategoriesOrder(id: string, data: any) {
+    this.isLoadingSubject.next(true);
+    const token = sessionStorage.getItem('token');
+    let headers = new HttpHeaders({ 'Authorization': `Bearer ${token}` });
+    let URL = `${URL_SERVICIOS}/admin/categories/${id}`;
+    return this.http.put(URL, data, { headers: headers }).pipe(
+      finalize(() => this.isLoadingSubject.next(false))
+    );
+  }
+
   deleteCategorie(categorie_id:string){
     this.isLoadingSubject.next(true);
     let headers = new HttpHeaders({'Authorization': 'Bearer '+this.authservice.token});

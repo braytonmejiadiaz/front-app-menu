@@ -3,7 +3,7 @@
        style="background-size: 600px;">
     <div class="text-center px-4 lg:px-0">
       <h1 class="text-[20px] md:text-[27px] text-[#000] font-bold">¡COMIENZA TU EXPERIENCIA FOODLOGIC!</h1>
-      <p class="text-[16px] md:text-[18px] text-[#FC4D25] font-medium">Pruebalo <b>gratis</b> por 1 semana</p>
+      <p class="text-[16px] md:text-[18px] text-[#FC4D25] font-medium"><b>Sube al siguiente nivel</b></p>
     </div>
     <div class="w-full lg:w-4/5  sm:flex sm:items-center sm:text-center flex flex-col lg:flex-row items-start px-4 lg:px-0 mt-10">
       <div class="flex-1 mr-0 lg:mr-4 sm:w-full " style="width: 90%;">
@@ -34,19 +34,35 @@
           <label class="text-[14px] md:text-[15px] font-thin lg:text-left sm:text-center">Contraseña</label>
           <input class="border border-gray-300 p-2 rounded-lg text-[14px] lg:text-left sm:text-center" [(ngModel)]="password" type="password" placeholder="*******">
         </div>
+        <div class="mb-4 flex flex-col gap-3">
+          <label class="text-[14px] md:text-[15px] font-thin lg:text-left sm:text-center">
+            Selecciona tu plan
+          </label>
+          <select class="border border-gray-300 p-2 rounded-lg text-[14px] lg:text-left sm:text-center" [(ngModel)]="plan_id">
+            <option [value]="1">Plan Esencial</option>
+            <option [value]="2">Plan Avanzado</option>
+            <option [value]="3">Plan Premium</option>
+          </select>
+        </div>
+        
       </div>
     </div>
+
     <label class="flex items-center gap-2 text-[14px]">
       <input type="checkbox" class="form-checkbox text-blue-500">
       <span>Acepto los términos y condiciones</span>
     </label>
     <button class="mt-8 mb-5 w-4/5 bg-[#FF7043] text-white p-2 rounded hover:bg-[#ed401a] transition duration-500" (click)="register()">Registrarme</button>
+    <a href="/login" class="pt-2 text-sm text-[#01BBF2] underline text-center md:text-left ">
+      Ya tienes una cuenta? Ingresar aquí.
+    </a>
   </div>
+
 
   <div class="w-full lg:w-4/5 lg:h-screen sm:h-64 sm:p-5 flex flex-col items-center justify-center gap-6
    px-4 lg:px-0 bg-cover bg-top bg-[url('https://restobar.loggro.com/assets/images/pirpos/img_main_hero_register.png')]" style="padding: 5%;">
     <h2 class="text-[30px] md:text-[60px] text-center">Bienvenido a <span class="text-[#FC4D25] font-bold">FoodLogic</span></h2>
-    <p class="text-[16px] md:text-[18px]">¿Ya tienes una cuenta? <span class="text-[#FC4D25]"><a href="#">ingresa aquí</a></span></p>
+    <p class="text-[16px] md:text-[18px]">¿Ya tienes una cuenta? <span class="text-[#FC4D25]"><a href="/login">ingresa aquí</a></span></p>
     <img src="/foodlogic-logo.svg" alt="" class="w-32 md:w-48">
   </div>
 

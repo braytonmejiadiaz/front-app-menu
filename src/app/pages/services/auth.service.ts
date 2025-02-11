@@ -61,9 +61,25 @@ export class AuthService {
   }
 
   register(data: any) {
-    let URL = URL_SERVICIOS + "/auth/register";
-    return this.http.post(URL, data);
+    let URL = URL_SERVICIOS + "/auth/register"; // URL de tu API para el registro
+    return this.http.post(URL, data).pipe(
+      map((resp: any) => {
+        // Verifica si la respuesta contiene el payment_link
+        if (resp.payment_link) {
+          // Retorna el payment_link para que el componente lo maneje
+          return resp.payment_link;
+        } else {
+          // Si no se encuentra el payment_link, muestra un error
+          throw new Error('Error al generar el enlace de pago');
+        }
+      }),
+      catchError((err: any) => {
+        console.error(err);
+        return of(err); // Devuelve el error en caso de que haya un problema
+      })
+    );
   }
+
 
   verifiedAuth(data: any) {
     let URL = URL_SERVICIOS + "/auth/verified_auth";

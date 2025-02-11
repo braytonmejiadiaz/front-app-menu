@@ -62,11 +62,10 @@ export class ListProductComponent {
   }
 
   searchTo(){
-    this.listProducts();
+   this.listProducts();
   }
 
   loadPage($event:any){
-    console.log($event);
     this.listProducts($event);
   }
 

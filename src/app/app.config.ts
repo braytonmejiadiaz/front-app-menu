@@ -11,5 +11,5 @@ import { QRCodeComponent, QRCodeModule } from 'angularx-qrcode';
 export const appConfig: ApplicationConfig = {
 
   providers: [  provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes),
-     provideClientHydration(), provideHttpClient(), provideToastr(),provideAnimations(), QRCodeModule, QRCodeComponent ]
+     provideClientHydration(), provideHttpClient(), provideToastr(),provideAnimations(), QRCodeModule, QRCodeComponent,  ]
 };

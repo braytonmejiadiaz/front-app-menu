@@ -1,10 +1,10 @@
 <!-- Encabezado del menú -->
- <app-modal-url-plantilla></app-modal-url-plantilla>
+<app-modal-url-plantilla></app-modal-url-plantilla>
 
 
 <div class="bg-[#F5F5F4] flex items-center justify-between p-5">
   <div>
-    <button class="bg-blue-500 text-white p-3 rounded-lg flex gap-2 " (click)="exportTemplate('plantilla-menu-1')">
+    <button class="bg-blue-500 text-white p-3 rounded-lg flex gap-2 " (click)="exportTemplate('plantilla-menu-5')">
 
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"
        stroke-linejoin="round" width="24" height="24" stroke-width="2">
@@ -29,7 +29,7 @@
 
 <div [ngClass]="isMobileMode ? 'max-w-md mx-auto h-[90%] overflow-auto' : 'max-w-full mx-auto h-[90%] overflow-auto rounded-md'" class="p-4">
   <!-- Encabezado -->
-  <div class="flex justify-center bg-black pt-5 pb-5">
+  <div class="flex justify-center bg-[#111015] pt-5 pb-5">
     <img class="w-[60%] max-w-[250px]"
     src="{{avatar}}" alt="Logo" />
   </div>
@@ -39,7 +39,7 @@
   <ng-container *ngFor="let category of groupedCategories">
     <a *ngIf="category.products && category.products.length > 0"
        (click)="scrollToCategory(category.name)"
-       class="cursor-pointer text-md font-semibold text-black/90 hover:underline">
+       class="cursor-pointer text-md font-semibold text-black/90 hover:underline hover:bg-[#FD8B1D]">
       {{ category.name }}
     </a>
   </ng-container>
@@ -49,22 +49,25 @@
   <main [ngClass]="isMobileMode ? 'max-w-md mx-auto' : 'max-w-full mx-auto'">
     <ng-container *ngFor="let category of groupedCategories">
       <!-- Verificar si la categoría tiene productos antes de mostrarla -->
-      <section [id]="category.name" class="bg-[url('https://tucartaya.com/wp-content/uploads/2024/12/asd.jpg')] bg-cover bg-repeat-y flex flex-col items-center w-full pt-5"
+      <section [id]="category.name" class="relative flex flex-col items-center w-full pt-5 bg-cover bg-repeat-y"
+      style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1)), url('https://tucartaya.com/wp-content/uploads/2025/01/back.jpg');"
        *ngIf="category.products && category.products.length > 0">
         <div>
           <!-- Título de la categoría -->
           <div class="p-5 w-full max-w-3xl bg-cover bg-center">
             <div class="flex justify-center">
-                <h2 class="lg:w-2/3 md:w-full sm:w-full bg-[#00000098] rounded-md p-2 text-3xl md:text-6xl font-semibold text-[#B68765] mb-8 text-center font-[poiret-one]">
+                <h2 class="lg:w-2/3 md:w-full sm:w-full rounded-md p-2 text-3xl md:text-6xl
+                font-semibold text-[#ffffff] mb-8 text-center font-[poiret-one]">
                 {{ category.name }}
               </h2>
             </div>
             <!-- Contenedor de productos -->
-            <div class="grid grid-cols-2 gap-3 p-2">
-              <div *ngFor="let product of category.products" class="w-full bg-[#00000095] text-center rounded-md shadow-md">
-                <img [src]="'https://api.foodlogic.com.co/storage/' + product.imagen" class="rounded-t-md w-full" [alt]="product.title" />
+            <div class="grid grid-cols-2 gap-5 p-2">
+              <div *ngFor="let product of category.products" class="w-full bg-[#00000095] text-center rounded-2xl border-2 border-white/30 shadow-lg shadow-white/30">
+                <img [src]="'https://api.foodlogic.com.co/storage/' + product.imagen" class="rounded-t-2xl w-full md:w-[400px] h-[400px]
+                object-cover object-center" [alt]="product.title" />
                 <div class="p-2">
-                  <h3 class="text-[#B68765] text-2xl font-semibold font-[poiret-one]">
+                  <h3 class="text-[#F4B333] text-xl font-semibold font-[poiret-one]">
                     {{ product.title }}
                   </h3>
                   <p class="text-white text-sm">{{ product.description }}</p>
@@ -81,7 +84,7 @@
   </main>
 
   <!-- Pie de página -->
-  <footer class="bg-gray-800 text-white py-6">
+  <footer class="bg-[#111015] text-white py-6">
     <div class="container mx-auto px-4 text-center">
         <!-- Redes Sociales -->
         <div class="mb-4">
@@ -110,6 +113,5 @@
 
 <!-- Include Font Awesome for icons -->
 <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
 
 </div>

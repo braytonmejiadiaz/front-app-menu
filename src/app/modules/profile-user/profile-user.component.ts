@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../pages/services/auth.service';
 
 @Component({
   selector: 'app-profile-user',
@@ -29,7 +30,7 @@ export class ProfileUserComponent {
 
 
 
-  constructor(public profileClient: ProfileUserService, private toast: ToastrService){
+  constructor(public profileClient: ProfileUserService, private toast: ToastrService , private authService: AuthService){
     this.profileClient.showUsers().subscribe((resp:any) =>{
       console.log(resp)
       this.name = resp.name
@@ -100,5 +101,9 @@ export class ProfileUserComponent {
       this.imagen_previsualiza = reader.result;  // Aquí guardamos la imagen en base64 para previsualización
       this.avatar = reader.result as string;  // Asignamos el base64 a avatar como string
     };
+  }
+
+  onLogout(){
+    this.authService.logout()
   }
 }

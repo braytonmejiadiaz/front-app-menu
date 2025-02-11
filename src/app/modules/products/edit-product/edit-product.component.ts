@@ -92,32 +92,36 @@ export class EditProductComponent {
     this.description = event.editor.getData();
   }
 
-  save(){
-
-    if(!this.title || !this.sku  || !this.price_pes || !this.description || !this.categorie_first_id){
+  save() {
+    if (!this.title || !this.sku || !this.price_pes || !this.categorie_first_id) {
       this.toastr.error('Debes seleccionar una categoría');
-    }
-    else{
+    } else {
       let formData = new FormData();
-      formData.append("title",this.title);
-      formData.append("sku",this.sku);
-      formData.append("price_pes",this.price_pes+"");
-      if(this.file_imagen){
-        formData.append("portada",this.file_imagen);
+      formData.append("title", this.title);
+      formData.append("sku", this.sku);
+      formData.append("price_pes", this.price_pes + "");
+
+      if (this.file_imagen) {
+        formData.append("portada", this.file_imagen);
       }
-      formData.append("categorie_first_id",this.categorie_first_id+"");
 
-      formData.append("description",this.description);
+      formData.append("categorie_first_id", this.categorie_first_id + "");
 
-      this.productService.updateProducts(this.PRODUCT_ID,formData).subscribe((resp:any) => {
-        if(resp.message == 403){
+      // Si description no está vacío, lo agregamos
+      if (this.description && this.description.trim() !== "") {
+        formData.append("description", this.description);
+      }
+
+      this.productService.updateProducts(this.PRODUCT_ID, formData).subscribe((resp: any) => {
+        if (resp.message == 403) {
           this.toastr.error('Error al editar tu producto');
-        }else{
+        } else {
           this.file_imagen = null;
           this.imagen_previsualiza = "https://preview.keenthemes.com/metronic8/demo1/assets/media/svg/illustrations/easy/2.svg";
-          this.toastr.success('Producto actualizado con exito');
+          this.toastr.success('Producto actualizado con éxito');
         }
-      })
+      });
     }
-    }
+  }
+
 }

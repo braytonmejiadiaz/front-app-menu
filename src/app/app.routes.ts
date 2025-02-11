@@ -12,12 +12,12 @@ import { PlantillaMenu3Component } from './modules/plantillas menu/plantilla-men
 
 export const routes: Routes = [
   {
-    path:'register',
+    path:'registro',
     loadComponent: () => import('./pages/pages-login/pages-login.component').then((m) => m.PagesLoginComponent)
   },
   {
     path:'',
-    redirectTo:'register',
+    redirectTo:'registro',
     pathMatch:'full',
   },
   {
@@ -57,6 +57,10 @@ export const routes: Routes = [
           {
             path:'demo-5',
             loadComponent: () => import('./modules/plantillas menu/plantilla-menu-5/plantilla-menu-5.component').then((m) => m.PlantillaMenu5Component)
+          },
+          {
+            path:'demo-6',
+            loadComponent: () => import('./modules/plantillas menu/plantilla-menu-6/plantilla-menu-6.component').then((m) => m.PlantillaMenu6Component)
           },
         ]
       },

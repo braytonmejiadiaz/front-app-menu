@@ -20,12 +20,12 @@ export class PlantillaMenu1Component implements OnInit {
   fb: string = "";
   ins: string = "";
   tikTok: string = "";
-  addres:string = "";
-  name_bussines:string = "";
-  phone:string = "";
+  addres: string = "";
+  name_bussines: string = "";
+  phone: string = "";
   groupedCategories: any[] = [];
-  exportedUrl: string = ''; // URL generada para la plantilla
-  qrData: string = ''; // Datos del QR (en este caso, la URL generada)
+  exportedUrl: string = '';
+  qrData: string = '';
   public isMobileMode: boolean = false;
 
   constructor(
@@ -35,15 +35,15 @@ export class PlantillaMenu1Component implements OnInit {
     public profileUser: ProfileUserService,
     private modalS: CategoriesServicePlantilla
   ) {
-    this.profileUser.showUsers().subscribe((resp:any) =>{
-      this.avatar = resp.avatar
-      this.fb = resp.fb
-      this.ins = resp.ins
-      this.tikTok = resp.tikTok
-      this.addres = resp.addres
-      this.name_bussines = resp.name_bussines
-      this.phone = resp.phone
-    })
+    this.profileUser.showUsers().subscribe((resp: any) => {
+      this.avatar = resp.avatar;
+      this.fb = resp.fb;
+      this.ins = resp.ins;
+      this.tikTok = resp.tikTok;
+      this.addres = resp.addres;
+      this.name_bussines = resp.name_bussines;
+      this.phone = resp.phone;
+    });
   }
 
   ngOnInit(): void {
@@ -58,56 +58,25 @@ export class PlantillaMenu1Component implements OnInit {
     }
   }
 
-  // Método para obtener los productos y agruparlos por categorías
+  // Método para obtener las categorías con productos
   listProduct() {
     this.productService.listProductsMenu().subscribe({
       next: (resp: any) => {
-        console.log("Respuesta del servicio:", resp);
-
-        // Accede a groupedCategories que es un arreglo dentro de la respuesta
         if (resp && Array.isArray(resp.groupedCategories)) {
-          // Agrupa los productos por categoría
-          this.groupedCategories = this.groupProductsByCategory(resp.groupedCategories);
-          console.log("Categorías agrupadas:", this.groupedCategories);
-        } else {
-          console.error('La respuesta no contiene un arreglo válido en groupedCategories:', resp);
+          // Asigna las categorías ordenadas
+          this.groupedCategories = resp.groupedCategories.sort((a: { order: number }, b: { order: number }) => a.order - b.order);
         }
       },
       error: (err) => {
-        console.error('Error al obtener productos:', err);
+        this.toastr.error('Error al obtener productos');
       }
     });
-  }
-
-  // Agrupa los productos por categoría
-  groupProductsByCategory(categoriesWithProducts: any[]): any[] {
-    console.log('Antes de agrupar:', categoriesWithProducts);
-    const categoryMap = new Map<string, { name: string, products: any[] }>();
-
-    categoriesWithProducts.forEach((categoryData) => {
-      if (categoryData && categoryData.name && Array.isArray(categoryData.products)) {
-        const categoryName = categoryData.name;
-
-        if (!categoryMap.has(categoryName)) {
-          categoryMap.set(categoryName, {
-            name: categoryName,
-            products: categoryData.products
-          });
-        }
-      } else {
-        console.warn('Datos no válidos:', categoryData);
-      }
-    });
-
-    return Array.from(categoryMap.values());
   }
 
   // Función para manejar la navegación hacia atrás
   navigateBack() {
     this.router.navigate(['/usuario/lista-plantillas']);
   }
-
-
 
   // Detecta el tamaño de la pantalla y ajusta el modo
   @HostListener('window:resize', ['$event'])
@@ -127,22 +96,18 @@ export class PlantillaMenu1Component implements OnInit {
       categories: this.groupedCategories,
       isMobileMode: this.isMobileMode,
     };
-
     this.productService.exportTemplate(data).subscribe({
       next: (response: any) => {
         if (response && response.url) {
           this.exportedUrl = response.url;
           this.qrData = this.exportedUrl;
-          // Aquí estamos pasando la URL generada al modal
-          this.modalS.setExportedUrl(response.url); // Método que definimos para emitir la URL
-          this.modalS.openModal(); // Abrimos el modal automáticamente
+          this.modalS.setExportedUrl(response.url);
+          this.modalS.openModal();
           this.toastr.success('Tu plantilla se guardó correctamente');
-        } else {
-          console.error('No se pudo generar la URL');
         }
       },
       error: (error) => {
-        console.error('Error al exportar la plantilla:', error);
+        this.toastr.error('Error al exportar la plantilla, contacta con soporte');
       }
     });
   }

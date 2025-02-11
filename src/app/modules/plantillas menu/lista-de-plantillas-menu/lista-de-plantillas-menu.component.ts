@@ -16,7 +16,7 @@ export class ListaDePlantillasMenuComponent {
 isNotDemoRoute(): boolean {
   const url = this.router.url;
   return !url.includes('demo-1') && !url.includes('demo-2') && !url.includes('demo-3') && !url.includes('demo-4')
-  && !url.includes('demo-5');
+  && !url.includes('demo-5')  && !url.includes('demo-6');
 }
 
 

@@ -84,7 +84,7 @@ export class CreateProductComponent {
 
   save(){
 
-    if(!this.title || !this.sku  || !this.price_pes  || !this.file_imagen||  !this.description || !this.categorie_first_id){
+    if(!this.title || !this.sku  || !this.price_pes  || !this.file_imagen || !this.categorie_first_id){
       this.toastr.error("Debes rellenar todos los campos para crear un producto")
     }
     else{

@@ -1,19 +1,19 @@
 import { Component, HostListener } from '@angular/core';
-import { RouterModule, Router } from '@angular/router';
-import { CategoriesServicePlantilla } from '../services/categories-plantilla.service';
-import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { ProfileUserService } from '../../profile-user/service/profile.service';
-import { ModalUrlPlantillaComponent } from "../modal-url-plantilla/modal-url-plantilla.component";
+import { CategoriesServicePlantilla } from '../services/categories-plantilla.service';
+import { CommonModule } from '@angular/common';
+import { RouterModule,Router } from '@angular/router';
+import { ModalUrlPlantillaComponent } from '../modal-url-plantilla/modal-url-plantilla.component';
 
 @Component({
-  selector: 'app-plantilla-menu-4',
+  selector: 'app-plantilla-menu-6',
   standalone: true,
-  imports: [RouterModule, CommonModule, ModalUrlPlantillaComponent],
-  templateUrl: './plantilla-menu-4.component.html',
-  styleUrl: './plantilla-menu-4.component.css'
+  imports: [CommonModule, RouterModule, ModalUrlPlantillaComponent],
+  templateUrl: './plantilla-menu-6.component.html',
+  styleUrl: './plantilla-menu-6.component.css'
 })
-export class PlantillaMenu4Component {
+export class PlantillaMenu6Component {
   avatar: string = "";
   fb: string = "";
   ins: string = "";
